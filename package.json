@@ -13,17 +13,17 @@
         {
             "displayName": "2022 Example",
             "description": "Contains an example from back in the days",
-            "path": "Samples~/MinimumExample2022"
+            "path": "Samples/MinimumExample2022"
         },
         {
             "displayName": "Monoscopic Destkop Example",
             "description": "Example for monoscopic desktop rendering",
-            "path": "Samples~/MonoscopicDesktopExample"
+            "path": "Samples/MonoscopicDesktopExample"
         },
         {
             "displayName": "Stereoscopic HMD Example",
             "description": "Example for rendering a portal for HMD usage",
-            "path": "Samples~/StereoscopicHMDExample"
+            "path": "Samples/StereoscopicHMDExample"
         }
     ]
 }
