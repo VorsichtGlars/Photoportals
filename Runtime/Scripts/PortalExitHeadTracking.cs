@@ -32,7 +32,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //-----------------------------------------------------------------
-//   Authors:        André Kunert
+//   Authors:        Sebastian Muehlhaus
 //   Date:           2022
 //-----------------------------------------------------------------
 
@@ -40,57 +40,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Vrsys
+namespace Vrsys.Photoportals
 {
-    [ExecuteInEditMode]
-    public class ScreenProperties : MonoBehaviour
+    public class PortalExitHeadTracking : MonoBehaviour
     {
-        public float width = 3f;
-        public float height = 2f;
+        public Transform portalEntranceHead;
+        public Transform portalEntranceScreen;
+        public Transform portalExitScreen;
 
-        public bool drawGizmoFlag = true; // helper visualizations
-
-        public Vector3 topLeftCorner {
-            get
-            {
-                return transform.TransformPoint(new Vector3(-width * 0.5f, height * 0.5f, 0f));
-            }
-        }
-
-        public Vector3 topRightCorner {
-            get
-            {
-                return transform.TransformPoint(new Vector3(width * 0.5f, height * 0.5f, 0f));
-            }
-        }
-
-        public Vector3 bottomRightCorner {
-            get
-            {
-                return transform.TransformPoint(new Vector3(width * 0.5f, -height * 0.5f, 0f));
-            }
-        }
-
-        public Vector3 bottomLeftCorner
+        // Update is called once per frame
+        void Update()
         {
-            get
-            {
-                return transform.TransformPoint(new Vector3(-width * 0.5f, -height * 0.5f, 0f));
-            }
-        }
-
-
-        private void OnDrawGizmos()
-        {
-            if (drawGizmoFlag)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawLine(bottomLeftCorner, topLeftCorner);
-                Gizmos.DrawLine(topLeftCorner, topRightCorner);
-                Gizmos.DrawLine(topRightCorner, bottomRightCorner);
-                Gizmos.DrawLine(bottomRightCorner, bottomLeftCorner);
-            }
+            transform.localRotation = portalEntranceHead.rotation;
+            transform.localPosition = portalExitScreen.localPosition - (portalEntranceScreen.transform.position - portalEntranceHead.transform.position);
         }
     }
-
 }

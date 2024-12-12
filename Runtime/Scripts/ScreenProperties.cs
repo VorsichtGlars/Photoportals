@@ -32,7 +32,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //-----------------------------------------------------------------
-//   Authors:        Sebastian Muehlhaus, André Kunert, Lucky Chandrautama
+//   Authors:        Andrï¿½ Kunert
 //   Date:           2022
 //-----------------------------------------------------------------
 
@@ -40,63 +40,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Vrsys
+namespace Vrsys.Photoportals
 {
-    [RequireComponent(typeof(Camera))]
-    public class OffAxisProjection : MonoBehaviour
+    [ExecuteInEditMode]
+    public class ScreenProperties : MonoBehaviour
     {
-        // externals
-        public ScreenProperties screen;        
+        public float width = 3f;
+        public float height = 2f;
 
-        private Vector3 eyePos;
-        private Camera cam;
+        public bool drawGizmoFlag = true; // helper visualizations
 
-        public bool autoUpdate = false;
-        public bool calcNearClipPlane = false;
-
-        private void Awake()
-        {
-            cam = GetComponent<Camera>();
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-        }
-
-        // Update is called once per frame
-        void LateUpdate()
-        {
-            if (autoUpdate)
-                CalcProjection();
-        }
-
-        public void CalcProjection()
-        {
-            transform.localRotation = Quaternion.Inverse(transform.parent.localRotation);
-
-            eyePos = transform.position;
-
-            var eyePosSP = screen.transform.worldToLocalMatrix * new Vector4(eyePos.x, eyePos.y, eyePos.z, 1f);
-            eyePosSP *= -1f;
-
-            var near = cam.nearClipPlane;
-            if(calcNearClipPlane)
+        public Vector3 topLeftCorner {
+            get
             {
-                var s1 = screen.transform.position;
-                var s2 = screen.transform.position - screen.transform.forward;
-                var camOnScreenForward = Vector3.Project((transform.position - s1), (s2 - s1)) + s1;
-                near = Vector3.Distance(screen.transform.position, camOnScreenForward);
+                return transform.TransformPoint(new Vector3(-width * 0.5f, height * 0.5f, 0f));
             }
-            var far = cam.farClipPlane;
+        }
 
-            var factor = near / eyePosSP.z;
-            var l = (eyePosSP.x - screen.width * 0.5f) * factor;
-            var r = (eyePosSP.x + screen.width * 0.5f) * factor;
-            var b = (eyePosSP.y - screen.height * 0.5f) * factor;
-            var t = (eyePosSP.y + screen.height * 0.5f) * factor;
+        public Vector3 topRightCorner {
+            get
+            {
+                return transform.TransformPoint(new Vector3(width * 0.5f, height * 0.5f, 0f));
+            }
+        }
 
-            cam.projectionMatrix = Matrix4x4.Frustum(l, r, b, t, near, far);
+        public Vector3 bottomRightCorner {
+            get
+            {
+                return transform.TransformPoint(new Vector3(width * 0.5f, -height * 0.5f, 0f));
+            }
+        }
+
+        public Vector3 bottomLeftCorner
+        {
+            get
+            {
+                return transform.TransformPoint(new Vector3(-width * 0.5f, -height * 0.5f, 0f));
+            }
+        }
+
+
+        private void OnDrawGizmos()
+        {
+            if (drawGizmoFlag)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(bottomLeftCorner, topLeftCorner);
+                Gizmos.DrawLine(topLeftCorner, topRightCorner);
+                Gizmos.DrawLine(topRightCorner, bottomRightCorner);
+                Gizmos.DrawLine(bottomRightCorner, bottomLeftCorner);
+            }
         }
     }
+
 }
