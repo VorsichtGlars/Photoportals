@@ -1,0 +1,12 @@
+{
+    "name": "vrsys.photoportals",
+    "version": "1.0.0",
+    "displayName": "VRSYS Photoportals",
+    "description": "Implementation of Photoportals for VRSYS",
+    "unity": "6000.0.30f1",
+    "author": {
+        "name": "Manuel Hartmann",
+        "email": "manuel.hartmann@uni-weimar.de",
+        "url": "manuelhartmann.net"
+        }
+}
