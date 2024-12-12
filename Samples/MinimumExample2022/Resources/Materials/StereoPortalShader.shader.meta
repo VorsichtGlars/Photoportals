@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: ccde0dff1b888e24cb9e927c63b7e667
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _MainTex: {fileID: 8400000, guid: d65dc454aa3b52b4a82664742e429fda, type: 2}
+  - _LeftEyeTexture: {fileID: 8400000, guid: 7d1167b806537ac48a8a690c3e34a663, type: 2}
+  - _RightEyeTexture: {fileID: 8400000, guid: 787ca76ba2b3ec44ba77fc82e57ba24b, type: 2}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
