@@ -11,7 +11,7 @@
         },
     "samples": [
         {
-            "displayName": "Destkop Example (Monoscopic Portal",
+            "displayName": "Destkop Example (Monoscopic Portal)",
             "description": "Example for monoscopic desktop rendering.",
             "path": "Samples/DesktopExample"
         },
