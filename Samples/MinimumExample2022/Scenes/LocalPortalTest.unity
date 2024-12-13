@@ -1711,7 +1711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae1a1b60cef29f48b63689bdce45e69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalEntranceHead: {fileID: 1893491557}
+  portalEntranceHead: {fileID: 884193325}
   portalEntranceScreen: {fileID: 1010485263}
   portalExitScreen: {fileID: 650004716}
 --- !u!135 &1392301472
@@ -1959,7 +1959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1675948791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2011,7 +2011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1893491555
 AudioListener:
   m_ObjectHideFlags: 0
