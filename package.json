@@ -20,5 +20,8 @@
             "description": "Example for stereoscopic HMD rendering.",
             "path": "Samples/HMDExample"
         }
-    ]
+    ],
+    "dependencies": {
+        "com.unity.xr.openxr": "1.12.1"
+    }
 }
