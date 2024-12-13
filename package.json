@@ -4,6 +4,7 @@
     "displayName": "VRSYS Photoportals",
     "description": "Implementation of Photoportals for VRSYS",
     "unity": "6000.0",
+    "documentationUrl":"https://github.com/VorsichtGlars/Photoportals/wiki",
     "author": {
         "name": "Manuel Hartmann",
         "email": "manuel.hartmann@uni-weimar.de",
