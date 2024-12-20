@@ -51,6 +51,10 @@ namespace Vrsys.Photoportals
         // Update is called once per frame
         void Update()
         {
+            if(portalEntranceHead == null) return;
+            if(portalEntranceScreen == null) return;
+            if(portalExitScreen == null) return;
+
             transform.localRotation = portalEntranceHead.rotation;
             transform.localPosition = portalExitScreen.localPosition - (portalEntranceScreen.transform.position - portalEntranceHead.transform.position);
         }
