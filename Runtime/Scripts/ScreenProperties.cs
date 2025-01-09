@@ -47,7 +47,7 @@ namespace Vrsys.Photoportals
     {
         public float width = 3f;
         public float height = 2f;
-
+        public GameObject geometry;
         public bool drawGizmoFlag = true; // helper visualizations
 
         public Vector3 topLeftCorner {
@@ -79,7 +79,6 @@ namespace Vrsys.Photoportals
             }
         }
 
-
         private void OnDrawGizmos()
         {
             if (drawGizmoFlag)
@@ -90,6 +89,12 @@ namespace Vrsys.Photoportals
                 Gizmos.DrawLine(topRightCorner, bottomRightCorner);
                 Gizmos.DrawLine(bottomRightCorner, bottomLeftCorner);
             }
+        }
+
+        void Update(){
+            if(this.geometry == null) return;
+            this.width = this.geometry.transform.localScale.x;
+            this.height = this.geometry.transform.localScale.y;
         }
     }
 

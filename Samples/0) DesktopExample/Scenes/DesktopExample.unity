@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 409046185}
   - component: {fileID: 409046184}
   - component: {fileID: 409046183}
+  - component: {fileID: 409046186}
   m_Layer: 0
   m_Name: Geometry
   m_TagString: Untagged
@@ -288,7 +289,7 @@ Transform:
   m_GameObject: {fileID: 409046180}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 0, z: -0.03}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.2, y: 1.8, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -322,7 +323,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409046180}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -368,6 +369,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409046180}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1818360610 &409046186
+ScaleConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409046180}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_ScaleAtRest: {x: 3.2, y: 1.8, z: 0.05}
+  m_ScaleOffset: {x: 0.99526757, y: 0.99800575, z: 0.99526757}
+  m_AffectScalingX: 1
+  m_AffectScalingY: 1
+  m_AffectScalingZ: 1
+  m_Active: 1
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 762591366}
+    weight: 1
 --- !u!1 &466589154
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &650004716
 Transform:
   m_ObjectHideFlags: 0
@@ -555,6 +576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 3.2
   height: 1.8
+  geometry: {fileID: 409046180}
   drawGizmoFlag: 1
 --- !u!1 &662174397
 GameObject:
