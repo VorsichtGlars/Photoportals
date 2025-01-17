@@ -32,12 +32,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //-----------------------------------------------------------------
-//   Authors:        Sebastian Muehlhaus
-//   Date:           2022
+//   Authors:        Sebastian Muehlhaus, Manuel Hartmann
+//   Date:           2022, 2024
 //-----------------------------------------------------------------
 
 using System.Collections;
 using System.Collections.Generic;
+using Codice.Client.BaseCommands.Merge.Xml;
 using UnityEngine;
 
 namespace Vrsys.Photoportals
@@ -55,8 +56,13 @@ namespace Vrsys.Photoportals
             if(portalEntranceScreen == null) return;
             if(portalExitScreen == null) return;
 
-            transform.localRotation = portalEntranceHead.rotation;
-            transform.localPosition = portalExitScreen.localPosition - (portalEntranceScreen.transform.position - portalEntranceHead.transform.position);
+            Matrix4x4 headMatrix = Matrix4x4.TRS(portalEntranceHead.position, portalEntranceHead.rotation, Vector3.one);
+            Matrix4x4 entranceMat = Matrix4x4.TRS(portalEntranceScreen.position, portalEntranceScreen.rotation, Vector3.one);
+            Matrix4x4 entranceToHeadOffset = Matrix4x4.Inverse(entranceMat) * headMatrix;
+            Matrix4x4 portalExitMat = Matrix4x4.TRS(portalExitScreen.position, portalExitScreen.rotation, Vector3.one);
+            Matrix4x4 portalHeadMat = portalExitMat * entranceToHeadOffset;
+            transform.position = portalHeadMat.GetColumn(3);
+            transform.rotation = portalHeadMat.rotation;
         }
     }
 }

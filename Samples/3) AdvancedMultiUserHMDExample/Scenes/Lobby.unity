@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 892096676
+  GlobalObjectIdHash: 496393009
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  sceneLoadSettings: {fileID: 11400000, guid: 7516c34cbb0f98749af08b9fac9576eb, type: 2}
+  sceneLoadSettings: {fileID: 11400000, guid: d97617fb01cf88c44b2f9297db8fc1e6, type: 2}
   sceneToLoadOnSpawnOnce: 
   sceneToLoadOnDespawnOnce: 
   verbose: 0
