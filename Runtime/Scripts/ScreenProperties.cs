@@ -32,19 +32,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //-----------------------------------------------------------------
-//   Authors:        Andr� Kunert
-//   Date:           2022
+//   Authors:        Andr� Kunert, Manuel Hartmann
+//   Date:           2022, 2025
 //-----------------------------------------------------------------
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Vrsys.Photoportals
+namespace VRVIS.Photoportals
 {
     [ExecuteInEditMode]
     public class ScreenProperties : MonoBehaviour
     {
+
+        /**
+        //cannot use these because i wanna see them in the inspector
         public float width {
             get
             {
@@ -59,6 +62,19 @@ namespace Vrsys.Photoportals
             }
         }
 
+        **/
+
+        public float width;
+        public float height;
+
+        #region States
+        public void Update()
+        {
+            width = transform.localScale.x;
+            height = transform.localScale.y;
+        }
+        #endregion
+        #region Methods
         public Vector3 topLeftCorner {
             get
             {
@@ -87,5 +103,6 @@ namespace Vrsys.Photoportals
                 return transform.TransformPoint(new Vector3(-width * 0.5f, -height * 0.5f, 0f));
             }
         }
+        #endregion
     }
 }

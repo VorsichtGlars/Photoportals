@@ -1,8 +1,8 @@
 using UnityEngine;
 using VRSYS.Core.Networking;
-using Vrsys.Photoportals;
+using VRVIS.Photoportals;
 
-namespace Vrsys.Photoportals.Samples.MultiuserHMDExample
+namespace VRVIS.Photoportals.Samples.MultiuserHMDExample
 {
    public class PortalNetworkUserCallbacks : MonoBehaviour, INetworkUserCallbacks
     {

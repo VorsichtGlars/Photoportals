@@ -11,9 +11,11 @@ namespace VRVIS.Photoportals
         MonoBox,
         StereoBox
     }
+
+    [ExecuteInEditMode]
     public class ModeSwitcher : MonoBehaviour
     {
-        public PortalMode mode;
+        public PortalMode mode = PortalMode.Undefined;
 
         public GameObject monoDisplay;
         public GameObject monoDisplayProxy;
@@ -24,6 +26,30 @@ namespace VRVIS.Photoportals
 
         public void SwitchMode(PortalMode requestedMode)
         {
+            if (this.mode == requestedMode)
+            {
+                return;
+            }
+            switch (this.mode)
+            {
+                case PortalMode.MonoPlane:
+                    this.monoDisplay.SetActive(false);
+                    this.monoDisplayProxy.SetActive(false);
+                    this.monoCamera.SetActive(false);
+                    this.portalExitHeadTracking.enabled = false;
+                    break;
+                case PortalMode.StereoPlane:
+                    Debug.LogWarning("StereoPlane mode not implemented yet");
+                    break;
+                case PortalMode.MonoBox:
+                    Debug.LogWarning("MonoBox mode not implemented yet");
+                    break;
+                case PortalMode.StereoBox:
+                    Debug.LogWarning("StereoBox mode not implemented yet");
+                    break;
+                case PortalMode.Undefined:
+                    break;
+            }
             switch (requestedMode)
             {
                 case PortalMode.MonoPlane:
@@ -64,6 +90,11 @@ namespace VRVIS.Photoportals
         void Update()
         {
             
+        }
+
+        void OnValidate()
+        {
+            this.SwitchMode(this.mode);
         }
 
         #endregion

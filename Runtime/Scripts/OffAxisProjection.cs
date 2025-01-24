@@ -39,8 +39,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-namespace Vrsys.Photoportals
+namespace VRVIS.Photoportals
 {
     [RequireComponent(typeof(Camera))]
     public class OffAxisProjection : MonoBehaviour
@@ -48,16 +49,15 @@ namespace Vrsys.Photoportals
         // externals
         public ScreenProperties screen;        
 
-        private Vector3 eyePos;
-        private Camera cam;
+        public Vector3 eyePos{ get; set; }
+        
+        [SerializeField]
+        public Camera cam;
 
         public bool autoUpdate = false;
         public bool calcNearClipPlane = false;
 
-        public bool magic = true;
-
-        public bool drawGizmos = true;
-
+        #region States
         private void Awake()
         {
             cam = GetComponent<Camera>();
@@ -70,13 +70,14 @@ namespace Vrsys.Photoportals
                 CalcProjection();
         }
 
+        #endregion
+
+        #region Methods
         public void CalcProjection()
         {
 
             // Q1 What is the purpose of this?
-            if(this.magic){
-                transform.localRotation = Quaternion.Inverse(transform.parent.localRotation);
-            }
+            transform.localRotation = Quaternion.Inverse(transform.parent.localRotation);
             // Q1
 
             eyePos = transform.position;
@@ -103,40 +104,56 @@ namespace Vrsys.Photoportals
             cam.projectionMatrix = Matrix4x4.Frustum(l, r, b, t, near, far);
         }
 
-        //TODO: Move to Editor Script
-        private void OnDrawGizmos(){
-            if(drawGizmos == false) return;
-            Gizmos.color = Color.white;
-            Gizmos.DrawSphere(eyePos, 0.05f);
+        #endregion
+        
+        #region Editor
+        #if UNITY_EDITOR
+        private bool showExtraGizmos = false;
 
+        [ContextMenu("Toggle Extra Gizmos")]
+        public void ToggleGizmos(){
+            this.showExtraGizmos = !this.showExtraGizmos;
+        }
+        /**
+            I'd like to see this in the /Editor folder as a derivative of Editor, but:
+            I couldn't find a fitting way to have this render frame based without the object being selected.
+            So for now we just have this region in the monobehaviour.
+            https://discussions.unity.com/t/keep-my-custom-handle-visible-even-if-object-is-not-selected/97952
+        **/
+        private void OnDrawGizmos(){
+            if(this.showExtraGizmos == false) return;
+            Handles.color = Color.white;
+            
             //rays from camera to near clip plane corners
-            Gizmos.DrawLine(eyePos, screen.bottomLeftCorner);
-            Gizmos.DrawLine(eyePos, screen.bottomRightCorner);
-            Gizmos.DrawLine(eyePos, screen.topLeftCorner);
-            Gizmos.DrawLine(eyePos, screen.topRightCorner);
+            Handles.DrawLine(this.eyePos, this.screen.bottomLeftCorner);
+            Handles.DrawLine(this.eyePos, this.screen.bottomRightCorner);
+            Handles.DrawLine(this.eyePos, this.screen.topLeftCorner);
+            Handles.DrawLine(this.eyePos, this.screen.topRightCorner);
 
             //near clip plane corners
-            Gizmos.DrawLine(screen.bottomLeftCorner, screen.topLeftCorner);
-            Gizmos.DrawLine(screen.topLeftCorner, screen.topRightCorner);
-            Gizmos.DrawLine(screen.topRightCorner, screen.bottomRightCorner);
-            Gizmos.DrawLine(screen.bottomRightCorner, screen.bottomLeftCorner);
+            Handles.DrawLine(this.screen.bottomLeftCorner, this.screen.topLeftCorner);
+            Handles.DrawLine(this.screen.topLeftCorner, this.screen.topRightCorner);
+            Handles.DrawLine(this.screen.topRightCorner, this.screen.bottomRightCorner);
+            Handles.DrawLine(this.screen.bottomRightCorner, this.screen.bottomLeftCorner);
             
             //rays from near clip plane to far clip plane corners
             //https://discussions.unity.com/t/how-do-i-get-the-world-coordinates-of-corners-of-far-clip-panel-of-camera-in-a-script/899976
-            Vector3 farPlaneBottomLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,0, cam.farClipPlane));
-            Vector3 farPlaneBottomRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,0, cam.farClipPlane));
-            Vector3 farPlaneTopLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,1, cam.farClipPlane));
-            Vector3 farPlaneTopRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,1, cam.farClipPlane));
-            Gizmos.DrawLine(screen.bottomLeftCorner , farPlaneBottomLeftCorner);
-            Gizmos.DrawLine(screen.bottomRightCorner, farPlaneBottomRightCorner);
-            Gizmos.DrawLine(screen.topLeftCorner, farPlaneTopLeftCorner);
-            Gizmos.DrawLine(screen.topRightCorner, farPlaneTopRightCorner);
+            Vector3 farPlaneBottomLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,0, this.cam.farClipPlane));
+            Vector3 farPlaneBottomRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,0, this.cam.farClipPlane));
+            Vector3 farPlaneTopLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,1, this.cam.farClipPlane));
+            Vector3 farPlaneTopRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,1, this.cam.farClipPlane));
+            Handles.DrawLine(this.screen.bottomLeftCorner , farPlaneBottomLeftCorner);
+            Handles.DrawLine(this.screen.bottomRightCorner, farPlaneBottomRightCorner);
+            Handles.DrawLine(this.screen.topLeftCorner, farPlaneTopLeftCorner);
+            Handles.DrawLine(this.screen.topRightCorner, farPlaneTopRightCorner);
 
             //far clip plane corners
-            Gizmos.DrawLine(farPlaneBottomLeftCorner, farPlaneTopLeftCorner);
-            Gizmos.DrawLine(farPlaneTopLeftCorner, farPlaneTopRightCorner);
-            Gizmos.DrawLine(farPlaneTopRightCorner, farPlaneBottomRightCorner);
-            Gizmos.DrawLine(farPlaneBottomRightCorner, farPlaneBottomLeftCorner);
+            Handles.DrawLine(farPlaneBottomLeftCorner, farPlaneTopLeftCorner);
+            Handles.DrawLine(farPlaneTopLeftCorner, farPlaneTopRightCorner);
+            Handles.DrawLine(farPlaneTopRightCorner, farPlaneBottomRightCorner);
+            Handles.DrawLine(farPlaneBottomRightCorner, farPlaneBottomLeftCorner);
         }
+        #endif
+        #endregion
     }
 }
