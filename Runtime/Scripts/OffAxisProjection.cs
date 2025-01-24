@@ -76,9 +76,7 @@ namespace VRVIS.Photoportals
         public void CalcProjection()
         {
 
-            // Q1 What is the purpose of this?
             transform.localRotation = Quaternion.Inverse(transform.parent.localRotation);
-            // Q1
 
             eyePos = transform.position;
 
@@ -92,6 +90,7 @@ namespace VRVIS.Photoportals
                 var s2 = screen.transform.position - screen.transform.forward;
                 var camOnScreenForward = Vector3.Project((transform.position - s1), (s2 - s1)) + s1;
                 near = Vector3.Distance(screen.transform.position, camOnScreenForward);
+                cam.nearClipPlane = near;
             }
             var far = cam.farClipPlane;
 
@@ -124,34 +123,41 @@ namespace VRVIS.Photoportals
             if(this.showExtraGizmos == false) return;
             Handles.color = Color.white;
             
-            //rays from camera to near clip plane corners
-            Handles.DrawLine(this.eyePos, this.screen.bottomLeftCorner);
-            Handles.DrawLine(this.eyePos, this.screen.bottomRightCorner);
-            Handles.DrawLine(this.eyePos, this.screen.topLeftCorner);
-            Handles.DrawLine(this.eyePos, this.screen.topRightCorner);
-
-            //near clip plane corners
-            Handles.DrawLine(this.screen.bottomLeftCorner, this.screen.topLeftCorner);
-            Handles.DrawLine(this.screen.topLeftCorner, this.screen.topRightCorner);
-            Handles.DrawLine(this.screen.topRightCorner, this.screen.bottomRightCorner);
-            Handles.DrawLine(this.screen.bottomRightCorner, this.screen.bottomLeftCorner);
-            
-            //rays from near clip plane to far clip plane corners
+            //calculating corners of near and far clip plane
             //https://discussions.unity.com/t/how-do-i-get-the-world-coordinates-of-corners-of-far-clip-panel-of-camera-in-a-script/899976
+            Vector3 nearPlaneBottomLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,0, this.cam.nearClipPlane));
+            Vector3 nearPlaneBottomRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,0, this.cam.nearClipPlane));
+            Vector3 nearPlaneTopLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,1, this.cam.nearClipPlane));
+            Vector3 nearPlaneTopRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,1, this.cam.nearClipPlane));
+
             Vector3 farPlaneBottomLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,0, this.cam.farClipPlane));
             Vector3 farPlaneBottomRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,0, this.cam.farClipPlane));
             Vector3 farPlaneTopLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,1, this.cam.farClipPlane));
             Vector3 farPlaneTopRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,1, this.cam.farClipPlane));
-            Handles.DrawLine(this.screen.bottomLeftCorner , farPlaneBottomLeftCorner);
-            Handles.DrawLine(this.screen.bottomRightCorner, farPlaneBottomRightCorner);
-            Handles.DrawLine(this.screen.topLeftCorner, farPlaneTopLeftCorner);
-            Handles.DrawLine(this.screen.topRightCorner, farPlaneTopRightCorner);
 
-            //far clip plane corners
+            //near clip plane
+            Handles.DrawLine(nearPlaneBottomLeftCorner, nearPlaneTopLeftCorner);
+            Handles.DrawLine(nearPlaneTopLeftCorner, nearPlaneTopRightCorner);
+            Handles.DrawLine(nearPlaneTopRightCorner, nearPlaneBottomRightCorner);
+            Handles.DrawLine(nearPlaneBottomRightCorner, nearPlaneBottomLeftCorner);
+
+            //far clip plane
             Handles.DrawLine(farPlaneBottomLeftCorner, farPlaneTopLeftCorner);
             Handles.DrawLine(farPlaneTopLeftCorner, farPlaneTopRightCorner);
             Handles.DrawLine(farPlaneTopRightCorner, farPlaneBottomRightCorner);
             Handles.DrawLine(farPlaneBottomRightCorner, farPlaneBottomLeftCorner);
+
+            //rays from camera to near clip plane corners
+            Handles.DrawLine(this.eyePos, nearPlaneBottomLeftCorner);
+            Handles.DrawLine(this.eyePos, nearPlaneBottomRightCorner);
+            Handles.DrawLine(this.eyePos, nearPlaneTopLeftCorner);
+            Handles.DrawLine(this.eyePos, nearPlaneTopRightCorner);
+
+            //rays from near clip plane to far clip plane corners
+            Handles.DrawLine(nearPlaneBottomLeftCorner , farPlaneBottomLeftCorner);
+            Handles.DrawLine(nearPlaneBottomRightCorner, farPlaneBottomRightCorner);
+            Handles.DrawLine(nearPlaneTopLeftCorner, farPlaneTopLeftCorner);
+            Handles.DrawLine(nearPlaneTopRightCorner, farPlaneTopRightCorner);
         }
         #endif
         #endregion
