@@ -1,0 +1,76 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
+
+namespace VRVIS.Photoportals
+{
+    public class BasicClutchInteraction : MonoBehaviour
+    {
+
+        public InputActionProperty clutchInput;
+        public Transform viewTransform;
+        public XRGrabInteractable grabInteractable;
+        private Matrix4x4 offsetMatrix = Matrix4x4.identity;
+
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
+        {
+            
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if(this.clutchInput.action?.WasPressedThisFrame() == true){
+                Debug.Log("Clutch WasPressed");
+                this.OnClutchActionWasPressed();
+            }
+
+            if(this.clutchInput.action?.IsPressed() == true){
+                Debug.Log("Clutch IsPressed");
+                this.OnClutchActionIsPressed();
+            }
+
+            if(this.clutchInput.action?.WasReleasedThisFrame() == true){
+                Debug.Log("Clutch WasReleased");
+                this.OnClutchActionWasReleased();
+            }
+        }
+
+        void OnClutchActionWasPressed(){
+            if(this.grabInteractable.isSelected == false){
+                Debug.Log("Nothing Grabbed");
+                return;
+            }
+            this.offsetMatrix = GetTransformationMatrix(this.grabInteractable.transform, true).inverse *
+            GetTransformationMatrix(this.viewTransform, true);
+        }
+
+        void OnClutchActionIsPressed(){
+            if(this.offsetMatrix == Matrix4x4.identity)
+                return;
+            Matrix4x4 newMatrix = GetTransformationMatrix(this.grabInteractable.transform, true) * this.offsetMatrix;
+            this.viewTransform.position = newMatrix.GetColumn(3);
+            this.viewTransform.rotation = newMatrix.rotation;
+        }
+
+        void OnClutchActionWasReleased(){
+            this.offsetMatrix = Matrix4x4.identity;
+        }
+
+        #region Utilities
+        //TODO Move to global utility class
+        public Matrix4x4 GetTransformationMatrix(Transform t, bool inWorldSpace = true)
+        {
+            if (inWorldSpace)
+            {
+                return Matrix4x4.TRS(t.position, t.rotation, t.lossyScale);
+            }
+            else
+            {
+                return Matrix4x4.TRS(t.localPosition, t.localRotation, t.localScale);
+            }
+        }
+        #endregion
+    }
+}

@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &52392417 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4709433403689159779, guid: 9f9768dd7291a5b42a1a21b753784151, type: 3}
+  m_PrefabInstance: {fileID: 2141164075}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &209320041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,18 +2193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9388b217de87c488be3cefea90bc9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleInput:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Scale Input
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 65043dd2-a01b-464d-ae19-f24eb3299d9a
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -407821811598926488, guid: 266f96d8e11535e43a65a15b16b41116, type: 3}
   clutchInput:
     m_UseReference: 1
     m_Action:
@@ -2212,6 +2205,8 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -8346578834987705981, guid: 266f96d8e11535e43a65a15b16b41116, type: 3}
+  viewTransform: {fileID: 52392417}
+  grabInteractable: {fileID: 1896866850}
 --- !u!1001 &2141164075
 PrefabInstance:
   m_ObjectHideFlags: 0

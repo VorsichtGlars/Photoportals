@@ -10,5 +10,18 @@ namespace VRVIS.Photoportals.Maths
 
         public static float DistanceFromPlane(Vector3 planeOffset, Vector3 planeNormal, Vector3 point)
             => Vector3.Dot(planeOffset - point, planeNormal);
+        
+        public static Matrix4x4 GetTransformationMatrix(Transform t, bool inWorldSpace = true)
+        {
+            if (inWorldSpace)
+            {
+                return Matrix4x4.TRS(t.position, t.rotation, t.lossyScale);
+            }
+            else
+            {
+                return Matrix4x4.TRS(t.localPosition, t.localRotation, t.localScale);
+            }
+        }
+
     }
 }
