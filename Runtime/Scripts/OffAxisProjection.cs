@@ -39,6 +39,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 namespace VRVIS.Photoportals
 {
@@ -46,24 +47,20 @@ namespace VRVIS.Photoportals
     public class OffAxisProjection : MonoBehaviour
     {
         // externals
-        public ScreenProperties screen;    
+        public ScreenProperties screen;        
 
-        private Vector3 eyePos;
-        private Camera cam;
+        public Vector3 eyePos{ get; set; }
+        
+        [SerializeField]
+        public Camera cam;
 
         public bool autoUpdate = false;
         public bool calcNearClipPlane = false;
 
-        public bool resetRotation;
-
+        #region States
         private void Awake()
         {
             cam = GetComponent<Camera>();
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
         }
 
         // Update is called once per frame
@@ -73,11 +70,13 @@ namespace VRVIS.Photoportals
                 CalcProjection();
         }
 
+        #endregion
+
+        #region Methods
         public void CalcProjection()
         {
-            if(this.resetRotation){
-                transform.localRotation = Quaternion.Inverse(transform.parent.localRotation);
-            }
+
+            transform.localRotation = Quaternion.Inverse(transform.parent.localRotation);
 
             eyePos = transform.position;
 
@@ -91,6 +90,7 @@ namespace VRVIS.Photoportals
                 var s2 = screen.transform.position - screen.transform.forward;
                 var camOnScreenForward = Vector3.Project((transform.position - s1), (s2 - s1)) + s1;
                 near = Vector3.Distance(screen.transform.position, camOnScreenForward);
+                cam.nearClipPlane = near;
             }
             var far = cam.farClipPlane;
 
@@ -102,5 +102,64 @@ namespace VRVIS.Photoportals
 
             cam.projectionMatrix = Matrix4x4.Frustum(l, r, b, t, near, far);
         }
+
+        #endregion
+        
+        #region Editor
+        #if UNITY_EDITOR
+        private bool showExtraGizmos = false;
+
+        [ContextMenu("Toggle Extra Gizmos")]
+        public void ToggleGizmos(){
+            this.showExtraGizmos = !this.showExtraGizmos;
+        }
+        /**
+            I'd like to see this in the /Editor folder as a derivative of Editor, but:
+            I couldn't find a fitting way to have this render frame based without the object being selected.
+            So for now we just have this region in the monobehaviour.
+            https://discussions.unity.com/t/keep-my-custom-handle-visible-even-if-object-is-not-selected/97952
+        **/
+        private void OnDrawGizmos(){
+            if(this.showExtraGizmos == false) return;
+            Handles.color = Color.white;
+            
+            //calculating corners of near and far clip plane
+            //https://discussions.unity.com/t/how-do-i-get-the-world-coordinates-of-corners-of-far-clip-panel-of-camera-in-a-script/899976
+            Vector3 nearPlaneBottomLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,0, this.cam.nearClipPlane));
+            Vector3 nearPlaneBottomRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,0, this.cam.nearClipPlane));
+            Vector3 nearPlaneTopLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,1, this.cam.nearClipPlane));
+            Vector3 nearPlaneTopRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,1, this.cam.nearClipPlane));
+
+            Vector3 farPlaneBottomLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,0, this.cam.farClipPlane));
+            Vector3 farPlaneBottomRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,0, this.cam.farClipPlane));
+            Vector3 farPlaneTopLeftCorner = this.cam.ViewportToWorldPoint(new Vector3(0,1, this.cam.farClipPlane));
+            Vector3 farPlaneTopRightCorner = this.cam.ViewportToWorldPoint(new Vector3(1,1, this.cam.farClipPlane));
+
+            //near clip plane
+            Handles.DrawLine(nearPlaneBottomLeftCorner, nearPlaneTopLeftCorner);
+            Handles.DrawLine(nearPlaneTopLeftCorner, nearPlaneTopRightCorner);
+            Handles.DrawLine(nearPlaneTopRightCorner, nearPlaneBottomRightCorner);
+            Handles.DrawLine(nearPlaneBottomRightCorner, nearPlaneBottomLeftCorner);
+
+            //far clip plane
+            Handles.DrawLine(farPlaneBottomLeftCorner, farPlaneTopLeftCorner);
+            Handles.DrawLine(farPlaneTopLeftCorner, farPlaneTopRightCorner);
+            Handles.DrawLine(farPlaneTopRightCorner, farPlaneBottomRightCorner);
+            Handles.DrawLine(farPlaneBottomRightCorner, farPlaneBottomLeftCorner);
+
+            //rays from camera to near clip plane corners
+            Handles.DrawLine(this.eyePos, nearPlaneBottomLeftCorner);
+            Handles.DrawLine(this.eyePos, nearPlaneBottomRightCorner);
+            Handles.DrawLine(this.eyePos, nearPlaneTopLeftCorner);
+            Handles.DrawLine(this.eyePos, nearPlaneTopRightCorner);
+
+            //rays from near clip plane to far clip plane corners
+            Handles.DrawLine(nearPlaneBottomLeftCorner , farPlaneBottomLeftCorner);
+            Handles.DrawLine(nearPlaneBottomRightCorner, farPlaneBottomRightCorner);
+            Handles.DrawLine(nearPlaneTopLeftCorner, farPlaneTopLeftCorner);
+            Handles.DrawLine(nearPlaneTopRightCorner, farPlaneTopRightCorner);
+        }
+        #endif
+        #endregion
     }
 }
