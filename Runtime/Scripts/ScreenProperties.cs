@@ -32,24 +32,49 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //-----------------------------------------------------------------
-//   Authors:        Andr� Kunert
-//   Date:           2022
+//   Authors:        Andr� Kunert, Manuel Hartmann
+//   Date:           2022, 2025
 //-----------------------------------------------------------------
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Vrsys.Photoportals
+namespace VRVIS.Photoportals
 {
     [ExecuteInEditMode]
     public class ScreenProperties : MonoBehaviour
     {
-        public float width = 3f;
-        public float height = 2f;
 
-        public bool drawGizmoFlag = true; // helper visualizations
+        /**
+        //cannot use these because i wanna see them in the inspector
+        public float width {
+            get
+            {
+                return transform.localScale.x;
+            }
+        }
 
+        public float height {
+            get
+            {
+                return transform.localScale.y;
+            }
+        }
+
+        **/
+
+        public float width;
+        public float height;
+
+        #region States
+        public void Update()
+        {
+            width = transform.localScale.x;
+            height = transform.localScale.y;
+        }
+        #endregion
+        #region Methods
         public Vector3 topLeftCorner {
             get
             {
@@ -78,19 +103,6 @@ namespace Vrsys.Photoportals
                 return transform.TransformPoint(new Vector3(-width * 0.5f, -height * 0.5f, 0f));
             }
         }
-
-
-        private void OnDrawGizmos()
-        {
-            if (drawGizmoFlag)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawLine(bottomLeftCorner, topLeftCorner);
-                Gizmos.DrawLine(topLeftCorner, topRightCorner);
-                Gizmos.DrawLine(topRightCorner, bottomRightCorner);
-                Gizmos.DrawLine(bottomRightCorner, bottomLeftCorner);
-            }
-        }
+        #endregion
     }
-
 }
