@@ -40,7 +40,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Vrsys.Photoportals
+namespace VRVIS.Photoportals
 {
     [RequireComponent(typeof(Camera))]
     public class OffAxisProjection : MonoBehaviour
@@ -54,12 +54,8 @@ namespace Vrsys.Photoportals
         public bool autoUpdate = false;
         public bool calcNearClipPlane = false;
 
-<<<<<<< Updated upstream
-=======
         public bool resetRotation;
 
-        #region States
->>>>>>> Stashed changes
         private void Awake()
         {
             cam = GetComponent<Camera>();
@@ -79,13 +75,9 @@ namespace Vrsys.Photoportals
 
         public void CalcProjection()
         {
-<<<<<<< Updated upstream
-            transform.localRotation = Quaternion.Inverse(transform.parent.localRotation);
-=======
             if(this.resetRotation){
                 transform.localRotation = Quaternion.Inverse(transform.parent.localRotation);
             }
->>>>>>> Stashed changes
 
             eyePos = transform.position;
 
