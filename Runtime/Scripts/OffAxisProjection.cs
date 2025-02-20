@@ -46,7 +46,7 @@ namespace Vrsys.Photoportals
     public class OffAxisProjection : MonoBehaviour
     {
         // externals
-        public ScreenProperties screen;        
+        public ScreenProperties screen;    
 
         private Vector3 eyePos;
         private Camera cam;
@@ -54,6 +54,12 @@ namespace Vrsys.Photoportals
         public bool autoUpdate = false;
         public bool calcNearClipPlane = false;
 
+<<<<<<< Updated upstream
+=======
+        public bool resetRotation;
+
+        #region States
+>>>>>>> Stashed changes
         private void Awake()
         {
             cam = GetComponent<Camera>();
@@ -73,7 +79,13 @@ namespace Vrsys.Photoportals
 
         public void CalcProjection()
         {
+<<<<<<< Updated upstream
             transform.localRotation = Quaternion.Inverse(transform.parent.localRotation);
+=======
+            if(this.resetRotation){
+                transform.localRotation = Quaternion.Inverse(transform.parent.localRotation);
+            }
+>>>>>>> Stashed changes
 
             eyePos = transform.position;
 
