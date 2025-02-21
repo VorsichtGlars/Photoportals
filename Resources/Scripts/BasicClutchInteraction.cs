@@ -61,11 +61,13 @@ namespace VRVIS.Photoportals
             
             //calculate relative offset
             this.offsetMatrix = GetTransformationMatrix(this.grabInteractable.transform,true).inverse * this.clutchingOriginDisplay;          
-            this.offsetMatrix = this.offsetMatrix.inverse;
+            this.offsetMatrix = this.offsetMatrix.inverse; //actually i don't know why this is necessary
 
             //calculate absolute offset
             //potential bug here: what happens when the scale is changed during clutching?
             this.offsetMatrix = this.clutchingOriginView * this.offsetMatrix;
+
+            //apply offset
             this.viewTransform.position = this.offsetMatrix.GetColumn(3);
             this.viewTransform.rotation = this.offsetMatrix.rotation;
         }
