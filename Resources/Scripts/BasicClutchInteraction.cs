@@ -11,6 +11,8 @@ namespace VRVIS.Photoportals
         public Transform viewTransform;
         public XRGrabInteractable grabInteractable;
         private Matrix4x4 offsetMatrix = Matrix4x4.identity;
+        private Matrix4x4 clutchingOriginDisplay = Matrix4x4.identity;
+        private Matrix4x4 clutchingOriginView = Matrix4x4.identity;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -42,19 +44,34 @@ namespace VRVIS.Photoportals
                 Debug.Log("Nothing Grabbed");
                 return;
             }
-            this.offsetMatrix = GetTransformationMatrix(this.grabInteractable.transform, true).inverse *
-            GetTransformationMatrix(this.viewTransform, true);
+            //this.offsetMatrix = GetTransformationMatrix(this.grabInteractable.transform, true).inverse *
+            //GetTransformationMatrix(this.viewTransform, true);
+            this.clutchingOriginDisplay = GetTransformationMatrix(this.grabInteractable.transform, true);
+            this.clutchingOriginView = GetTransformationMatrix(this.viewTransform, true);
         }
 
         void OnClutchActionIsPressed(){
-            if(this.offsetMatrix == Matrix4x4.identity)
+            if(this.clutchingOriginDisplay == Matrix4x4.identity)
                 return;
-            Matrix4x4 newMatrix = GetTransformationMatrix(this.grabInteractable.transform, true) * this.offsetMatrix;
-            this.viewTransform.position = newMatrix.GetColumn(3);
-            this.viewTransform.rotation = newMatrix.rotation;
+            //if(this.offsetMatrix == Matrix4x4.identity)
+            //    return;
+            //Matrix4x4 newMatrix = GetTransformationMatrix(this.grabInteractable.transform, true) * this.offsetMatrix;
+            //this.viewTransform.position = newMatrix.GetColumn(3);
+            //this.viewTransform.rotation = newMatrix.rotation;
+            
+            //calculate relative offset
+            this.offsetMatrix = GetTransformationMatrix(this.grabInteractable.transform,true).inverse * this.clutchingOriginDisplay;          
+            this.offsetMatrix = this.offsetMatrix.inverse;
+
+            //calculate absolute offset
+            //potential bug here: what happens when the scale is changed during clutching?
+            this.offsetMatrix = this.clutchingOriginView * this.offsetMatrix;
+            this.viewTransform.position = this.offsetMatrix.GetColumn(3);
+            this.viewTransform.rotation = this.offsetMatrix.rotation;
         }
 
         void OnClutchActionWasReleased(){
+            this.clutchingOriginDisplay = Matrix4x4.identity;
             this.offsetMatrix = Matrix4x4.identity;
         }
 

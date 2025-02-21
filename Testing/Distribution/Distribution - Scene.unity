@@ -2207,6 +2207,44 @@ MonoBehaviour:
     m_Reference: {fileID: -8346578834987705981, guid: 266f96d8e11535e43a65a15b16b41116, type: 3}
   viewTransform: {fileID: 52392417}
   grabInteractable: {fileID: 1896866850}
+--- !u!114 &1896866854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896866848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d91155244c26bb4ebfafef087b45204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Scale Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: ff1926c6-ac1a-44f5-9046-0cbffe553abe
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -407821811598926488, guid: 266f96d8e11535e43a65a15b16b41116, type: 3}
+  scaleResetInput:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Scale Reset Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 7386f6f7-09e4-4785-9a8b-64884ba13488
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  viewTransform: {fileID: 52392417}
+  scalePerSecond: 3
 --- !u!1001 &2141164075
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2490,6 +2528,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4750686462243144669, guid: 9f9768dd7291a5b42a1a21b753784151, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1896866853}
+    - targetCorrespondingSourceObject: {fileID: 4750686462243144669, guid: 9f9768dd7291a5b42a1a21b753784151, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1896866854}
     - targetCorrespondingSourceObject: {fileID: 6528592843295541615, guid: 9f9768dd7291a5b42a1a21b753784151, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1203123382}
