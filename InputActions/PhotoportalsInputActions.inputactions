@@ -1,0 +1,118 @@
+{
+    "name": "PhotoportalsInputActions",
+    "maps": [
+        {
+            "name": "Controllers",
+            "id": "4eca0ea6-d485-4fd5-bb52-5f4e10695595",
+            "actions": [
+                {
+                    "name": "Scaling",
+                    "type": "Button",
+                    "id": "32654c8a-5927-4a1f-baf0-19719ff96c4a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Clutching",
+                    "type": "Button",
+                    "id": "52d3b9e5-33c7-4701-b53f-e34a14b6e662",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Steering",
+                    "type": "Button",
+                    "id": "f28b7459-abe7-4b38-bc27-68692b54544c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "46793f6e-2191-4396-8bb4-05766c670220",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scaling",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b3f230c6-bf85-40ce-8a22-be8877c8be94",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clutching",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4180e957-c054-4824-87f0-883b9b03a4d0",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clutching",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ee2cd89-be58-4c64-87c0-21fb0304c017",
+                    "path": "<XRController>{RightHand}/{TriggerTouch}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clutching",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "acde62f0-f48f-4d72-862b-d73ac7415bfc",
+                    "path": "<XRController>{LeftHand}/{TriggerTouch}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clutching",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d5292ae8-d189-46a4-b056-f012ecc77751",
+                    "path": "<XRController>{RightHand}/{TriggerButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21af7af1-ab09-4377-a1d3-018c8e75dea6",
+                    "path": "<XRController>{LeftHand}/{TriggerButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
