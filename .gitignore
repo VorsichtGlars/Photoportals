@@ -70,3 +70,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Testing/World Scale Environment.glb
+Testing/WS-Verstehen-OnlineScene.glb
+Testing/World Scale Environment.glb.meta
+Testing/WS-Verstehen-OnlineScene.glb.meta
+Resources/Environments/Vianden Castle.glb
+Resources/Environments/Vianden Castle.glb.meta

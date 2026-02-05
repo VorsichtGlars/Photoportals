@@ -1,29 +1,22 @@
 {
-    "name": "vrsys.photoportals",
+    "name": "vrvis.photoportals",
     "version": "1.0.0",
-    "displayName": "VRSYS Photoportals",
-    "description": "Implementation of Photoportals for VRSYS",
+    "displayName": "VRVIS Photoportals",
+    "description": "Implementation of Photoportals for the Virtual Reality and Visualization Systems Group at BUW",
     "unity": "6000.0",
     "documentationUrl":"https://github.com/VorsichtGlars/Photoportals/wiki",
     "author": {
-        "name": "Manuel Hartmann",
-        "email": "manuel.hartmann@uni-weimar.de",
-        "url": "manuelhartmann.net"
+        "name": "Manuel Hartmann"
         },
     "samples": [
         {
-            "displayName": "Desktop Example (Monoscopic Portal)",
-            "description": "Example for monoscopic desktop rendering.",
-            "path": "Samples/DesktopExample"
-        },
-        {
-            "displayName": "HMD Example (Stereoscopic Portal)",
-            "description": "Example for stereoscopic HMD rendering.",
-            "path": "Samples/HMDExample"
+            "displayName": "Example Scene",
+            "description": "Example for using the Photoportals package.",
+            "path": "Samples/Example Scene"
         }
     ],
     "dependencies": {
         "com.unity.xr.openxr": "1.12.1",
-        "com.unity.xr.interaction.toolkit": "3.0.6",
+        "com.unity.xr.interaction.toolkit": "3.0.6"
     }
 }
