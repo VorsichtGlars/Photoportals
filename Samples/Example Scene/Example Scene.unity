@@ -4758,10 +4758,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9426972c937cb143ad20aa7c942bcb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userSpawnInfo: {fileID: 11400000, guid: f708207a23cf5644da109a83fed28813, type: 2}
+  userSpawnInfo: {fileID: 11400000, guid: 47b3f84f46da8394a97c3eb5b98bdebf, type: 2}
   startDedicatedServer: 0
   dedicatedServerSettings: {fileID: 0}
-  lobbySettings: {fileID: 11400000, guid: 0633e5af84e10f044b4471d691c55b47, type: 2}
+  lobbySettings: {fileID: 11400000, guid: 9b21cd5d1b71407419e7a55505661e51, type: 2}
   verbose: 1
   onAuthenticated:
     m_PersistentCalls:
