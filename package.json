@@ -17,7 +17,7 @@
     ],
     "dependencies": {
         "com.unity.xr.openxr": "1.12.1",
-        "com.unity.xr.interaction.toolkit": "3.0.6",
-        "com.vrsys.core" : "https://github.com/vrsys/vrsys-core.git?path=/Packages/com.vrsys.core"
+        "com.unity.xr.interaction.toolkit": "3.0.6"
+        //"com.vrsys.core" : "https://github.com/vrsys/vrsys-core.git?path=/Packages/com.vrsys.core" //git urls do not work in package.json
     }
 }
