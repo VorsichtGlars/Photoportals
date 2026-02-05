@@ -53,6 +53,13 @@ namespace VRVIS.Photoportals {
             };
         }
 
+        private void Update() {
+            if (Input.GetKeyDown(KeyCode.P)) {
+                var spawnMatrix = GetSpawnMatrix();
+                this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
+            }
+        }
+
         public Matrix4x4 GetSpawnMatrix() {
             if(ConnectionManager.Instance.userSpawnInfo.userRole == UserRole.HMD) {
                 Debug.Log("Setting right hand as spawn postioon for HMD User");
