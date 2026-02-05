@@ -1,15 +1,15 @@
 using System.Collections.Generic;
-using Mu.UnityExtensions;
 using Unity.Netcode;
-using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+
 using VRSYS.Core.Logging;
 using VRSYS.Core.Networking;
 using VRVIS.Networking;
+
+using Mu.UnityExtensions;
 
 namespace VRVIS.Photoportals {
 
@@ -54,7 +54,11 @@ namespace VRVIS.Photoportals {
         }
 
         private void Update() {
-            if (Input.GetKeyDown(KeyCode.P)) {
+            var kb = Keyboard.current;
+            if (kb == null) return;
+
+            if (kb[Key.P].wasPressedThisFrame) {
+                
                 var spawnMatrix = GetSpawnMatrix();
                 this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
             }
