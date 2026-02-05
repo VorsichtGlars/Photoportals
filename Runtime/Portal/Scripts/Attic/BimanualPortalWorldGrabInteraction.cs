@@ -8,7 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using VRSYS.Core.Avatar;
 using VRSYS.Core.Logging;
 using VRSYS.Core.Networking;
-using Mu.UnityExtensions;
+using VRSYS.Photoportals.Extensions;
 
 public class BimanualPortalWorldGrabInteraction : MonoBehaviour, INetworkUserCallbacks {
 

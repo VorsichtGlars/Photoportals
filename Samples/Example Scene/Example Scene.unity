@@ -3880,13 +3880,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  userPrefabs:
-  - UserRole: 1
-    UserPrefab: {fileID: 7216047633976425198, guid: 698fc360540de54489a75ef804f49b8d, type: 3}
-  - UserRole: 0
-    UserPrefab: {fileID: 8231461269131396514, guid: a261985c04347724aae188d2bb71865f, type: 3}
-  spawnPoints:
-  - {fileID: 516289250}
+  userPrefabs: []
+  useRoleSpawnPoints: 1
+  spawnPoint: {fileID: 0}
   verbose: 1
 --- !u!1 &1552626330
 GameObject:
@@ -4762,6 +4758,8 @@ MonoBehaviour:
   startDedicatedServer: 0
   dedicatedServerSettings: {fileID: 0}
   lobbySettings: {fileID: 11400000, guid: 9b21cd5d1b71407419e7a55505661e51, type: 2}
+  offlineSession: 0
+  localNetworkSettings: {fileID: 0}
   verbose: 1
   onAuthenticated:
     m_PersistentCalls:
@@ -4772,6 +4770,10 @@ MonoBehaviour:
   onLobbyJoined:
     m_PersistentCalls:
       m_Calls: []
+  onJoinedLocalNetwork:
+    m_PersistentCalls:
+      m_Calls: []
+  connectionState: 0
   onConnectionStateChange:
     m_PersistentCalls:
       m_Calls: []
@@ -4838,7 +4840,6 @@ MonoBehaviour:
     PlayerPrefab: {fileID: 0}
     Prefabs:
       NetworkPrefabsLists:
-      - {fileID: 11400000, guid: ee07838b5f5dd244c97bcecb3c0f47b0, type: 2}
       - {fileID: 11400000, guid: 6e6f12a3f6678e640bef44e262b475ac, type: 2}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
@@ -4853,7 +4854,7 @@ MonoBehaviour:
     NetworkIdRecycleDelay: 120
     RpcHashSize: 0
     LoadSceneTimeOut: 120
-    SpawnTimeout: 1
+    SpawnTimeout: 10
     EnableNetworkLogs: 1
     NetworkTopology: 0
     UseCMBService: 0
@@ -4891,7 +4892,6 @@ GameObject:
   - component: {fileID: 1063091960995118006}
   - component: {fileID: 693322001661637823}
   - component: {fileID: 8576329755639709908}
-  - component: {fileID: 8576329755639709909}
   m_Layer: 0
   m_Name: VRSYS-Networking
   m_TagString: Untagged
@@ -4917,20 +4917,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   verbose: 1
---- !u!114 &8576329755639709909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8576329755639709907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b101af54d7f78694e9afb450dd7b2db8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infoToOverride: {fileID: 11400000, guid: f708207a23cf5644da109a83fed28813, type: 2}
-  serverRoleToSet: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

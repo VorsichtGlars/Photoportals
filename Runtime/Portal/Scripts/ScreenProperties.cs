@@ -36,11 +36,9 @@
 //   Date:           2022, 2025
 //-----------------------------------------------------------------
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace VRVIS.Photoportals {
+namespace VRSYS.Photoportals {
     [ExecuteInEditMode]
     public class ScreenProperties : MonoBehaviour {
 

@@ -1,15 +1,17 @@
 using System.Collections.Generic;
-using Unity.Netcode;
+
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 using VRSYS.Core.Logging;
 using VRSYS.Core.Networking;
-using VRVIS.Networking;
 
-using Mu.UnityExtensions;
+using VRSYS.Photoportals;
+using VRSYS.Photoportals.Extensions;
+using VRSYS.Photoportals.Networking;
 
 namespace VRVIS.Photoportals {
 
@@ -65,13 +67,13 @@ namespace VRVIS.Photoportals {
         }
 
         public Matrix4x4 GetSpawnMatrix() {
-            if(ConnectionManager.Instance.userSpawnInfo.userRole == UserRole.HMD) {
+            if(ConnectionManager.Instance.userSpawnInfo.userRole.Name == "HMD") {
                 Debug.Log("Setting right hand as spawn postioon for HMD User");
                 var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
                 return avatar.rightHand.GetMatrix4x4();
             }
 
-            if(ConnectionManager.Instance.userSpawnInfo.userRole == UserRole.Desktop) {
+            if(ConnectionManager.Instance.userSpawnInfo.userRole.Name == "Desktop") {
                 Debug.Log("Setting head as spawn postioon for Desktop User");
                 var avatar = NetworkUser.LocalInstance.avatarAnatomy;
                 return avatar.head.GetMatrix4x4() * Matrix4x4.Translate(avatar.head.forward * 0.5f);

@@ -44,7 +44,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace VRVIS.Photoportals {
+namespace VRSYS.Photoportals {
     [RequireComponent(typeof(Camera))]
     public class OffAxisProjection : MonoBehaviour {
         // externals

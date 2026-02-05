@@ -576,7 +576,6 @@ GameObject:
   - component: {fileID: 5281603013008201876}
   - component: {fileID: 8126681051436444133}
   - component: {fileID: 5308852153995822969}
-  - component: {fileID: 6543417498527518183}
   m_Layer: 0
   m_Name: Portal Display
   m_TagString: Untagged
@@ -601,7 +600,6 @@ Transform:
   - {fileID: 6388521857204455601}
   - {fileID: 4239764259272266653}
   - {fileID: 7161682922923369119}
-  - {fileID: 9016759507028100431}
   - {fileID: 6422009180899850084}
   - {fileID: 832728420983757106}
   - {fileID: 8881418808884495798}
@@ -637,7 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1429483488
+  GlobalObjectIdHash: 3396257479
   InScenePlacedSourceGlobalObjectIdHash: 4140372752
   DeferredDespawnTick: 0
   Ownership: 1
@@ -664,6 +662,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 1
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
@@ -1109,20 +1117,6 @@ MonoBehaviour:
   portalExitScreen: {fileID: 0}
   portalExitHead: {fileID: 0}
   viewRoot: {fileID: 0}
---- !u!114 &6543417498527518183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3785651222127509849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 275050e0f3fb2ff42921edd8e266edb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 3785651222127509849}
-  prefabName: Portal Display
 --- !u!1 &5073429162619708513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2107,6 +2101,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 1
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
@@ -3078,112 +3082,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   distributeVisualsOnly: 1
---- !u!1001 &8156669832354024032
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 7595021662059038193}
-    m_Modifications:
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.173
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.135
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.006
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2388358783454212957, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_Name
-      value: Scale Slider
-      objectReference: {fileID: 0}
-    - target: {fileID: 2388358783454212957, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9175459740848573871, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: OnSliderSelectionChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9175459740848573871, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: OnSliderSelectionChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8126681051436444133}
-    - target: {fileID: 9175459740848573871, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: OnSliderSelectionChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9175459740848573871, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: OnSliderSelectionChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetScale
-      objectReference: {fileID: 0}
-    - target: {fileID: 9175459740848573871, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: OnSliderSelectionChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: VRVIS.Photoportals.PortalControl, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 9175459740848573871, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-      propertyPath: OnSliderSelectionChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
---- !u!4 &9016759507028100431 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 870242565114433327, guid: f0cce9cce44e7864f8d49250ebd16d9b, type: 3}
-  m_PrefabInstance: {fileID: 8156669832354024032}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8635084924586796764
 PrefabInstance:
   m_ObjectHideFlags: 0

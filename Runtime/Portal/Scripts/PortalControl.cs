@@ -1,22 +1,22 @@
 using System;
 
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 using DG.Tweening;
 using TMPro;
 
 using VRSYS.Core.Logging;
-using Mu.Maths;
-using Mu.UnityExtensions;
-using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using VRSYS.Core.Avatar;
 using VRSYS.Core.Networking;
-using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.UI;
 
-namespace VRVIS.Photoportals {
+using VRSYS.Photoportals.Extensions;
+
+namespace VRSYS.Photoportals {
     public class PortalControl : MonoBehaviour {
         [Header("Component Status")]
         [SerializeField]

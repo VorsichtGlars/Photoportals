@@ -1,6 +1,8 @@
-using Unity.XR.CoreUtils;
 using UnityEngine;
-using VRVIS.Photoportals;
+
+using Unity.XR.CoreUtils;
+
+using VRSYS.Photoportals;
 
 public class PortalAndJoystickConnector : MonoBehaviour {
     [SerializeField]

@@ -1,0 +1,25 @@
+{
+    "name": "vrsys.photoportals",
+    "rootNamespace": "",
+    "references": [
+        "Unity.InputSystem",
+        "Unity.XR.Interaction.Toolkit",
+        "UnityEngine.UI",
+        "Unity.Netcode.Runtime",
+        "Unity.XR.Management",
+        "Unity.XR.CoreUtils",
+        "Unity.TextMeshPro",
+        "Unity.Collections",
+        "Unity.Networking.Transport",
+        "vrsys.core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

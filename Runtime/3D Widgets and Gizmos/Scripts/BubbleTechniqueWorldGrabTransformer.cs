@@ -1,15 +1,13 @@
 using System;
 using DG.Tweening;
-using DG.Tweening.Core;
-using Mu.Maths;
-using Mu.UnityExtensions;
-using Unity.XR.CoreUtils;
+using VRSYS.Photoportals.Extensions;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Transformers;
 using VRVIS.Photoportals;
+
+namespace VRSYS.Photoportals {    
 public class BubbleTechniqueWorldGrabTransformer : XRBaseGrabTransformer {
     [SerializeField]
     private string status;
@@ -131,4 +129,6 @@ public class BubbleTechniqueWorldGrabTransformer : XRBaseGrabTransformer {
         this.transferFunction.SetMaximum(this.radius);
         this.transferFunction.SetShape(0.8f);
     }
+}
+
 }
