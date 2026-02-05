@@ -1513,7 +1513,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
+  SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
@@ -3846,7 +3846,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 0
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
+  SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
@@ -3880,7 +3880,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  userPrefabs: []
+  userPrefabs:
+  - UserRole:
+      Name: Desktop
+    Prefab: {fileID: 8231461269131396514, guid: a261985c04347724aae188d2bb71865f, type: 3}
+    SpawnPoint: {fileID: 516289250}
+  - UserRole:
+      Name: HMD
+    Prefab: {fileID: 7216047633976425198, guid: 698fc360540de54489a75ef804f49b8d, type: 3}
+    SpawnPoint: {fileID: 516289250}
   useRoleSpawnPoints: 1
   spawnPoint: {fileID: 0}
   verbose: 1
