@@ -76,7 +76,8 @@ namespace VRVIS.Photoportals {
             if(ConnectionManager.Instance.userSpawnInfo.userRole.Name == "Desktop") {
                 Debug.Log("Setting head as spawn postioon for Desktop User");
                 var avatar = NetworkUser.LocalInstance.avatarAnatomy;
-                return avatar.head.GetMatrix4x4() * Matrix4x4.Translate(avatar.head.forward * 0.5f);
+                //return avatar.head.GetMatrix4x4() * Matrix4x4.Translate(avatar.head.forward * 0.5f); //this is in world space but we need the translation it in local
+                return Matrix4x4.TRS(avatar.head.position + (avatar.head.forward * 0.5f), avatar.head.rotation, Vector3.one);
             }
             return Matrix4x4.identity;
         }
@@ -330,7 +331,7 @@ namespace VRVIS.Photoportals {
                 this.spawnPosition = avatar.rightHand;
             } */
             newPortal.display.transform.position = newPortal.view.transform.position = position;
-            newPortal.view.transform.Translate(newPortal.view.transform.forward * 0.01f, Space.World);
+            newPortal.view.transform.Translate(newPortal.view.transform.forward * 0.01f, Space.Self);
             newPortal.display.transform.rotation = newPortal.view.transform.rotation = rotation;
         }
 
