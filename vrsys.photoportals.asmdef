@@ -4,6 +4,7 @@
     "references": [
         "Unity.Collections",
         "UnityEngine.UI",
+        "Unity.Mathematics",
         "Unity.InputSystem",
         "Unity.TextMeshPro",
         "Unity.Netcode.Runtime",
