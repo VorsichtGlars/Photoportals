@@ -12,6 +12,7 @@
         "Unity.XR.Interaction.Toolkit",
         "Unity.XR.Management",
         "Unity.XR.CoreUtils",
+        "Unity.XR.Hands",
         "vrsys.core"
     ],
     "includePlatforms": [],
