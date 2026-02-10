@@ -15,6 +15,7 @@ using VRSYS.Core.Avatar;
 using VRSYS.Core.Networking;
 
 using VRSYS.Photoportals.Extensions;
+using Unity.Netcode;
 
 namespace VRSYS.Photoportals {
     public class PortalControl : MonoBehaviour {
@@ -479,6 +480,17 @@ namespace VRSYS.Photoportals {
                 oap.SetNearClipPlane(value);
             }
         }
+        #endregion
+
+
+        #region Creation and Deletion
+        [ContextMenu("Despawn")]
+        public void Despawn() {
+            ExtendedLogger.LogInfo(this.GetType().Name, $"Despawning Portal {this.name}", this);
+            this.viewTransform.GetComponent<NetworkObject>().Despawn();
+            this.GetComponent<NetworkObject>().Despawn();
+        }
+
         #endregion
     }
 }
