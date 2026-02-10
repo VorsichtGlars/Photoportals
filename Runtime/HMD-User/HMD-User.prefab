@@ -2622,7 +2622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 831200466228595155}
-  - component: {fileID: 9104892954484857204}
+  - component: {fileID: 7494898435765248491}
   m_Layer: 0
   m_Name: Hand Visualizer
   m_TagString: Untagged
@@ -2645,7 +2645,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3146571813431783643}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9104892954484857204
+--- !u!114 &7494898435765248491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2654,20 +2654,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1678399557495423410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e9813c68d7d6f44282ace8bd2d1fd46, type: 3}
+  m_Script: {fileID: 11500000, guid: ec34a6647c3c25243936d47bed3291f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UseOptimizedControls: 0
-  m_MetaQuestLeftHandMesh: {fileID: 0}
-  m_MetaQuestRightHandMesh: {fileID: 0}
-  m_AndroidXRLeftHandMesh: {fileID: 0}
-  m_AndroidXRRightHandMesh: {fileID: 0}
-  m_HandMeshMaterial: {fileID: 0}
+  m_LeftHandMesh: {fileID: 7077262299415891908}
+  m_RightHandMesh: {fileID: 1960486332862710957}
+  m_HandMeshMaterial: {fileID: 2100000, guid: 7d8e7777e6ad14a4cb71a6d22656ee59, type: 2}
   m_DrawMeshes: 0
   m_DebugDrawPrefab: {fileID: 0}
   m_DebugDrawJoints: 0
   m_VelocityPrefab: {fileID: 0}
-  m_VelocityType: 0
+  m_VelocityType: 2
 --- !u!1 &1816795067710782610
 GameObject:
   m_ObjectHideFlags: 0

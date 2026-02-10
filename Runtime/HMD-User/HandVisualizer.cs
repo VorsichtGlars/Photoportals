@@ -1,6 +1,12 @@
+using UnityEngine;
+
+using UnityEngine.InputSystem;
+
+using UnityEngine.XR.Hands;
+
 using System.Collections.Generic;
 
-namespace UnityEngine.XR.Hands.Samples.VisualizerSample
+namespace VRSYS.Photoportals.Hands
 {
     /// <summary>
     /// This component visualizes the hand joints and mesh for the left and right hands.
@@ -108,7 +114,7 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
         {
 #if ENABLE_INPUT_SYSTEM
             if (m_UseOptimizedControls)
-                InputSystem.InputSystem.settings.SetInternalFeatureFlag("USE_OPTIMIZED_CONTROLS", true);
+                InputSystem.settings.SetInternalFeatureFlag("USE_OPTIMIZED_CONTROLS", true);
 #endif // ENABLE_INPUT_SYSTEM
         }
 
