@@ -131,12 +131,16 @@ namespace VRVIS.Photoportals {
             var offAxisProjections = view.GetComponentsInChildren<OffAxisProjection>();
             
             //register UI
+            /**
             Transform toggleClippingGO = display.transform.Find("UI Poke Components/Clipping Toggle");
             Toggle toggleComponent = toggleClippingGO.GetComponentInChildren<Toggle>();
             toggleComponent.onValueChanged.AddListener((value) => {portalControl.SetNearClipPlane(value);});
             portalControl.EnableNearClipPlane();
             toggleComponent.isOn = true;
+            
+            **/
 
+            /**
             Transform deleteGO = display.transform.Find("UI Poke Components/Delete Button");
             Button buttonComponent = deleteGO.GetComponentInChildren<Button>();
             buttonComponent.onClick.AddListener(
@@ -149,6 +153,7 @@ namespace VRVIS.Photoportals {
                     //this.registry.Remove(newPortal);
                 }
             );
+            **/
 
             /*          
             Transform anchoringGO = display.transform.Find("UI Poke Components/Anchoring Toggle");
