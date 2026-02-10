@@ -815,7 +815,7 @@ MonoBehaviour:
     SpawnPoint: {fileID: 516289250}
   - UserRole:
       Name: HMD
-    Prefab: {fileID: 7216047633976425198, guid: 698fc360540de54489a75ef804f49b8d, type: 3}
+    Prefab: {fileID: 7216047633976425198, guid: 93955e1d319c941468b7833bcd7b8e40, type: 3}
     SpawnPoint: {fileID: 516289250}
   useRoleSpawnPoints: 1
   spawnPoint: {fileID: 0}
