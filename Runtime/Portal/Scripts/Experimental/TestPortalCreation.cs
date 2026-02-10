@@ -231,46 +231,41 @@ namespace VRVIS.Photoportals {
             toggleComponentOptionA.isOn = true;
             */
 
+            Debug.Log("Adding Listener to Scale Slider for portal scaling");
             Transform scaleGO = display.transform.Find("UI Poke Components/Scale Slider");
             Slider sliderComponent = scaleGO.GetComponentInChildren<Slider>();
             //viewNetworkObject.GetComponent<NetworkTransform>().
-            sliderComponent.onValueChanged.AddListener(
+            if (sliderComponent == null) {
+                Debug.LogWarning("No slider component found for scale adjustment in portal UI.");
+            }
+
+            sliderComponent?.onValueChanged.AddListener(
                 (value) => {
-                    float mappedScaleValue = 1f;
-                    float clampedScaleValue = 0.1f;
                     switch (value) {
-                        case float n when (0 < n && n < 0.2f):
-                            mappedScaleValue = 1f;
-                            clampedScaleValue = 0.1f;
+                        case 0f:
+                            portalControl.SetScale(1f);
                             break;
-                        case float n when (0.2f < n && n < 0.4f):
-                            mappedScaleValue = 10f;
-                            clampedScaleValue = 0.3f;
+
+                        case 1f:
+                            portalControl.SetScale(10f);
                             break;
-                        case float n when (0.4f < n && n < 0.6f):
-                            mappedScaleValue = 50f;
-                            clampedScaleValue = 0.5f;
+
+                        case 2f:
+                            portalControl.SetScale(50f);
                             break;
-                        case float n when (0.6f < n && n < 0.8f):
-                            mappedScaleValue = 100f;
-                            clampedScaleValue = 0.7f;
+                        
+                        case 3f:
+                            portalControl.SetScale(100f);                            
                             break;
-                        case float n when (0.8f < n && n < 1f):
-                            mappedScaleValue = 500f;
-                            clampedScaleValue = 0.9f;
-                        break;
+                  
+                        case 4f:
+                            portalControl.SetScale(500f);
+                            break;
+
                         default:
-                            mappedScaleValue = 1f;
-                            clampedScaleValue = 0.1f;
+                            Debug.LogWarning("No scale value found for slider value.");
                             break;
                     }
-                    if (portalControl.GetScale() == mappedScaleValue) {
-                        Debug.Log("Scale unchanged, not applying.");
-                        return;
-                    }
-                    Debug.Log($"Applying scale {mappedScaleValue}");
-                    portalControl.SetScale(mappedScaleValue);
-                    sliderComponent.value = clampedScaleValue;
                 }
             );
 
