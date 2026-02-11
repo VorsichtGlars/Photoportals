@@ -874,8 +874,7 @@ MonoBehaviour:
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []
-  m_StartingHoverFilters:
-  - {fileID: 0}
+  m_StartingHoverFilters: []
   m_StartingSelectFilters:
   - {fileID: 5281603013008201876}
   m_StartingInteractionStrengthFilters: []
