@@ -4501,7 +4501,143 @@ MonoBehaviour:
   - Ring
   - Little
   m_FingerStartJointIds: 03000000070000000c0000001100000016000000
-  handFidelityOptions: []
+  handFidelityOptions:
+  - fingerJoints:
+    - fingerName: Thumb
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 3
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 4
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 5
+        m_JointTransform: {fileID: 0}
+    - fingerName: Index
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 7
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 8
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 9
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 10
+        m_JointTransform: {fileID: 0}
+    - fingerName: Middle
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 12
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 13
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 14
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 15
+        m_JointTransform: {fileID: 0}
+    - fingerName: Ring
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 17
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 18
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 19
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 20
+        m_JointTransform: {fileID: 0}
+    - fingerName: Little
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 22
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 23
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 24
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 25
+        m_JointTransform: {fileID: 0}
+  - fingerJoints:
+    - fingerName: Thumb
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 4
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 5
+        m_JointTransform: {fileID: 0}
+    - fingerName: Index
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 8
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 9
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 10
+        m_JointTransform: {fileID: 0}
+    - fingerName: Middle
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 13
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 14
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 15
+        m_JointTransform: {fileID: 0}
+    - fingerName: Ring
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 18
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 19
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 20
+        m_JointTransform: {fileID: 0}
+    - fingerName: Little
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 23
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 24
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 25
+        m_JointTransform: {fileID: 0}
+  - fingerJoints:
+    - fingerName: Thumb
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 4
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 5
+        m_JointTransform: {fileID: 0}
+    - fingerName: Index
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 8
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 9
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 10
+        m_JointTransform: {fileID: 0}
+    - fingerName: Middle
+      curlAmount: 0
+      jointTransformReferences:
+      - m_XRHandJointID: 13
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 14
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 15
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 18
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 19
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 20
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 23
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 24
+        m_JointTransform: {fileID: 0}
+      - m_XRHandJointID: 25
+        m_JointTransform: {fileID: 0}
   m_MinMaxEulerX: {x: 0, y: 100}
 --- !u!137 &8009811912517972128
 SkinnedMeshRenderer:
@@ -6559,7 +6695,9 @@ MonoBehaviour:
   rightTrackedHand: {fileID: 1886460988206790184}
   m_FidelityLevel: 0
   m_MinUpdateDelta: 0.1
-  m_HandCurler: []
+  m_HandCurler:
+  - {fileID: 8545988254034632589}
+  - {fileID: 5590051627734013127}
   m_FingerLerpSpeed: 20
   m_UpdateHandsLocally: 0
 --- !u!1 &5834820999799151545
