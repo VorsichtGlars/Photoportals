@@ -266,29 +266,28 @@ namespace VRSYS.Photoportals {
             //gui element
             float scaleValue = this.viewTransform.lossyScale.x;
             this.displayedText = $"1:{(int)scaleValue}";
-            this.guiElement.text = this.displayedText;
+            //this.guiElement.text = this.displayedText;
 
             //slider positioning
             float mappedScaleValue = 1f;
-            float clampedScaleValue = 0.1f;
             switch (scaleValue) {
                 case float n when (0f < n && n < 10f):
-                    mappedScaleValue = scaleValue.Map(1f, 10f, 0f, 0.2f);
+                    mappedScaleValue = 0f;
                     break;
                 case float   n when (10f < n && n < 50f):
-                    mappedScaleValue = scaleValue.Map(10f, 50f, 0.2f, 0.4f);
+                    mappedScaleValue = 1f;
                     break;
                 case float n when (50f < n && n < 100f):
-                    mappedScaleValue = scaleValue.Map(50f, 100f, 0.4f, 0.6f);
+                    mappedScaleValue = 2f;
                     break;
                 case float n when (100f < n && n < 500f):
-                    mappedScaleValue = scaleValue.Map(100f, 500f, 0.6f, 0.8f);
+                    mappedScaleValue = 3f;
                     break;
                 case float n when (500f < n && n < 1000f):
-                    mappedScaleValue = scaleValue.Map(500f, 1000f, 0.8f, 1f);
+                    mappedScaleValue = 4f;
                     break;
                 default:
-                    mappedScaleValue = 1f;
+                    mappedScaleValue = 0f;
                     break;
             }
             this.sliderElement.SetValueWithoutNotify(mappedScaleValue);
