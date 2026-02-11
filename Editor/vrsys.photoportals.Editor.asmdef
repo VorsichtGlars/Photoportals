@@ -1,0 +1,28 @@
+{
+    "name": "vrsys.photoportals.Editor",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Collections",
+        "UnityEngine.UI",
+        "Unity.Mathematics",
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "Unity.Netcode.Runtime",
+        "Unity.Networking.Transport",
+        "Unity.XR.Interaction.Toolkit",
+        "Unity.XR.Management",
+        "Unity.XR.CoreUtils",
+        "Unity.XR.Hands",
+        "ParrelSync",
+        "vrsys.core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
