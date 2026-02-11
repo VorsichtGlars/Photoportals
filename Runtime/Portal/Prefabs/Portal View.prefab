@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 3581623521668074310}
   - component: {fileID: 8420215858947311355}
   - component: {fileID: 3949860697234697031}
-  - component: {fileID: 7412743248371289602}
+  - component: {fileID: 1505066669145718414}
   - component: {fileID: 1947031635738994456}
   m_Layer: 0
   m_Name: Portal View
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3290106121
+  GlobalObjectIdHash: 69386811
   InScenePlacedSourceGlobalObjectIdHash: 2199031757
   DeferredDespawnTick: 0
   Ownership: 1
@@ -385,6 +385,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 1
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
@@ -420,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
---- !u!114 &7412743248371289602
+--- !u!114 &1505066669145718414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -429,11 +439,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2126383613563301595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 275050e0f3fb2ff42921edd8e266edb5, type: 3}
+  m_Script: {fileID: 11500000, guid: 245c96193dc0cbe49a7529803ee2c0d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2126383613563301595}
-  prefabName: Portal View
+  note: Here was a script but now it is missing. I dont remember which one it was.
+    Leaving this note to remind myself of this tragedy.
 --- !u!114 &1947031635738994456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +538,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: d65dc454aa3b52b4a82664742e429fda, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
