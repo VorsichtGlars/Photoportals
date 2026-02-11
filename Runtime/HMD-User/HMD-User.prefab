@@ -2661,10 +2661,10 @@ MonoBehaviour:
   m_LeftHandMesh: {fileID: 7077262299415891908}
   m_RightHandMesh: {fileID: 1960486332862710957}
   m_HandMeshMaterial: {fileID: 2100000, guid: 7d8e7777e6ad14a4cb71a6d22656ee59, type: 2}
-  m_DrawMeshes: 0
-  m_DebugDrawPrefab: {fileID: 0}
+  m_DrawMeshes: 1
+  m_DebugDrawPrefab: {fileID: 6507399986997092475, guid: ec9ea1611b26aa14c87d00b71e7d815c, type: 3}
   m_DebugDrawJoints: 0
-  m_VelocityPrefab: {fileID: 0}
+  m_VelocityPrefab: {fileID: 8538602047018081646, guid: 893854de4288ad1418d8147efd525db6, type: 3}
   m_VelocityType: 2
 --- !u!1 &1816795067710782610
 GameObject:
@@ -4493,7 +4493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b953628b2248f4f85eaccedc57cd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandRoot: {fileID: 0}
+  m_HandRoot: {fileID: 2765388033575764790}
   m_FingerNames:
   - Thumb
   - Index
@@ -6555,8 +6555,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  leftTrackedHand: {fileID: 0}
-  rightTrackedHand: {fileID: 0}
+  leftTrackedHand: {fileID: 6083102222540373092}
+  rightTrackedHand: {fileID: 1886460988206790184}
   m_FidelityLevel: 0
   m_MinUpdateDelta: 0.1
   m_HandCurler: []
@@ -6749,7 +6749,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -8386526219334692167, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_RotationInput:
     m_UseReference: 1
     m_Action:
@@ -6761,7 +6761,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 4222510706494500663, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_TrackingStateInput:
     m_UseReference: 1
     m_Action:
@@ -6773,7 +6773,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 6399398584939457650, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_PositionAction:
     m_Name: 
     m_Type: 0
@@ -6847,8 +6847,8 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReferencePerformed: {fileID: 0}
-    m_InputActionReferenceValue: {fileID: 0}
+    m_InputActionReferencePerformed: {fileID: 8815738649508342562, guid: 1057e31865b512b4da84b3166928856f, type: 3}
+    m_InputActionReferenceValue: {fileID: 8815738649508342562, guid: 1057e31865b512b4da84b3166928856f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualPerformed: 0
     m_ManualValue: 0
@@ -7168,7 +7168,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 1724252911699217628, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_RotationInput:
     m_UseReference: 1
     m_Action:
@@ -7180,7 +7180,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -5642439622082174334, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_TrackingStateInput:
     m_UseReference: 1
     m_Action:
@@ -7192,7 +7192,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 6399398584939457650, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_PositionAction:
     m_Name: 
     m_Type: 0
@@ -7658,7 +7658,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 273295471819062000, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_RotationInput:
     m_UseReference: 1
     m_Action:
@@ -7670,7 +7670,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 9059152784045693930, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_TrackingStateInput:
     m_UseReference: 1
     m_Action:
@@ -7682,7 +7682,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -4697559963244629418, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_PositionAction:
     m_Name: 
     m_Type: 0
@@ -8216,7 +8216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b953628b2248f4f85eaccedc57cd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandRoot: {fileID: 0}
+  m_HandRoot: {fileID: 967177008023454514}
   m_FingerNames:
   - Thumb
   - Index
@@ -9492,7 +9492,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 1669181904768240485, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_RotationInput:
     m_UseReference: 1
     m_Action:
@@ -9504,7 +9504,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 6401543951401124472, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_TrackingStateInput:
     m_UseReference: 1
     m_Action:
@@ -9516,7 +9516,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -4697559963244629418, guid: 1057e31865b512b4da84b3166928856f, type: 3}
   m_PositionAction:
     m_Name: 
     m_Type: 0
@@ -9590,8 +9590,8 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReferencePerformed: {fileID: 0}
-    m_InputActionReferenceValue: {fileID: 0}
+    m_InputActionReferencePerformed: {fileID: -681588737452640525, guid: 1057e31865b512b4da84b3166928856f, type: 3}
+    m_InputActionReferenceValue: {fileID: -681588737452640525, guid: 1057e31865b512b4da84b3166928856f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualPerformed: 0
     m_ManualValue: 0
