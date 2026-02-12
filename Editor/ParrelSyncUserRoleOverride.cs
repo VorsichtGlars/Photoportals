@@ -13,6 +13,8 @@ namespace VRSYS.Photoportals {
 public class ParrelSyncUserRoleOverride : MonoBehaviour {
     
     public NetworkUserSpawnInfo infoToOverride;
+
+    [UserRoleSelector]
     public UserRole serverRoleToSet;
 
     void Awake() {

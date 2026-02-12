@@ -1095,9 +1095,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b101af54d7f78694e9afb450dd7b2db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infoToOverride: {fileID: 0}
+  infoToOverride: {fileID: 11400000, guid: 16ed45b5e89073848855ec20b891d4eb, type: 2}
   serverRoleToSet:
-    Name: 
+    Name: Desktop
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
