@@ -41,7 +41,7 @@ using UnityEditor;
 using VRSYS.Core.Networking;
 using VRSYS.Core.Avatar;
 
-namespace VRVIS.Photoportals {
+namespace VRSYS.Photoportals {
     public class PortalExitHeadTracking : MonoBehaviour, INetworkUserCallbacks {
         public Transform portalEntranceHead;
         public Transform portalEntranceScreen;

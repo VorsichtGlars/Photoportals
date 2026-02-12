@@ -13,7 +13,7 @@ using VRSYS.Photoportals;
 using VRSYS.Photoportals.Extensions;
 using VRSYS.Photoportals.Networking;
 
-namespace VRVIS.Photoportals {
+namespace VRSYS.Photoportals {
 
     [System.Serializable]
     public class Portal {
