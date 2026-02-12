@@ -2,30 +2,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
 
+/**
+    This script distributes a sliders value to its remote clients
+    Caution: It can potentially be a lot of calls depending on the slider configuration
+**/
 [RequireComponent(typeof(Slider))]
-public class NetworkedSlider : NetworkBehaviour
-{
+public class NetworkedSlider : NetworkBehaviour {
     private Slider slider;
-
-    private bool changeAppliedLocally;
-
-    private NetworkVariable<float> sliderState = new NetworkVariable<float>(
-        readPerm: NetworkVariableReadPermission.Everyone,
-        writePerm: NetworkVariableWritePermission.Server
-    );
-
-    void Awake()
-    {
-        this.slider = this.GetComponent<Slider>();
-    }
 
     public override void OnNetworkSpawn() {
         base.OnNetworkSpawn();
-        this.slider.onValueChanged.AddListener(this.OnValueChanged);
+        this.slider = this.GetComponent<Slider>();
+        this.slider.onValueChanged.AddListener(this.OnValueChangedServerRpc);
     }
 
-    private void OnValueChanged(float value) {
-        this.slider.value = 1.0f;
+    [Rpc(SendTo.NotMe, RequireOwnership = false)]
+    private void OnValueChangedServerRpc(float value) {
+        Debug.Log("OnValueChangedServerRpc", this);
+        //Removing the listener is necessary to avoid infinite recursion
+        this.slider.onValueChanged.RemoveListener(this.OnValueChangedServerRpc);
+        this.slider.value = value;
+        this.slider.onValueChanged.AddListener(this.OnValueChangedServerRpc);
     }
-
 }

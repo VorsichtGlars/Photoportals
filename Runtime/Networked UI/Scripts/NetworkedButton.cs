@@ -8,26 +8,16 @@ using Unity.Netcode;
 public class NetworkedButton : NetworkBehaviour {
     private Button button;
 
-    private bool pressedLocally = false;
-    private NetworkVariable<bool> toggleState = new NetworkVariable<bool>(
-        false,
-        readPerm: NetworkVariableReadPermission.Everyone,
-        writePerm: NetworkVariableWritePermission.Server
-    );
-
-    void Awake() {
-        this.button = this.GetComponent<Button>();
-    }
-
     public override void OnNetworkSpawn() {
+        base.OnNetworkSpawn();
+        this.button = this.GetComponent<Button>();
         this.button.onClick.AddListener(this.OnButtonClickServerRpc);
     }
 
     [Rpc(SendTo.NotMe, RequireOwnership = false)]
     private void OnButtonClickServerRpc() {
         Debug.Log("OnButtonClickServerRpc", this);
-
-        //this workaround is necessary to avoid infinite recursion
+        //Removing the listener is necessary to avoid infinite recursion
         this.button.onClick.RemoveListener(this.OnButtonClickServerRpc);
         this.button.onClick.Invoke();
         this.button.onClick.AddListener(this.OnButtonClickServerRpc);
