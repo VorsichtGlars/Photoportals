@@ -12,6 +12,7 @@ using VRSYS.Core.Networking;
 using VRSYS.Photoportals;
 using VRSYS.Photoportals.Extensions;
 using VRSYS.Photoportals.Networking;
+using DG.Tweening;
 
 namespace VRSYS.Photoportals {
 
@@ -141,6 +142,32 @@ namespace VRSYS.Photoportals {
             portalControl.EnableNearClipPlane();
             toggleComponent.isOn = true;
 
+            Transform teleportGO = display.transform.Find("UI Poke Components/Teleport Button");
+            Button teleportButtonComponent = teleportGO.GetComponentInChildren<Button>();
+            if (teleportButtonComponent == null) {
+                Debug.LogWarning("No teleportButtonComponent found for teleport button in portal UI.");
+            }
+
+            teleportButtonComponent.onClick.AddListener(() =>{
+
+                void teleport() {
+                    Transform avatar = NetworkUser.LocalInstance.transform;
+                    Matrix4x4 relativeOffsetMatrix = display.transform.GetMatrix4x4().inverse * avatar.GetMatrix4x4();
+                    Matrix4x4 absoluteWorldPositon = view.transform.GetMatrix4x4() * relativeOffsetMatrix;
+                    avatar.transform.SetMatrix4x4(absoluteWorldPositon);
+                    //avatar.position = absoluteWorldPositon.GetPosition();
+                    //avatar.rotation = absoluteWorldPositon.rotation;
+                    display.transform.SetMatrix4x4(view.transform.GetMatrix4x4());
+                    view.transform.Translate(Vector3.forward * 0.01f, Space.Self);
+                }
+
+                if(view.transform.localScale.x == 1.0f) {
+                    teleport();
+                }
+                else {
+                    view.transform.DOScale(1.0f, 1.0f).OnComplete(()=>teleport());
+                }
+            });
 
             /**
             Transform deleteGO = display.transform.Find("UI Poke Components/Delete Button");
@@ -333,8 +360,8 @@ namespace VRSYS.Photoportals {
                 this.spawnPosition = avatar.rightHand;
             } */
             newPortal.display.transform.position = newPortal.view.transform.position = position;
-            newPortal.view.transform.Translate(newPortal.view.transform.forward * 0.01f, Space.Self);
             newPortal.display.transform.rotation = newPortal.view.transform.rotation = rotation;
+            newPortal.view.transform.Translate(Vector3.forward * 0.01f, Space.Self);
         }
 
         public Portal GetPortalByDisplayName(string displayName) {
