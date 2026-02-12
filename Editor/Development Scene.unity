@@ -907,56 +907,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &693322001661637823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8576329755639709907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9426972c937cb143ad20aa7c942bcb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userSpawnInfo: {fileID: 11400000, guid: 16ed45b5e89073848855ec20b891d4eb, type: 2}
-  startDedicatedServer: 0
-  dedicatedServerSettings: {fileID: 0}
-  lobbySettings: {fileID: 11400000, guid: 0828839ca2ee3ca49bcd52e84aabe276, type: 2}
-  offlineSession: 0
-  localNetworkSettings: {fileID: 0}
-  verbose: 1
-  onAuthenticated:
-    m_PersistentCalls:
-      m_Calls: []
-  onLobbyCreated:
-    m_PersistentCalls:
-      m_Calls: []
-  onLobbyJoined:
-    m_PersistentCalls:
-      m_Calls: []
-  onJoinedLocalNetwork:
-    m_PersistentCalls:
-      m_Calls: []
-  connectionState: 0
-  onConnectionStateChange:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!4 &1063091960995118006
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8576329755639709907}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2598550084816371613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1039,57 +989,22 @@ GameObject:
   - component: {fileID: 41686788906034298}
   - component: {fileID: 3996252248700606859}
   - component: {fileID: 2598550084816371613}
+  - component: {fileID: 6821161032171161007}
+  - component: {fileID: 6821161032171161006}
   m_Layer: 0
-  m_Name: NETCODE-NetworkManager
+  m_Name: Networking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &8576329755639709907
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1063091960995118006}
-  - component: {fileID: 693322001661637823}
-  - component: {fileID: 8576329755639709908}
-  - component: {fileID: 8576329755639709909}
-  m_Layer: 0
-  m_Name: VRSYS-Networking
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &8576329755639709908
+--- !u!114 &6821161032171161006
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8576329755639709907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef852470e7fcfb941a1ad51a82305fe9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateLobbyList: 1
-  updateInterval: 10
-  onLobbyListUpdated:
-    m_PersistentCalls:
-      m_Calls: []
-  verbose: 1
---- !u!114 &8576329755639709909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8576329755639709907}
+  m_GameObject: {fileID: 6821161032171161005}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b101af54d7f78694e9afb450dd7b2db8, type: 3}
@@ -1098,12 +1013,46 @@ MonoBehaviour:
   infoToOverride: {fileID: 11400000, guid: 16ed45b5e89073848855ec20b891d4eb, type: 2}
   serverRoleToSet:
     Name: Desktop
+--- !u!114 &6821161032171161007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821161032171161005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9426972c937cb143ad20aa7c942bcb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userSpawnInfo: {fileID: 11400000, guid: 16ed45b5e89073848855ec20b891d4eb, type: 2}
+  startDedicatedServer: 0
+  dedicatedServerSettings: {fileID: 0}
+  lobbySettings: {fileID: 11400000, guid: 0828839ca2ee3ca49bcd52e84aabe276, type: 2}
+  offlineSession: 0
+  localNetworkSettings: {fileID: 0}
+  verbose: 1
+  onAuthenticated:
+    m_PersistentCalls:
+      m_Calls: []
+  onLobbyCreated:
+    m_PersistentCalls:
+      m_Calls: []
+  onLobbyJoined:
+    m_PersistentCalls:
+      m_Calls: []
+  onJoinedLocalNetwork:
+    m_PersistentCalls:
+      m_Calls: []
+  connectionState: 0
+  onConnectionStateChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 41686788906034298}
-  - {fileID: 1063091960995118006}
   - {fileID: 1551519177}
   - {fileID: 488981170}
   - {fileID: 1286749002}
