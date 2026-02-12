@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 488981175}
   - component: {fileID: 488981171}
   - component: {fileID: 488981172}
+  - component: {fileID: 488981176}
   m_Layer: 0
   m_Name: Portal Manager
   m_TagString: Untagged
@@ -253,6 +254,25 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &488981176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488981169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f002bb487f5723d4fbfca52a5cdd49ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedPortal:
+    display: {fileID: 0}
+    view: {fileID: 0}
+    material: {fileID: 0}
+    leftRenderTexture: {fileID: 0}
+    rightRenderTexture: {fileID: 0}
+  selectedGO: {fileID: 0}
 --- !u!1 &516289249
 GameObject:
   m_ObjectHideFlags: 0
