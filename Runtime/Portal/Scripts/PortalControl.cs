@@ -70,6 +70,14 @@ namespace VRSYS.Photoportals {
         public Transform input_current_in_view_current;
         public Matrix4x4 inital_display_to_controller_offset;
         private Vector3 worldGrabSteeringVector = Vector3.zero;
+
+        //one handed portalview grab
+
+        private bool collisionAtScreenCenter;
+        public void SetCollisionAtScrenCenter(bool value) {
+            this.collisionAtScreenCenter = value;
+        }
+
         #endregion
 
         #region steering members
@@ -137,8 +145,19 @@ namespace VRSYS.Photoportals {
             this.UpdateScaleUI();
             this.CreateInteractionHelpers();
             this.grabInteractable.selectExited.AddListener(() => {
+                //TODO check if this reset is necessary and actually happening
+                if (this.portalGrabIsActive) {
+                    this.StopPortalGrab();
+                }
                 this.portalGrabIsActive = false;
                 this.worldGrabIsActive = false;
+            });
+
+            this.grabInteractable.selectEntered.AddListener(() => {
+                if (this.collisionAtScreenCenter) {
+                    this.portalGrabIsActive = true;
+                    this.StartPortalGrab();
+                }
             });
         }
 

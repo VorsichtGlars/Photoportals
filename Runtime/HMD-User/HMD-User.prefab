@@ -7062,7 +7062,7 @@ MonoBehaviour:
   m_HapticHoverCancelIntensity: 0
   m_HapticHoverCancelDuration: 0
   m_AllowHoverHapticsWhileSelecting: 1
-  m_ImproveAccuracyWithSphereCollider: 1
+  m_ImproveAccuracyWithSphereCollider: 0
   m_PhysicsLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -9899,7 +9899,7 @@ MonoBehaviour:
   m_HapticHoverCancelIntensity: 0
   m_HapticHoverCancelDuration: 0
   m_AllowHoverHapticsWhileSelecting: 1
-  m_ImproveAccuracyWithSphereCollider: 1
+  m_ImproveAccuracyWithSphereCollider: 0
   m_PhysicsLayerMask:
     serializedVersion: 2
     m_Bits: 1
