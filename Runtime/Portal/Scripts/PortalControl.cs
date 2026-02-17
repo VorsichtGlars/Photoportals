@@ -141,6 +141,7 @@ namespace VRSYS.Photoportals {
         private string displayedText = "1:1";
         #endregion
 
+        #region Event Processing
         void Start() {
             this.UpdateScaleUI();
             this.CreateInteractionHelpers();
@@ -280,7 +281,13 @@ namespace VRSYS.Photoportals {
                 .OnComplete(() => this.UpdateComponentStatus($"Finished Scaling to 1.0"));
             }
         }
-
+        #endregion
+        #region Editor Stuff
+        private void UpdateComponentStatus(string message) {
+            this.currentStatusMessage = message;
+        }
+        #endregion
+        #region Scaling
         private void UpdateScaleUI() {
             //gui element
             float scaleValue = this.viewTransform.lossyScale.x;
@@ -321,19 +328,6 @@ namespace VRSYS.Photoportals {
 
         public float GetScale() {
             return this.viewTransform.lossyScale.x;
-        }
-
-        private void UpdateComponentStatus(string message) {
-            this.currentStatusMessage = message;
-        }
-
-        #region Steering
-        public void ApplySteering(Vector3 vector, bool inWorldSpace = false) {
-            //how do i want the steering to look like?
-            //is it meters per second, so shall i make it frame independent
-            this.viewTransform.SetMatrix4x4(this.viewTransform.GetMatrix4x4() * Matrix4x4.Translate(vector));
-            //this.viewTransform.position += vector;
-            //this.viewTransform.position += this.viewTransform.forward * this.steeringValue;
         }
         #endregion
         #region PortalGrab
@@ -445,15 +439,13 @@ namespace VRSYS.Photoportals {
         #endregion
 
         #region Steering
-
-        public void OnJoystickSteeringStart() {
-            
+        public void ApplySteering(Vector3 vector, bool inWorldSpace = false) {
+            //how do i want the steering to look like?
+            //is it meters per second, so shall i make it frame independent
+            this.viewTransform.SetMatrix4x4(this.viewTransform.GetMatrix4x4() * Matrix4x4.Translate(vector));
+            //this.viewTransform.position += vector;
+            //this.viewTransform.position += this.viewTransform.forward * this.steeringValue;
         }
-
-        public void OnJoystickSteeringEnd() {
-            
-        }
-
         public void EnqueueSteeringVector(Vector3 vector, Space space) {
             if(space == Space.World) {
                 //TODO: view_initial is only used for world grab
