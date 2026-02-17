@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 6320379113362852160}
   - component: {fileID: 3164221969828974505}
   - component: {fileID: 6960387864829177243}
+  - component: {fileID: 3022787318136535548}
   m_Layer: 0
   m_Name: StereoDisplayProxy
   m_TagString: Untagged
@@ -307,6 +308,23 @@ PositionConstraint:
   m_Active: 0
   m_IsLocked: 0
   m_Sources: []
+--- !u!114 &3022787318136535548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272017383308836482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d299502104b064388841ec2adf6def, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 771180996322000307}
+  m_AimTargetObject: {fileID: 0}
+  m_UseLocalSpace: 0
+  m_AngleStabilization: 20
+  m_PositionStabilization: 0.25
 --- !u!1 &2126383613563301595
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +338,6 @@ GameObject:
   - component: {fileID: 8420215858947311355}
   - component: {fileID: 3949860697234697031}
   - component: {fileID: 1505066669145718414}
-  - component: {fileID: 1947031635738994456}
   m_Layer: 0
   m_Name: Portal View
   m_TagString: Portal
@@ -444,23 +461,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   note: Here was a script but now it is missing. I dont remember which one it was.
     Leaving this note to remind myself of this tragedy.
---- !u!114 &1947031635738994456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126383613563301595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64d299502104b064388841ec2adf6def, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 771180996322000307}
-  m_AimTargetObject: {fileID: 0}
-  m_UseLocalSpace: 0
-  m_AngleStabilization: 20
-  m_PositionStabilization: 0.25
 --- !u!1 &2934040983623796752
 GameObject:
   m_ObjectHideFlags: 0

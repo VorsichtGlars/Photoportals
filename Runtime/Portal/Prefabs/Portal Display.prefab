@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 6288252409876224155}
   - component: {fileID: 1164269634967206820}
   - component: {fileID: 805456482796282329}
+  - component: {fileID: 3411920475068623412}
   m_Layer: 5
   m_Name: Stereo Display
   m_TagString: Untagged
@@ -273,6 +274,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3411920475068623412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543356566762634056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d299502104b064388841ec2adf6def, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 7595021662059038193}
+  m_AimTargetObject: {fileID: 0}
+  m_UseLocalSpace: 0
+  m_AngleStabilization: 20
+  m_PositionStabilization: 0.25
 --- !u!1 &3639763621678055863
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +468,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7595021662059038193}
   - component: {fileID: 5647323919113360792}
-  - component: {fileID: 6602215609200953754}
   - component: {fileID: 6536869594044831621}
   - component: {fileID: 8560744087212152974}
   - component: {fileID: 6143290610123614706}
@@ -462,6 +479,7 @@ GameObject:
   - component: {fileID: 109762706322906212}
   - component: {fileID: 8126681051436444133}
   - component: {fileID: 5308852153995822969}
+  - component: {fileID: 3631719947404973343}
   m_Layer: 5
   m_Name: Portal Display
   m_TagString: Untagged
@@ -487,9 +505,9 @@ Transform:
   - {fileID: 7781758227622210095}
   - {fileID: 4239764259272266653}
   - {fileID: 1235096460080394783}
+  - {fileID: 832728420983757106}
   - {fileID: 7161682922923369119}
   - {fileID: 6219955066451527920}
-  - {fileID: 832728420983757106}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5647323919113360792
@@ -538,23 +556,6 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &6602215609200953754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3785651222127509849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64d299502104b064388841ec2adf6def, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 7595021662059038193}
-  m_AimTargetObject: {fileID: 0}
-  m_UseLocalSpace: 0
-  m_AngleStabilization: 20
-  m_PositionStabilization: 0.25
 --- !u!114 &6536869594044831621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1069,6 +1070,25 @@ MonoBehaviour:
   portalExitScreen: {fileID: 0}
   portalExitHead: {fileID: 0}
   viewRoot: {fileID: 0}
+--- !u!114 &3631719947404973343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3785651222127509849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7333e73d67eca30418e6070e82912aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SummoningGestureDetected:
+    m_PersistentCalls:
+      m_Calls: []
+  RevocingGestureDetected:
+    m_PersistentCalls:
+      m_Calls: []
+  threshold: 0.2
 --- !u!1 &6768007053433402356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,9 +1197,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3631719947404973343}
+        m_TargetAssemblyTypeName: JoystickSummoning, vrsys.photoportals
+        m_MethodName: OnSelectionEnterEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_LastSelectExited:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 3631719947404973343}
+        m_TargetAssemblyTypeName: JoystickSummoning, vrsys.photoportals
+        m_MethodName: OnSelectionExitEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 8126681051436444133}
         m_TargetAssemblyTypeName: VRVIS.Photoportals.PortalControl, Assembly-CSharp
         m_MethodName: SwitchToUnimanualInteraction
@@ -1900,15 +1944,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1950,10 +1994,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8171102934518621575, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8171102934518621575, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 9097549787583492216}
     - targetCorrespondingSourceObject: {fileID: 4633656370193623877, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       insertIndex: 1
       addedObject: {fileID: 5549429157323902043}
@@ -1975,6 +2026,57 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5139917071972110621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 0
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
+  AuthorityMode: 1
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 1
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!1 &8538609803921104863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8171102934518621575, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+  m_PrefabInstance: {fileID: 511909193792420440}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9097549787583492216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538609803921104863}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
