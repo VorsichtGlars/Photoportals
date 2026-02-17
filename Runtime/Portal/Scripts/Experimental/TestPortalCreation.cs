@@ -13,7 +13,6 @@ using VRSYS.Photoportals;
 using VRSYS.Photoportals.Extensions;
 using VRSYS.Photoportals.Networking;
 using DG.Tweening;
-using UnityEditor.Experimental.GraphView;
 
 namespace VRSYS.Photoportals {
 
