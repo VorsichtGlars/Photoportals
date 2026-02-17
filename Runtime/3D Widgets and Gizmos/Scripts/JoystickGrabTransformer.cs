@@ -13,7 +13,7 @@ public class JoystickGrabTranformer : XRBaseGrabTransformer {
     private string status;
     [SerializeField]
     private Transform root;
-    private float sphereRadius = 0.075f;
+    private float sphereRadius = 0.08f/2f;
     private XRGrabInteractable handle;
 
     //hacky area

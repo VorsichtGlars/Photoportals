@@ -320,10 +320,25 @@ namespace VRSYS.Photoportals {
         }
 
         public void SetScale(float value) {
-            this.viewTransform.DOScale(value, 2.0f)
+            this.SetScale(value, 2f, null, true);
+        }
+
+        public void SetScale(float value, bool uiUpdate = true) {
+            this.SetScale(value, 2f, null, uiUpdate);
+        }
+
+        public void SetScale(float value, float time = 1f, System.Action onComplete = null, bool uiUpdate = true) {
+            this.viewTransform.DOScale(value, time)
                 .OnStart(() => this.UpdateComponentStatus($"Scaling to {value}"))
-                //.OnUpdate(() => this.UpdateScaleUI())
-                .OnComplete(() => this.UpdateComponentStatus($"Finished Scaling to {value}"));
+                .OnUpdate(() => {
+                    if (uiUpdate) {
+                        this.UpdateScaleUI();
+                    }
+                })
+                .OnComplete(() => {
+                    this.UpdateComponentStatus($"Finished Scaling to {value}");
+                    onComplete?.Invoke();
+                });
         }
 
         public float GetScale() {

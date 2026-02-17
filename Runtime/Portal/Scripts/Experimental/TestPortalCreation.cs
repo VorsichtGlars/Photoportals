@@ -13,6 +13,7 @@ using VRSYS.Photoportals;
 using VRSYS.Photoportals.Extensions;
 using VRSYS.Photoportals.Networking;
 using DG.Tweening;
+using UnityEditor.Experimental.GraphView;
 
 namespace VRSYS.Photoportals {
 
@@ -151,6 +152,7 @@ namespace VRSYS.Photoportals {
             teleportButtonComponent.onClick.AddListener(() =>{
 
                 void teleport() {
+                    portalControl.EnableNearClipPlane();
                     Transform avatar = NetworkUser.LocalInstance.transform;
                     Matrix4x4 relativeOffsetMatrix = display.transform.GetMatrix4x4().inverse * avatar.GetMatrix4x4();
                     Matrix4x4 absoluteWorldPositon = view.transform.GetMatrix4x4() * relativeOffsetMatrix;
@@ -165,7 +167,7 @@ namespace VRSYS.Photoportals {
                     teleport();
                 }
                 else {
-                    view.transform.DOScale(1.0f, 1.0f).OnComplete(()=>teleport());
+                    portalControl.SetScale(1f, 1f, teleport);
                 }
             });
 
@@ -272,23 +274,23 @@ namespace VRSYS.Photoportals {
                 (value) => {
                     switch (value) {
                         case 0f:
-                            portalControl.SetScale(1f);
+                            portalControl.SetScale(1f, false);
                             break;
 
                         case 1f:
-                            portalControl.SetScale(10f);
+                            portalControl.SetScale(10f, false);
                             break;
 
                         case 2f:
-                            portalControl.SetScale(50f);
+                            portalControl.SetScale(50f, false);
                             break;
                         
                         case 3f:
-                            portalControl.SetScale(100f);                            
+                            portalControl.SetScale(100f, false);                            
                             break;
                   
                         case 4f:
-                            portalControl.SetScale(500f);
+                            portalControl.SetScale(500f, false);
                             break;
 
                         default:

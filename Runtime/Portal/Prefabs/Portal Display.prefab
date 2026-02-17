@@ -86,6 +86,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1803344475487678023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1170911756505143474}
+  m_Layer: 5
+  m_Name: JoystickRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1170911756505143474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803344475487678023}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.1313, y: 0.0936, z: -0.0009}
+  m_LocalScale: {x: 0.33, y: 0.33, z: 0.046671905}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 7595021662059038193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2431469065378678930
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,6 +536,7 @@ Transform:
   - {fileID: 7781758227622210095}
   - {fileID: 4239764259272266653}
   - {fileID: 1235096460080394783}
+  - {fileID: 1170911756505143474}
   - {fileID: 832728420983757106}
   - {fileID: 7161682922923369119}
   - {fileID: 6219955066451527920}
@@ -1200,7 +1232,7 @@ MonoBehaviour:
       - m_Target: {fileID: 3631719947404973343}
         m_TargetAssemblyTypeName: JoystickSummoning, vrsys.photoportals
         m_MethodName: OnSelectionEnterEvent
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1215,7 +1247,7 @@ MonoBehaviour:
       - m_Target: {fileID: 3631719947404973343}
         m_TargetAssemblyTypeName: JoystickSummoning, vrsys.photoportals
         m_MethodName: OnSelectionExitEvent
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1927,16 +1959,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 7595021662059038193}
     m_Modifications:
     - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.046671905
+      objectReference: {fileID: 0}
+    - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.1313
       objectReference: {fileID: 0}
     - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2276
+      value: 0.0936
       objectReference: {fileID: 0}
     - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1156
+      value: -0.0009
       objectReference: {fileID: 0}
     - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1966,13 +2010,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 906587628900131690, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1371387130037035189, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1371387130037035189, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724409325929040871, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 4633656370193623877, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677231937551741590, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677231937551741590, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677231937551741590, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 5401145007080572290, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_Layer
@@ -1986,6 +2054,22 @@ PrefabInstance:
       propertyPath: portalControl
       value: 
       objectReference: {fileID: 8126681051436444133}
+    - target: {fileID: 7378755314232557811, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378755314232557811, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378755314232557811, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378755314232557811, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8171102934518621575, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_Name
       value: Six DOF Joystick Portal Grab

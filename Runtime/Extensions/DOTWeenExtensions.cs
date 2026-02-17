@@ -44,8 +44,16 @@ public static class DOTweenExtensions
             duration
         );
 
+        var scale = DOTween.To(
+            () => transform.localScale,
+            x  => transform.localScale = x,
+            target.localScale,
+            duration
+        );
+
         seq.Join(move);
         seq.Join(rot);
+        seq.Join(scale);
         seq.SetTarget(transform);
         return seq;
     }
