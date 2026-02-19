@@ -114,10 +114,7 @@ namespace VRSYS.Photoportals.Editor
                 "Example Scene",
                 "Import the example scene to see Photoportals in action with sample implementations.",
                 "Import Example Scene",
-                () => {
-                    // Open Package Manager to Photoportals package samples
-                    UnityEditor.PackageManager.UI.Window.Open("com.vrsys.photoportals");
-                }
+                () => UnityEditor.PackageManager.UI.Window.Open("com.vrsys.photoportals")
             );
 
             // GitHub Repository
