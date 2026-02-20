@@ -57,12 +57,12 @@ namespace VRSYS.Photoportals {
 
         public bool autoUpdate = false;
         public bool calcNearClipPlane = false;
-        private float originalNearClipPlane = 0f;
+        private float originalNearClipPlane = 0.01f;
 
         #region States
         private void Awake() {
             cam = GetComponent<Camera>();
-            this.originalNearClipPlane = cam.nearClipPlane;
+            this.originalNearClipPlane = Mathf.Max(cam.nearClipPlane, 0.01f);
         }
 
         // Update is called once per frame
@@ -100,10 +100,17 @@ namespace VRSYS.Photoportals {
                 var s2 = screen.transform.position - screen.transform.forward;
                 var camOnScreenForward = Vector3.Project((transform.position - s1), (s2 - s1)) + s1;
                 near = Vector3.Distance(screen.transform.position, camOnScreenForward);
-                cam.nearClipPlane = near;
             }else {
-                near = cam.nearClipPlane = this.originalNearClipPlane;
+                near = this.originalNearClipPlane;
             }
+            
+            // Validate and clamp near clip plane
+            if (near <= 0.01f) {
+                Debug.LogWarning($"Near plane too small: {near}, clamping to 0.01");
+                near = 0.01f;
+            }
+            cam.nearClipPlane = near;
+            
             var far = cam.farClipPlane;
 
             var factor = near / eyePosSP.z;
