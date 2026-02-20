@@ -79,12 +79,20 @@ namespace VRSYS.Photoportals {
         }
         public void CalcProjection() {
 
+            if (screen == null) {
+                Debug.LogError("No screen assigned to OffAxisProjection.");
+                return;
+            }
+
             transform.localRotation = Quaternion.Inverse(transform.parent.localRotation);
 
             eyePos = transform.position;
 
             var eyePosSP = screen.transform.worldToLocalMatrix * new Vector4(eyePos.x, eyePos.y, eyePos.z, 1f);
             eyePosSP *= -1f;
+
+            //TODO here one can check wether the eye is behind the screen
+            //TODO put it in a separate component
 
             var near = cam.nearClipPlane;
             if (calcNearClipPlane) {
@@ -103,6 +111,30 @@ namespace VRSYS.Photoportals {
             var r = (eyePosSP.x + screen.width * 0.5f) * factor;
             var b = (eyePosSP.y - screen.height * 0.5f) * factor;
             var t = (eyePosSP.y + screen.height * 0.5f) * factor;
+
+            // Validate frustum bounds
+            if (l >= r) {
+                Debug.LogError($"Invalid frustum: left ({l}) >= right ({r})");
+                return;
+            }
+            if (b >= t) {
+                Debug.LogError($"Invalid frustum: bottom ({b}) >= top ({t})");
+                return;
+            }
+            if (near <= 0 || far <= near) {
+                Debug.LogError($"Invalid clip planes: near={near}, far={far}");
+                return;
+            }
+
+            // Validate for NaN or Infinity
+            if (float.IsNaN(l) || float.IsNaN(r) || float.IsNaN(b) || float.IsNaN(t)) {
+                Debug.LogError($"NaN detected in frustum parameters: l={l}, r={r}, b={b}, t={t}");
+                return;
+            }
+            if (float.IsInfinity(l) || float.IsInfinity(r) || float.IsInfinity(b) || float.IsInfinity(t)) {
+                Debug.LogError($"Infinity detected in frustum parameters: l={l}, r={r}, b={b}, t={t}");
+                return;
+            }
 
             cam.projectionMatrix = Matrix4x4.Frustum(l, r, b, t, near, far);
         }
