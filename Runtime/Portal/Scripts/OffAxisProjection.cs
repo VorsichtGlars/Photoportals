@@ -80,7 +80,7 @@ namespace VRSYS.Photoportals {
         public void CalcProjection() {
 
             if (screen == null) {
-                Debug.LogError("No screen assigned to OffAxisProjection.");
+                Debug.LogError("No screen assigned to OffAxisProjection. Early returning.");
                 return;
             }
 
@@ -121,25 +121,25 @@ namespace VRSYS.Photoportals {
 
             // Validate frustum bounds
             if (l >= r) {
-                Debug.LogError($"Invalid frustum: left ({l}) >= right ({r})");
+                Debug.LogWarning($"Invalid frustum: left ({l}) >= right ({r}). Early returning.");
                 return;
             }
             if (b >= t) {
-                Debug.LogError($"Invalid frustum: bottom ({b}) >= top ({t})");
+                Debug.LogWarning($"Invalid frustum: bottom ({b}) >= top ({t}). Early returning.");
                 return;
             }
             if (near <= 0 || far <= near) {
-                Debug.LogError($"Invalid clip planes: near={near}, far={far}");
+                Debug.LogWarning($"Invalid clip planes: near={near}, far={far}. Early returning.");
                 return;
             }
 
             // Validate for NaN or Infinity
             if (float.IsNaN(l) || float.IsNaN(r) || float.IsNaN(b) || float.IsNaN(t)) {
-                Debug.LogError($"NaN detected in frustum parameters: l={l}, r={r}, b={b}, t={t}");
+                Debug.LogWarning($"NaN detected in frustum parameters: l={l}, r={r}, b={b}, t={t}. Early returning.");
                 return;
             }
             if (float.IsInfinity(l) || float.IsInfinity(r) || float.IsInfinity(b) || float.IsInfinity(t)) {
-                Debug.LogError($"Infinity detected in frustum parameters: l={l}, r={r}, b={b}, t={t}");
+                Debug.LogWarning($"Infinity detected in frustum parameters: l={l}, r={r}, b={b}, t={t}. Early returning.");
                 return;
             }
 
