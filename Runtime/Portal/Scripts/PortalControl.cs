@@ -283,6 +283,12 @@ namespace VRSYS.Photoportals {
                 .OnUpdate(() => this.UpdateScaleUI())
                 .OnComplete(() => this.UpdateComponentStatus($"Finished Scaling to 1.0"));
             }
+
+            if(this.rotationLock == true) {
+                Vector3 currentRotation = this.viewTransform.rotation.eulerAngles;
+                Vector3 constrainedRotation = new Vector3(0f, currentRotation.y, 0f);
+                this.viewTransform.rotation = Quaternion.Euler(constrainedRotation);
+            }
         }
         #endregion
         #region Editor Stuff
@@ -517,6 +523,21 @@ namespace VRSYS.Photoportals {
             ExtendedLogger.LogInfo(this.GetType().Name, $"Despawning Portal {this.name}", this);
             this.viewTransform.GetComponent<NetworkObject>().Despawn();
             this.GetComponent<NetworkObject>().Despawn();
+        }
+
+        #endregion
+
+        #region Rotation Lock
+
+        private bool rotationLock = true;
+        public void EnableRotationLock() {
+            this.rotationLock = true;
+        }
+        public void DisableRotationLock() {
+            this.rotationLock = false;
+        }
+        public void ToggleRotationLock() {
+            this.rotationLock = !this.rotationLock;
         }
 
         #endregion
