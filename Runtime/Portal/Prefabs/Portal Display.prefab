@@ -510,7 +510,6 @@ GameObject:
   - component: {fileID: 109762706322906212}
   - component: {fileID: 8126681051436444133}
   - component: {fileID: 5308852153995822969}
-  - component: {fileID: 3631719947404973343}
   m_Layer: 5
   m_Name: Portal Display
   m_TagString: Untagged
@@ -536,9 +535,9 @@ Transform:
   - {fileID: 7781758227622210095}
   - {fileID: 4239764259272266653}
   - {fileID: 1235096460080394783}
+  - {fileID: 7161682922923369119}
   - {fileID: 1170911756505143474}
   - {fileID: 832728420983757106}
-  - {fileID: 7161682922923369119}
   - {fileID: 6219955066451527920}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -646,7 +645,7 @@ MonoBehaviour:
   - {fileID: 2439159307910628738}
   - {fileID: 3611882011624974621}
   m_InteractionLayers:
-    m_Bits: 1073741825
+    m_Bits: 536870912
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -1085,6 +1084,8 @@ MonoBehaviour:
   guiElement: {fileID: 4416904002896190555}
   sliderElement: {fileID: 7261493934010409708}
   displayedText: 1:1
+  joystick: {fileID: 8538609803921104863}
+  joystickRoot: {fileID: 1803344475487678023}
 --- !u!114 &5308852153995822969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1102,25 +1103,6 @@ MonoBehaviour:
   portalExitScreen: {fileID: 0}
   portalExitHead: {fileID: 0}
   viewRoot: {fileID: 0}
---- !u!114 &3631719947404973343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3785651222127509849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7333e73d67eca30418e6070e82912aec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SummoningGestureDetected:
-    m_PersistentCalls:
-      m_Calls: []
-  RevocingGestureDetected:
-    m_PersistentCalls:
-      m_Calls: []
-  threshold: 0.2
 --- !u!1 &6768007053433402356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,7 +1172,7 @@ MonoBehaviour:
   m_Colliders:
   - {fileID: 8438494408546268265}
   m_InteractionLayers:
-    m_Bits: 1073741825
+    m_Bits: 536870912
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -1229,7 +1211,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3631719947404973343}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: JoystickSummoning, vrsys.photoportals
         m_MethodName: OnSelectionEnterEvent
         m_Mode: 0
@@ -1244,7 +1226,7 @@ MonoBehaviour:
   m_LastSelectExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3631719947404973343}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: JoystickSummoning, vrsys.photoportals
         m_MethodName: OnSelectionExitEvent
         m_Mode: 0
@@ -1288,7 +1270,31 @@ MonoBehaviour:
       m_Calls: []
   m_Activated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4725998324722607452}
+        m_TargetAssemblyTypeName: VRSYS.Photoportals.SimpleEventDebugger, vrsys.photoportals.Editor
+        m_MethodName: LogEventMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Activation Event
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8126681051436444133}
+        m_TargetAssemblyTypeName: VRSYS.Photoportals.PortalControl, vrsys.photoportals
+        m_MethodName: OnActivationEnterEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []
@@ -2026,6 +2032,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3782622189157898488, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 536870912
+      objectReference: {fileID: 0}
     - target: {fileID: 4633656370193623877, guid: e1db8bab596ce2249bd600a2c7111946, type: 3}
       propertyPath: m_Layer
       value: 5

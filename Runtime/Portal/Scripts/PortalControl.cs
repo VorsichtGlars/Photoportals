@@ -160,6 +160,8 @@ namespace VRSYS.Photoportals {
                     this.StartPortalGrab();
                 }
             });
+
+            this.InitJoystickSteering();
         }
 
         void Update() {
@@ -540,6 +542,41 @@ namespace VRSYS.Photoportals {
             this.rotationLock = !this.rotationLock;
         }
 
+        #endregion
+
+        #region Joystick Steering
+        //TODOs
+        // - register activate event in code
+        // - distribute active state of XRBaseInteractable
+
+        [Header("Joystick Steering Properties")]
+        public GameObject joystick;
+        public GameObject joystickRoot;
+        private bool joystickIsSummoned = false;
+        private XRBaseInteractable joystickInteractable;
+
+        private void InitJoystickSteering() {
+            this.joystickInteractable = this.joystick.GetComponentInChildren<XRBaseInteractable>();
+            this.joystickInteractable.enabled = this.joystickIsSummoned;
+        }
+
+        public void OnActivationEnterEvent(ActivateEventArgs args) {
+            this.joystickIsSummoned = !this.joystickIsSummoned;
+
+            if(this.joystickIsSummoned == true){
+                this.joystick.transform.DOFollowTransform(args.interactorObject.transform, 0.25f).
+                OnComplete(() => {
+                    this.joystickInteractable.enabled = true;
+                });
+            }
+
+            if(this.joystickIsSummoned == false){
+                this.joystick.transform.DOFollowTransform(this.joystickRoot.transform, 0.25f).
+                OnStart(() => {
+                    this.joystickInteractable.enabled = false;
+                });
+            }
+        }
         #endregion
     }
 }
