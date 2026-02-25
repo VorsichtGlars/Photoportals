@@ -213,7 +213,8 @@ namespace VRSYS.Photoportals {
 
             if (this.isSelectedWithLeftHand == true && this.rightClutchInput.action?.IsPressed() == true){
                 ExtendedLogger.LogInfo(this.GetType().Name, "Bimanual righthanded steering", this);
-                var avatar = NetworkUser.LocalInstance.avatarAnatomy as Photoportals.Avatar.AvatarHMDAnatomy;
+                //var avatar = NetworkUser.LocalInstance.avatarAnatomy as Photoportals.Avatar.AvatarHMDAnatomy;
+                var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
                 var localRepr = this.transform.GetMatrix4x4().inverse * avatar.rightHand.transform.forward;
                 var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
                 this.ApplySteeringVector(viewRepr * this.steeringValue, Space.Self);
@@ -221,7 +222,9 @@ namespace VRSYS.Photoportals {
 
             if ( this.isSelectedWithRightHand == true && this.leftClutchInput.action?.IsPressed() == true){
                 ExtendedLogger.LogInfo(this.GetType().Name, "Bimanual lefthanded steering", this);
-                var avatar = NetworkUser.LocalInstance.avatarAnatomy as Photoportals.Avatar.AvatarHMDAnatomy;
+                //var avatar = NetworkUser.LocalInstance.avatarAnatomy as Photoportals.Avatar.AvatarHMDAnatomy;
+                var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
+
                 var localRepr = this.transform.GetMatrix4x4().inverse * avatar.leftHand.transform.forward;
                 var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
                 this.ApplySteeringVector(viewRepr * this.steeringValue, Space.Self);

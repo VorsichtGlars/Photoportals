@@ -70,7 +70,8 @@ namespace VRSYS.Photoportals {
         public Matrix4x4 GetSpawnMatrix() {
             if(ConnectionManager.Instance.userSpawnInfo.userRole.Name == "HMD") {
                 Debug.Log("Setting right hand as spawn postioon for HMD User");
-                var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Photoportals.Avatar.AvatarHMDAnatomy;
+                var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
+                //var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Photoportals.Avatar.AvatarHMDAnatomy;
                 return avatar.rightHand.GetMatrix4x4();
             }
 
