@@ -203,18 +203,54 @@ MonoBehaviour:
   viewPrefab: {fileID: 2126383613563301595, guid: f6dc4a6ac71390345a671f1b3a61bba3, type: 3}
   materialToInstantiate: {fileID: 2100000, guid: 3fb85c0e29a5c83428da9c8e51a95486, type: 2}
   spawnPosition: {fileID: 516289250}
-  buttonPress:
+  buttonPressRight:
     m_UseReference: 1
     m_Action:
-      m_Name: Button Press
+      m_Name: Button Press Right
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 82e3253c-be7b-46b1-b7cb-26eab03d0fa6
+      m_Id: 3805c9d3-ce52-4cd3-8dcf-377cdf978eb3
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 8468309980782525165, guid: a7d31413095584b439b226fd8da36c86, type: 3}
+    m_Reference: {fileID: 2300911260926662560, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
+  buttonPressLeft:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Button Press Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: eb9134a8-6eef-409f-8f36-ce3f7aa512f9
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  doubleTapRight:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Double Tap Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 1cb10d23-a811-458a-86fb-41deac61b608
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 6521085133570059428, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
+  doubleTapLeft:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Double Tap Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 5907f6d9-591f-467d-9406-60b647d82e51
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   registry: []
 --- !u!114 &488981172
 MonoBehaviour:

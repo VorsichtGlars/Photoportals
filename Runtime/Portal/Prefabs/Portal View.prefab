@@ -288,8 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d62d1cfd8e06794088c73da96cf451c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 0.3
-  height: 0.3
+  width: 0.35
+  height: 0.35
 --- !u!1818360608 &6960387864829177243
 PositionConstraint:
   m_ObjectHideFlags: 0

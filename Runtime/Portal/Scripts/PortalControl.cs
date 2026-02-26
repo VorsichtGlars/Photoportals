@@ -23,9 +23,6 @@ namespace VRSYS.Photoportals {
         [SerializeField]
         private string currentStatusMessage;
 
-        [SerializeField]
-        public InteractionState interactionState;
-
         [Header("General Properties")]
         public Transform viewTransform;
         public XRGrabInteractable grabInteractable;
@@ -414,7 +411,10 @@ namespace VRSYS.Photoportals {
         }
 
         //these are being called by the SelectEnter and SelectExit events from the interactables
-        public void SwitchToBimanualInteraction(SelectEnterEventArgs args) {
+        public void InteractionZoneSelectEnter(SelectEnterEventArgs args){
+
+
+
             ExtendedLogger.LogInfo(this.GetType().Name, "Switching to bimanual interaction", this);
             this.input = args.interactorObject.transform;
             /**
@@ -429,7 +429,11 @@ namespace VRSYS.Photoportals {
             this.UpdateComponentStatus("Bimanual");
         }
 
-        public void SwitchToUnimanualInteraction(SelectExitEventArgs args) {
+        public void InteractionZoneSelectExit(SelectExitEventArgs args) {
+
+
+
+
             ExtendedLogger.LogInfo(this.GetType().Name, "Switching to unimanual interaction", this);
             this.worldGrabIsActive = false;
             this.portalGrabIsActive = true;
@@ -560,7 +564,7 @@ namespace VRSYS.Photoportals {
             this.joystickInteractable.enabled = this.joystickIsSummoned;
         }
 
-        public void OnActivationEnterEvent(ActivateEventArgs args) {
+        public void InteractionZoneActivate(ActivateEventArgs args) {
             this.joystickIsSummoned = !this.joystickIsSummoned;
 
             if(this.joystickIsSummoned == true){

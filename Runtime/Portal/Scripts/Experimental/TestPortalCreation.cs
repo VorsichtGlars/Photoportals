@@ -42,7 +42,13 @@ namespace VRSYS.Photoportals {
         public GameObject viewPrefab;
         public Material materialToInstantiate;
         public Transform spawnPosition;
-        public InputActionProperty buttonPress;
+        public InputActionProperty buttonPressRight;
+
+        public InputActionProperty buttonPressLeft;
+
+        public InputActionProperty doubleTapRight;
+
+        public InputActionProperty doubleTapLeft;
 
         [SerializeField]
         public List<Portal> registry;
@@ -50,10 +56,11 @@ namespace VRSYS.Photoportals {
         private int counter = 0;
 
         override public void OnNetworkSpawn() {
-            this.buttonPress.action.performed += (ctx) => {
+            this.buttonPressRight.action.performed += (ctx) => {
                 var spawnMatrix = GetSpawnMatrix();
                 this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
             };
+
         }
 
         private void Update() {

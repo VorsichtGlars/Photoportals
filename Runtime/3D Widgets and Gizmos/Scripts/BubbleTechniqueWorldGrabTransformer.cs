@@ -100,12 +100,12 @@ public class BubbleTechniqueWorldGrabTransformer : XRBaseGrabTransformer {
     private void OnSelectEntered(SelectEnterEventArgs args) {
         Debug.Log("Joystick.OnSelectEntered");
         this.initialMatrix = this.interactable.firstInteractorSelecting.transform.GetMatrix4x4();
-        this.portalControl.SwitchToBimanualInteraction(args);
+        //this.portalControl.SwitchToBimanualInteraction(args); //deprecated
     }
 
     private void OnSelectExited(SelectExitEventArgs args) {
         Debug.Log("Joystick.OnSelectExited");
-        this.portalControl.SwitchToUnimanualInteraction(args);
+        //this.portalControl.SwitchToUnimanualInteraction(args); //deprecated
         this.tween = this.interactable.transform.
             DOMove(this.root.position, 0.5f).
             SetEase(Ease.OutBack);
