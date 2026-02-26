@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace VRSYS.Photoportals {
@@ -7,12 +8,23 @@ namespace VRSYS.Photoportals {
      * It can also be used to log events from other scripts by calling the LogEventMessage or LogEventFloat methods.
      */
     public class SimpleEventDebugger : MonoBehaviour {
+        private List<string> history = new List<string>();
+        public IReadOnlyList<string> History => history;
+
         public void LogEventMessage(string message) {
-            Debug.Log($"LogEventMessage: {message}");
+            string logEntry = $"[{System.DateTime.Now:HH:mm:ss}] Message: {message}";
+            Debug.Log(logEntry);
+            history.Add(logEntry);
         }
 
         public void LogEventFloat(float value) {
-            Debug.Log($"LogEventFloat: {value}");
+            string logEntry = $"[{System.DateTime.Now:HH:mm:ss}] Float: {value}";
+            Debug.Log(logEntry);
+            history.Add(logEntry);
+        }
+
+        public void ClearHistory() {
+            history.Clear();
         }
     }
 }
