@@ -3247,9 +3247,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: 266f96d8e11535e43a65a15b16b41116, type: 3}
+  - {fileID: -944628639613478452, guid: 2434c2dd9e0ed4546879001408804eee, type: 3}
+  - {fileID: -944628639613478452, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
   - {fileID: -944628639613478452, guid: a7d31413095584b439b226fd8da36c86, type: 3}
-  - {fileID: -944628639613478452, guid: 28b9d02b1f4a4b7408059e9d8ecb336e, type: 3}
-  - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1 &1318063332
 GameObject:
   m_ObjectHideFlags: 0
