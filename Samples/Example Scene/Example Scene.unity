@@ -1468,18 +1468,54 @@ MonoBehaviour:
   viewPrefab: {fileID: 2126383613563301595, guid: f6dc4a6ac71390345a671f1b3a61bba3, type: 3}
   materialToInstantiate: {fileID: 2100000, guid: 3fb85c0e29a5c83428da9c8e51a95486, type: 2}
   spawnPosition: {fileID: 516289250}
-  buttonPress:
+  buttonPressRight:
     m_UseReference: 1
     m_Action:
-      m_Name: Button Press
+      m_Name: Button Press Right
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 82e3253c-be7b-46b1-b7cb-26eab03d0fa6
+      m_Id: 07d618f4-662c-4ec4-894e-dec67ce55425
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 8468309980782525165, guid: a7d31413095584b439b226fd8da36c86, type: 3}
+    m_Reference: {fileID: 2300911260926662560, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
+  buttonPressLeft:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Button Press Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 00741ffa-154f-457a-9f70-3e108ecb80b3
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  doubleTapRight:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Double Tap Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 3cc408af-d3d2-4c35-a5e8-40bdaf3d21ea
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  doubleTapLeft:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Double Tap Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 6df4dffc-2de1-4b12-947f-f6187deb4cd6
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   registry: []
 --- !u!114 &488981172
 MonoBehaviour:
@@ -3887,7 +3923,7 @@ MonoBehaviour:
     SpawnPoint: {fileID: 516289250}
   - UserRole:
       Name: HMD
-    Prefab: {fileID: 7216047633976425198, guid: 698fc360540de54489a75ef804f49b8d, type: 3}
+    Prefab: {fileID: 5769118235056873658, guid: edef73de7da37374ba3bf48c271160bb, type: 3}
     SpawnPoint: {fileID: 516289250}
   useRoleSpawnPoints: 1
   spawnPoint: {fileID: 0}
