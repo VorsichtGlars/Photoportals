@@ -1,0 +1,186 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7174691894995242127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2660969772062872893}
+  - component: {fileID: 3143836334330602290}
+  - component: {fileID: 744959003083549134}
+  - component: {fileID: 988100990580205162}
+  - component: {fileID: 2185766001474499780}
+  - component: {fileID: 2762014290073624146}
+  m_Layer: 0
+  m_Name: Portal Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2660969772062872893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7174691894995242127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -609.5346, y: -365.07578, z: 248.82007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3143836334330602290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7174691894995242127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2758848072
+  InScenePlacedSourceGlobalObjectIdHash: 1803927106
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &744959003083549134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7174691894995242127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ebdf314abcb2a4c99682ae95573fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  portalPrefab: {fileID: 0}
+  displayPrefab: {fileID: 3785651222127509849, guid: 37e5f2ffaf380d64aa741d0b6ec6e91c, type: 3}
+  viewPrefab: {fileID: 2126383613563301595, guid: f6dc4a6ac71390345a671f1b3a61bba3, type: 3}
+  materialToInstantiate: {fileID: 2100000, guid: 3fb85c0e29a5c83428da9c8e51a95486, type: 2}
+  spawnPosition: {fileID: 0}
+  buttonPressRight:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Button Press Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e40419da-5114-44d6-89d9-4a9086d0a8f4
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2300911260926662560, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
+  buttonPressLeft:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Button Press Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 71602ca6-0b92-45bb-a88d-a14cd4a7cd8a
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 9129577915066430493, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
+  doubleTapRight:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Double Tap Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 91e48d73-5c0b-401f-ae94-ab978ea0a424
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  doubleTapLeft:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Double Tap Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: fc09cb4a-0d32-4c2b-af7f-a7ab3fe21eb7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  desktopButtonPress:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Desktop Button Press
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: c1f44cc6-71c5-470e-ba7c-cc11064b07fc
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 5062046417304100245, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
+  registry: []
+--- !u!114 &988100990580205162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7174691894995242127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245c96193dc0cbe49a7529803ee2c0d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  note: Test Portal Creation should mostly be moved to the Portal and the Display
+    Prefab respectively
+--- !u!114 &2185766001474499780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7174691894995242127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d31b5a37acb8c34f853e9189013884d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  widgetsAndGizmosRenderStateControllers: []
+--- !u!114 &2762014290073624146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7174691894995242127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017c5e3933235514c9520e1dace2a4b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ActionAssets:
+  - {fileID: -944628639613478452, guid: 266f96d8e11535e43a65a15b16b41116, type: 3}
+  - {fileID: -944628639613478452, guid: 2434c2dd9e0ed4546879001408804eee, type: 3}
+  - {fileID: -944628639613478452, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
+  - {fileID: -944628639613478452, guid: a7d31413095584b439b226fd8da36c86, type: 3}

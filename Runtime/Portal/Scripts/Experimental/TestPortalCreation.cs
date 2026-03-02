@@ -36,12 +36,14 @@ namespace VRSYS.Photoportals {
         }
     }
 
-    public class TestPortalCreation : NetworkBehaviour {
+    public class TestPortalCreation : NetworkBehaviour, INetworkUserCallbacks  {
         public GameObject portalPrefab;
         public GameObject displayPrefab;
         public GameObject viewPrefab;
         public Material materialToInstantiate;
         public Transform spawnPosition;
+
+        [Header("HMD Input Actions for Portal Creation")]
         public InputActionProperty buttonPressRight;
 
         public InputActionProperty buttonPressLeft;
@@ -49,46 +51,65 @@ namespace VRSYS.Photoportals {
         public InputActionProperty doubleTapRight;
 
         public InputActionProperty doubleTapLeft;
+        
+        [Header("Desktop Input Actions for Portal Creation")]
+        public InputActionProperty desktopButtonPress;
 
         [SerializeField]
         public List<Portal> registry;
-
         private int counter = 0;
 
-        override public void OnNetworkSpawn() {
-            this.buttonPressRight.action.performed += (ctx) => {
-                var spawnMatrix = GetSpawnMatrix();
-                this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
-            };
-
+        public void OnLocalNetworkUserSetup() {
+            this.RegisterPortalCreationCallbacks();
         }
 
-        private void Update() {
-            var kb = Keyboard.current;
-            if (kb == null) return;
-
-            if (kb[Key.P].wasPressedThisFrame) {
-                
-                var spawnMatrix = GetSpawnMatrix();
-                this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
-            }
+        public void OnRemoteNetworkUserSetup(NetworkUser user) {
+            //throw new System.NotImplementedException();
         }
 
-        public Matrix4x4 GetSpawnMatrix() {
-            if(ConnectionManager.Instance.userSpawnInfo.userRole.Name == "HMD") {
-                Debug.Log("Setting right hand as spawn postioon for HMD User");
+        public void RegisterPortalCreationCallbacks() {
+            if(NetworkUser.LocalInstance.avatarAnatomy is VRSYS.Core.Avatar.AvatarHMDAnatomy) {
                 var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
-                //var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Photoportals.Avatar.AvatarHMDAnatomy;
-                return avatar.rightHand.GetMatrix4x4();
-            }
 
-            if(ConnectionManager.Instance.userSpawnInfo.userRole.Name == "Desktop") {
-                Debug.Log("Setting head as spawn postioon for Desktop User");
-                var avatar = NetworkUser.LocalInstance.avatarAnatomy;
-                //return avatar.head.GetMatrix4x4() * Matrix4x4.Translate(avatar.head.forward * 0.5f); //this is in world space but we need the translation it in local
-                return Matrix4x4.TRS(avatar.head.position + (avatar.head.forward * 0.5f), avatar.head.rotation, Vector3.one);
+                if (this.buttonPressRight.action != null) {
+                    this.buttonPressRight.action.performed += (ctx) => {
+                        Matrix4x4 spawnMatrix = avatar.rightHand.GetMatrix4x4();
+                        this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
+                    };
+                }
+
+                if (this.buttonPressLeft.action != null) {
+                    this.buttonPressLeft.action.performed += (ctx) => {
+                        Matrix4x4 spawnMatrix = avatar.leftHand.GetMatrix4x4();
+                        this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
+                    };
+                }
+
+                if(this.doubleTapRight.action != null) {
+                    this.doubleTapRight.action.performed += (ctx) => {
+                        Matrix4x4 spawnMatrix = avatar.rightHand.GetMatrix4x4();
+                        this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
+                    };
+                }
+
+                if(this.doubleTapLeft.action != null) {
+                    this.doubleTapLeft.action.performed += (ctx) => {
+                        Matrix4x4 spawnMatrix = avatar.leftHand.GetMatrix4x4();
+                        this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
+                    };    
+                }
             }
-            return Matrix4x4.identity;
+            else if(NetworkUser.LocalInstance.avatarAnatomy is VRSYS.Core.Avatar.AvatarAnatomy) {
+                var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarAnatomy;
+
+                if(this.desktopButtonPress.action != null) {
+                    this.desktopButtonPress.action.performed += (ctx) => {
+                        Matrix4x4 spawnMatrix = Matrix4x4.TRS(avatar.head.position + (avatar.head.forward * 0.5f), avatar.head.rotation, Vector3.one);
+                        this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
+                    };    
+                }
+                
+            }
         }
 
         [Rpc(SendTo.Everyone, RequireOwnership = false)]
@@ -331,7 +352,7 @@ namespace VRSYS.Photoportals {
 
         [ContextMenu("CreatePortal")]
         private void CreatePortal() {
-            var spawnMatrix = GetSpawnMatrix();
+            var spawnMatrix = Matrix4x4.identity;
             this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
         }
 

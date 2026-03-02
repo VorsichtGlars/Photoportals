@@ -32,8 +32,30 @@
         {
             "name": "Left Controller Interaction",
             "id": "9a89dc76-f225-4409-a465-0b59e3565fd2",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "Secondary Button Press",
+                    "type": "Button",
+                    "id": "763373fc-ba29-417e-9d7d-61a61fd14381",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ed941edd-2b17-4346-8488-c8a1fc2c17a4",
+                    "path": "<XRController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Secondary Button Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         },
         {
             "name": "Right Hand Interaction",
@@ -63,7 +85,7 @@
                     "id": "1058a4e9-cc42-4f4c-80b7-bc3450966860",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "MultiTap",
                     "initialStateCheck": false
                 }
             ],
@@ -94,7 +116,7 @@
                     "name": "",
                     "id": "499c7b46-f23f-4d0b-a7e6-58cfbec8375b",
                     "path": "<XRController>{RightHand}/{PinchTouched}",
-                    "interactions": "Press(pressPoint=0.8),MultiTap",
+                    "interactions": "Press(pressPoint=0.8),MultiTap(pressPoint=0.8)",
                     "processors": "",
                     "groups": "",
                     "action": "Pinch Double Tap",
@@ -124,6 +146,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pinch Double Tap",
+                    "type": "Button",
+                    "id": "444d1efa-dce8-4d1e-9022-7bf972b3f9fe",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -140,12 +171,51 @@
                 },
                 {
                     "name": "",
+                    "id": "e6ec6ab1-ff3d-4c31-b613-5a3104c69d27",
+                    "path": "<XRController>{LeftHand}/{PinchTouched}",
+                    "interactions": "Press(pressPoint=0.8),MultiTap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pinch Double Tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ea44534b-0967-4150-9807-3daf7109becf",
                     "path": "<XRController>{LeftHand}/{PinchTouched}",
                     "interactions": "Tap(pressPoint=0.8)",
                     "processors": "",
                     "groups": "",
                     "action": "Pinch Single Tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard Interaction",
+            "id": "7754c79e-c09c-4f01-b3a7-5e97935ae096",
+            "actions": [
+                {
+                    "name": "P Button",
+                    "type": "Button",
+                    "id": "8216d3a8-a37e-427a-b6dd-c8fcc04142e1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "29f2a13b-26b7-4156-ad5c-b1442b302900",
+                    "path": "<Keyboard>/#(P)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P Button",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
