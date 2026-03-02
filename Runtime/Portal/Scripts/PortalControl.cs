@@ -390,7 +390,7 @@ namespace VRSYS.Photoportals {
         private void CreateInteractionHelpers() {
             this.interaction_root = Instantiate(this.interaction_coordinates_prefab);
             this.interaction_root.name = "interaction_gizmos for " + this.gameObject.name;
-            this.interaction_root.transform.SetParent(GameObject.Find("Portal Interactions").transform);
+            this.interaction_root.transform.SetParent(GameObject.Find("Portal Manager").transform);
             this.input_initial = this.interaction_root.transform.Find("input_initial").transform;
             this.input_current = this.interaction_root.transform.Find("input_current").transform;
             this.display_initial = this.interaction_root.transform.Find("display_initial").transform;
