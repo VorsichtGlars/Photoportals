@@ -936,9 +936,62 @@ MonoBehaviour:
   portalGrabIsActive: 0
   worldGrabIsActive: 0
   speedTransferFunction:
-    minimum: 0.1
-    maximum: 20
-    shape: 4
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.26852345
+      value: 0.0008402206
+      inSlope: -0.13380417
+      outSlope: -0.13380417
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.7274467
+    - serializedVersion: 3
+      time: 0.6222525
+      value: 8.920547
+      inSlope: 61.547462
+      outSlope: 61.547462
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.29444245
+    - serializedVersion: 3
+      time: 0.79486144
+      value: 19.968176
+      inSlope: 0.59208745
+      outSlope: 0.59208745
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11279694
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bimanualSpeedTransferFunction:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9827881
+      value: 19.962494
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   scaleTransferFunction:
     minimum: 0.5
     maximum: 60

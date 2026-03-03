@@ -15,10 +15,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Trigger Button Value",
-                    "type": "Value",
+                    "name": "Trigger Value",
+                    "type": "PassThrough",
                     "id": "36e78051-325e-49b2-9658-096e2101d8f9",
-                    "expectedControlType": "",
+                    "expectedControlType": "Double",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -38,12 +38,12 @@
                 },
                 {
                     "name": "",
-                    "id": "7216c2d8-b8bf-4cf3-82a9-d9cf52b2bc1a",
-                    "path": "<XRController>{RightHand}/{TriggerButton}",
+                    "id": "6f0a68b5-812a-4211-bbcd-96ca93161cf3",
+                    "path": "<XRController>{RightHand}/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Trigger Button Value",
+                    "action": "Trigger Value",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -63,10 +63,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Trigger Button Value",
-                    "type": "Value",
+                    "name": "Trigger Value",
+                    "type": "PassThrough",
                     "id": "90d0d074-2787-4e45-a6c3-f78f7e7ccba4",
-                    "expectedControlType": "",
+                    "expectedControlType": "Double",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -86,12 +86,12 @@
                 },
                 {
                     "name": "",
-                    "id": "14c1e2a7-e790-4de0-b4bc-fddfd62cbc63",
-                    "path": "<XRController>{LeftHand}/{TriggerButton}",
+                    "id": "99c1f026-b451-4908-9507-11165b31df4e",
+                    "path": "<XRController>{LeftHand}/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Trigger Button Value",
+                    "action": "Trigger Value",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

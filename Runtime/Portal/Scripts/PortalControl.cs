@@ -61,10 +61,6 @@ namespace VRSYS.Photoportals {
         [Header("Advanced Setting")]
 
         #region grabbing members
-        //public InputActionProperty clutchInput;
-        //public InputActionProperty leftClutchInput;
-        //public InputActionProperty rightClutchInput;
-
 
         [SerializeField]
         private bool portalGrabIsActive = false;
@@ -83,8 +79,6 @@ namespace VRSYS.Photoportals {
         private Matrix4x4 inital_display_to_controller_offset;
         private Vector3 worldGrabSteeringVector = Vector3.zero;
 
-        //one handed portalview grab
-
         private bool collisionAtScreenCenter;
         public void SetCollisionAtScrenCenter(bool value) {
             this.collisionAtScreenCenter = value;
@@ -95,7 +89,11 @@ namespace VRSYS.Photoportals {
         #region steering members
         [SerializeField]
         [Tooltip("Specify the mapping of trigger input to steering speed in meters per second.")]
-        private TestTransferfunction speedTransferFunction = new TestTransferfunction();
+        private AnimationCurve speedTransferFunction = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+
+        [SerializeField]
+        [Tooltip("Specify the mapping of trigger input to steering speed in meters per second. Used for bimanual steering and joystick steering.")]
+        private AnimationCurve bimanualSpeedTransferFunction = AnimationCurve.Linear(0f, 0f, 1f, 1f);
         #endregion
 
         #region scaling members
@@ -153,6 +151,8 @@ namespace VRSYS.Photoportals {
 
         void Update() {
             //evaluate input
+            //Debug.Log($"Trigger Left {(float)this.leftTriggerInput.action?.ReadValue<float>()}");
+            //Debug.Log($"Trigger Right {(float)this.rightTriggerInput.action?.ReadValue<float>()}");
 
             //one handed controller view grab init (needs to be before steering as steering uses variables here)
             //TODO
@@ -160,25 +160,32 @@ namespace VRSYS.Photoportals {
             //currently this would lead to the situation that StopPortalGrab is not being called
             //one could think of going from one to two bool states: portalGrabIsActive -> leftPortalGrabIsActive, rightPortalGrabIsActive
             //2) also, what if both are pressed in this frame?
-            if (this.worldGrabIsActive == false && this.leftTriggerInput.action?.WasPressedThisFrame() == true && this.isSelectedWithLeftHand) {
+            float leftTriggerValue = (float)this.leftTriggerInput.action?.ReadValue<float>();
+            float rightTriggerValue = (float)this.rightTriggerInput.action?.ReadValue<float>();
+            leftTriggerValue = (float)Math.Round(leftTriggerValue, 2);
+            rightTriggerValue = (float)Math.Round(rightTriggerValue, 2);
+            Debug.Log($"Trigger Left {leftTriggerValue}");
+            Debug.Log($"Trigger Right {rightTriggerValue}");
+
+            if (this.worldGrabIsActive == false && this.portalGrabIsActive == false && leftTriggerValue > 0.1f && this.isSelectedWithLeftHand) {
                 this.UpdateComponentStatus("Starting portal grab with left hand");
                 this.portalGrabIsActive = true;
                 this.StartPortalGrab();
             }
 
-            if (this.portalGrabIsActive == true && this.leftTriggerInput.action?.WasReleasedThisFrame() == true && this.isSelectedWithLeftHand) {
+            if (this.portalGrabIsActive == true && leftTriggerValue < 0.1f && this.isSelectedWithLeftHand && this.collisionAtScreenCenter == false) {
                 this.UpdateComponentStatus("Stopping portal grab with left hand");
                 this.portalGrabIsActive = false;
                 this.StopPortalGrab();
             }
 
-            if (this.worldGrabIsActive == false && this.rightTriggerInput.action?.WasPressedThisFrame() == true && this.isSelectedWithRightHand) {
+            if (this.worldGrabIsActive == false && this.portalGrabIsActive == false && rightTriggerValue > 0.1f && this.isSelectedWithRightHand) {
                 this.UpdateComponentStatus("Starting portal grab with right hand");
                 this.portalGrabIsActive = true;
                 this.StartPortalGrab();
             }
 
-            if (this.portalGrabIsActive == true && this.rightTriggerInput.action?.WasReleasedThisFrame() == true && this.isSelectedWithRightHand) {
+            if (this.portalGrabIsActive == true && rightTriggerValue < 0.1f && this.isSelectedWithRightHand && this.collisionAtScreenCenter == false) {
                 this.UpdateComponentStatus("Stopping portal grab with right hand");
                 this.portalGrabIsActive = false;
                 this.StopPortalGrab();
@@ -186,37 +193,36 @@ namespace VRSYS.Photoportals {
 
             //unimanual action
             //one handed view steering
-            if (this.portalGrabIsActive == true && (this.leftTriggerInput.action?.IsInProgress() == true || this.rightTriggerInput.action?.IsInProgress() == true)) {
-                this.UpdateComponentStatus("Performing one handed controller based steering");
-                var oneHandedSteeringValue = 0f;
-                if(this.isSelectedWithLeftHand) {
-                    oneHandedSteeringValue = (float)this.leftTriggerInput.action?.ReadValue<float>();
-                    oneHandedSteeringValue = this.speedTransferFunction.Apply(oneHandedSteeringValue);
-                    oneHandedSteeringValue *= Time.deltaTime;
-                }
-                if(this.isSelectedWithRightHand) {
-                    oneHandedSteeringValue = (float)this.rightTriggerInput.action?.ReadValue<float>();
-                    oneHandedSteeringValue = this.speedTransferFunction.Apply(oneHandedSteeringValue);
-                    oneHandedSteeringValue *= Time.deltaTime;
-                }
+            if (this.portalGrabIsActive == true && leftTriggerValue > 0.1f && this.isSelectedWithLeftHand) {
+                this.UpdateComponentStatus("Performing unimanual left handed controller based steering");
+                var oneHandedSteeringValue = this.speedTransferFunction.Evaluate(leftTriggerValue);
+                oneHandedSteeringValue *= Time.deltaTime;
+                this.clutchingOriginView = Matrix4x4.Translate(this.viewTransform.forward * oneHandedSteeringValue) * this.clutchingOriginView;
+            }
+            
+            if (this.portalGrabIsActive == true && rightTriggerValue > 0.1f && this.isSelectedWithRightHand) {
+                this.UpdateComponentStatus("Performing unimanual right handed controller based steering");
+                var oneHandedSteeringValue = this.speedTransferFunction.Evaluate(rightTriggerValue);
+                oneHandedSteeringValue *= Time.deltaTime;
                 this.clutchingOriginView = Matrix4x4.Translate(this.viewTransform.forward * oneHandedSteeringValue) * this.clutchingOriginView;
             }
 
             //bimanual action
+            //TODO encapsulate logic and then call for left and right hand
 
-            if (this.isSelectedWithLeftHand == true && this.rightTriggerInput.action?.IsPressed() == true){
+            if (this.isSelectedWithLeftHand == true && rightTriggerValue > 0.1f){
                 this.UpdateComponentStatus("Performing bimanual controller based steering with right hand");
                 //var avatar = NetworkUser.LocalInstance.avatarAnatomy as Photoportals.Avatar.AvatarHMDAnatomy;
                 var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
                 var localRepr = this.transform.GetMatrix4x4().inverse * avatar.rightHand.transform.forward;
                 var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
                 var rightSteeringValue = (float)this.rightTriggerInput.action?.ReadValue<float>();
-                rightSteeringValue = this.speedTransferFunction.Apply(rightSteeringValue);
+                rightSteeringValue = this.bimanualSpeedTransferFunction.Evaluate(rightSteeringValue);
                 rightSteeringValue *= Time.deltaTime;
                 this.ApplySteeringVector(viewRepr * rightSteeringValue, Space.Self);
             }
 
-            if ( this.isSelectedWithRightHand == true && this.leftTriggerInput.action?.IsPressed() == true){
+            if ( this.isSelectedWithRightHand == true && leftTriggerValue > 0.1f){
                 this.UpdateComponentStatus("Performing bimanual controller based steering with left hand");
                 //var avatar = NetworkUser.LocalInstance.avatarAnatomy as Photoportals.Avatar.AvatarHMDAnatomy;
                 var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
@@ -224,7 +230,7 @@ namespace VRSYS.Photoportals {
                 var localRepr = this.transform.GetMatrix4x4().inverse * avatar.leftHand.transform.forward;
                 var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
                 var leftSteeringValue = (float)this.leftTriggerInput.action?.ReadValue<float>();
-                leftSteeringValue = this.speedTransferFunction.Apply(leftSteeringValue);
+                leftSteeringValue = this.bimanualSpeedTransferFunction.Evaluate(leftSteeringValue);
                 leftSteeringValue *= Time.deltaTime;
                 this.ApplySteeringVector(viewRepr * leftSteeringValue, Space.Self);
             }
@@ -276,6 +282,7 @@ namespace VRSYS.Photoportals {
         #endregion
         #region Editor Stuff
         private void UpdateComponentStatus(string message) {
+            return;
             this.currentStatusMessage = message;
 
             if (this.statusMessages.Count > 0 && this.statusMessages[this.statusMessages.Count - 1] == message) {
@@ -467,7 +474,7 @@ namespace VRSYS.Photoportals {
         }
 
         public void ApplySteeringVector(Vector3 direction, float value, Space space) {
-            value = this.speedTransferFunction.Apply(value);
+            value = this.speedTransferFunction.Evaluate(value);
             this.ApplySteeringVector(direction * value, space);
             
         }
