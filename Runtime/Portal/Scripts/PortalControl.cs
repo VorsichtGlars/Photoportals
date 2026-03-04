@@ -168,8 +168,8 @@ namespace VRSYS.Photoportals {
             float rightTriggerValue = (float)this.rightTriggerInput.action?.ReadValue<float>();
             leftTriggerValue = (float)Math.Round(leftTriggerValue, 2);
             rightTriggerValue = (float)Math.Round(rightTriggerValue, 2);
-            Debug.Log($"Trigger Left {leftTriggerValue}");
-            Debug.Log($"Trigger Right {rightTriggerValue}");
+            //Debug.Log($"Trigger Left {leftTriggerValue}");
+            //Debug.Log($"Trigger Right {rightTriggerValue}");
 
             if (this.worldGrabIsActive == false && this.portalGrabIsActive == false && leftTriggerValue > 0.1f && this.isSelectedWithLeftHand) {
                 this.UpdateComponentStatus("Starting portal grab with left hand");
