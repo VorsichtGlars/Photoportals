@@ -172,7 +172,7 @@ namespace VRSYS.Photoportals {
             var offAxisProjections = view.GetComponentsInChildren<OffAxisProjection>();
             
             //register UI
-            Transform toggleClippingGO = display.transform.Find("UI Poke Components/Clipping Plane Toggle");
+            Transform toggleClippingGO = display.transform.Find("Poke Interactions Canvas/Clipping Plane Toggle");
             Toggle toggleComponent = toggleClippingGO.GetComponentInChildren<Toggle>();
             if (toggleComponent == null) {
                 Debug.LogWarning("No toggle component found for clipping plane toggle in portal UI.");
@@ -182,14 +182,14 @@ namespace VRSYS.Photoportals {
             portalControl.EnableNearClipPlane();
             toggleComponent.isOn = true;
 
-            Transform teleportGO = display.transform.Find("UI Poke Components/Teleport Button");
+            Transform teleportGO = display.transform.Find("Poke Interactions Canvas/Teleport Button");
             Button teleportButtonComponent = teleportGO.GetComponentInChildren<Button>();
             if (teleportButtonComponent == null) {
                 Debug.LogWarning("No teleportButtonComponent found for teleport button in portal UI.");
             }
 
             teleportButtonComponent.onClick.AddListener(() =>{
-
+                //TODO encapsulate this into portalcontrol
                 void teleport() {
                     portalControl.EnableNearClipPlane();
                     Transform avatar = NetworkUser.LocalInstance.transform;
@@ -210,18 +210,16 @@ namespace VRSYS.Photoportals {
                 }
             });
 
-            /*          
-            Transform anchoringGO = display.transform.Find("UI Poke Components/Anchoring Toggle");
+            Transform anchoringGO = display.transform.Find("Poke Interactions Canvas/Anchoring Toggle");
             toggleComponent = anchoringGO.GetComponentInChildren<Toggle>();
             toggleComponent.onValueChanged.AddListener(
                 (value) => {
                     Debug.Log("TODO: Toggle Anchoring");
                 }
             );
-            */
 
             Debug.Log("Adding Listener to Scale Slider for portal scaling");
-            Transform scaleGO = display.transform.Find("UI Poke Components/Scale Slider");
+            Transform scaleGO = display.transform.Find("Poke Interactions Canvas/Scale Slider");
             Slider sliderComponent = scaleGO.GetComponentInChildren<Slider>();
             if (sliderComponent == null) {
                 Debug.LogWarning("No slider component found for scale adjustment in portal UI.");
