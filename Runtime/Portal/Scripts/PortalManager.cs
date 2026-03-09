@@ -155,90 +155,15 @@ namespace VRSYS.Photoportals {
             tracking.viewRoot = view.transform;
             tracking.portalEntranceHead = NetworkUser.LocalInstance.avatarAnatomy.head;
             
-
-            //setting up interaction stuff
+            //setting up ownership transfer
             var displayOwnershipManager = display.GetComponent<OwnershipManager>();
             var viewOwnershipManager = view.GetComponent<OwnershipManager>();
             var grabInteractable = display.GetComponent<XRGrabInteractable>();
             grabInteractable.firstSelectEntered.AddListener(displayOwnershipManager.RequestOwnershipFromThisClient);
             grabInteractable.firstSelectEntered.AddListener(viewOwnershipManager.RequestOwnershipFromThisClient);
-            grabInteractable.lastSelectExited.AddListener(displayOwnershipManager.ReturnOwnershipToServer);
-            grabInteractable.lastSelectExited.AddListener(viewOwnershipManager.ReturnOwnershipToServer);
-
-            //register UI
-            Transform toggleClippingGO = display.transform.Find("Poke Interactions Canvas/Clipping Plane Toggle");
-            Toggle toggleComponent = toggleClippingGO.GetComponentInChildren<Toggle>();
-            if (toggleComponent == null) {
-                Debug.LogWarning("No toggle component found for clipping plane toggle in portal UI.");
-            }
-            //TODO Decide on in-code or in-inspector assignment
-            //toggleComponent.onValueChanged.AddListener((value) => {portalControl.SetNearClipPlane(value);});
-            portalControl.EnableNearClipPlane();
-            toggleComponent.isOn = true;
-
-            Transform teleportGO = display.transform.Find("Poke Interactions Canvas/Teleport Button");
-            Button teleportButtonComponent = teleportGO.GetComponentInChildren<Button>();
-            if (teleportButtonComponent == null) {
-                Debug.LogWarning("No teleportButtonComponent found for teleport button in portal UI.");
-            }
-
-            teleportButtonComponent.onClick.AddListener(() =>{
-                //TODO encapsulate this into portalcontrol
-                void teleport() {
-                    portalControl.EnableNearClipPlane();
-                    Transform avatar = NetworkUser.LocalInstance.transform;
-                    Matrix4x4 relativeOffsetMatrix = display.transform.GetMatrix4x4().inverse * avatar.GetMatrix4x4();
-                    Matrix4x4 absoluteWorldPositon = view.transform.GetMatrix4x4() * relativeOffsetMatrix;
-                    avatar.transform.SetMatrix4x4(absoluteWorldPositon);
-                    //avatar.position = absoluteWorldPositon.GetPosition();
-                    //avatar.rotation = absoluteWorldPositon.rotation;
-                    display.transform.SetMatrix4x4(view.transform.GetMatrix4x4());
-                    view.transform.Translate(Vector3.forward * 0.01f, Space.Self);
-                }
-
-                if(view.transform.localScale.x == 1.0f) {
-                    teleport();
-                }
-                else {
-                    portalControl.SetScale(1f, 1f, teleport);
-                }
-            });
-
-            Transform anchoringGO = display.transform.Find("Poke Interactions Canvas/Anchoring Toggle");
-            toggleComponent = anchoringGO.GetComponentInChildren<Toggle>();
-            toggleComponent.onValueChanged.AddListener((value) => portalControl.SetRotationLock(value));
-            toggleComponent.isOn = false;
-            portalControl.SetRotationLock(false);
-
-            Debug.Log("Adding Listener to Scale Slider for portal scaling");
-            Transform scaleGO = display.transform.Find("Poke Interactions Canvas/Scale Slider");
-            Slider sliderComponent = scaleGO.GetComponentInChildren<Slider>();
-            if (sliderComponent == null) {
-                Debug.LogWarning("No slider component found for scale adjustment in portal UI.");
-            }
-
-            sliderComponent?.onValueChanged.AddListener(value => {
-                float targetScale = value switch {
-                    0f => 1f,
-                    1f => 10f,
-                    2f => 50f,
-                    3f => 100f,
-                    4f => 500f,
-                    _ => 1f
-                };
-                portalControl.SetScale(targetScale, false);
-            });
-
-            /**
-            //TODO Decide wether to have this as code or as inspector assignment
-            var simpleInteractable = display.GetComponentInChildren<XRSimpleInteractable>();
-            grabInteractable.firstSelectEntered.AddListener(portalControl.SwitchToBimanualInteraction);
-            grabInteractable.lastSelectExited.AddListener(portalControl.SwitchToUnimanualInteraction);
-
-            GameObject viewInteractionZone = display.transform.Find("PortalViewInteractionZone").gameObject;
-            grabInteractable.firstSelectEntered.AddListener(() => viewInteractionZone.SetActive(true));
-            grabInteractable.lastSelectExited.AddListener(() => viewInteractionZone.SetActive(false));
-            **/
+            //maybe this is better as e.g. dotween scaling actions can still run
+            //grabInteractable.lastSelectExited.AddListener(displayOwnershipManager.ReturnOwnershipToServer);
+            //grabInteractable.lastSelectExited.AddListener(viewOwnershipManager.ReturnOwnershipToServer);
 
             ExtendedLogger.LogInfo(this.GetType().Name, "CreatePortal Done!", this);
         }

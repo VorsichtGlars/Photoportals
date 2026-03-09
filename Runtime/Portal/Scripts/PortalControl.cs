@@ -64,11 +64,6 @@ namespace VRSYS.Photoportals {
         private Transform view_initial, view_current;
         private Matrix4x4 inital_display_to_controller_offset;
         private bool collisionAtScreenCenter;
-
-        public void SetCollisionAtScreenCenter(bool value) {
-            this.collisionAtScreenCenter = value;
-        }
-
         #endregion
 
         #region steering members
@@ -117,6 +112,8 @@ namespace VRSYS.Photoportals {
         #region Event Processing
         void Start() {
             this.grabInteractable = this.transform.GetComponent<XRGrabInteractable>();
+            GameObject viewInteractionZone = this.transform.Find("Free Interaction Zone").gameObject;
+
             this.sliderElement = this.transform.GetComponentInChildren<Slider>();
             if(this.sliderElement == null) {
                 ExtendedLogger.LogError(this.GetType().Name, "No slider element found in children.", this);
@@ -125,21 +122,119 @@ namespace VRSYS.Photoportals {
             this.CreateInteractionHelpers();
             this.InitJoystickSteering();
 
-            this.grabInteractable.selectExited.AddListener(() => {
+            ColliderEvents colliderEvents = this.transform.GetComponentInChildren<ColliderEvents>();
+            colliderEvents.OnEnter.AddListener(() => this.collisionAtScreenCenter = true);
+            colliderEvents.OnExit.AddListener(() => this.collisionAtScreenCenter = false);
+
+            this.grabInteractable.firstSelectEntered.AddListener(() => {
+                if (this.collisionAtScreenCenter) {
+                    this.UpdateComponentStatus("Starting portal grab triggered from screen grab");
+                    this.portalGrabIsActive = true;
+                    this.StartPortalGrab();
+                }
+                else{
+                    viewInteractionZone.SetActive(true);
+                }
+            });
+
+            this.grabInteractable.lastSelectExited.AddListener(() => {
                 //TODO check if this reset is necessary and actually happening
                 if (this.portalGrabIsActive) {
                     this.StopPortalGrab();
                 }
                 this.portalGrabIsActive = false;
                 this.worldGrabIsActive = false;
+                viewInteractionZone.SetActive(false);
             });
 
-            this.grabInteractable.selectEntered.AddListener(() => {
-                if (this.collisionAtScreenCenter) {
-                    this.UpdateComponentStatus("Starting portal grab triggered from screen grab");
-                    this.portalGrabIsActive = true;
-                    this.StartPortalGrab();
+            var simpleInteractable = this.GetComponentInChildren<XRSimpleInteractable>(includeInactive: true);
+            simpleInteractable.firstSelectEntered.AddListener((args) => {
+                this.UpdateComponentStatus("InteractionZoneSelectEnter triggered, switching to bimanual interaction");
+                this.input = args.interactorObject.transform;
+                this.SetupBimanualInteractionHelpers();
+                this.worldGrabIsActive = true;
+            });
+
+            simpleInteractable.lastSelectExited.AddListener((args) => {
+                this.UpdateComponentStatus("InteractionZoneSelectExit triggered, switching to unimanual interaction");
+                this.worldGrabIsActive = false;
+                this.inital_display_to_controller_offset = Matrix4x4.identity;
+            });
+
+            simpleInteractable.activated.AddListener((args) => {
+                this.joystickIsSummoned = !this.joystickIsSummoned;
+
+                if(this.joystickIsSummoned == true){
+                    this.joystick.transform.DOFollowTransform(args.interactorObject.transform, 0.25f).
+                    OnComplete(() => {
+                        this.joystickInteractable.enabled = true;
+                    });
                 }
+
+                if(this.joystickIsSummoned == false){
+                    this.joystick.transform.DOFollowTransform(this.joystickRoot.transform, 0.25f).
+                    OnStart(() => {
+                        this.joystickInteractable.enabled = false;
+                    });
+                }
+            });
+
+            //register UI
+            Transform toggleClippingGO = this.transform.Find("Poke Interactions Canvas/Clipping Plane Toggle");
+            Toggle toggleClippingComponent = toggleClippingGO.GetComponentInChildren<Toggle>();
+            if (toggleClippingComponent == null)
+                Debug.LogWarning("No toggle component found for clipping plane toggle in portal UI.");
+            toggleClippingComponent.onValueChanged.AddListener((value) => {this.SetNearClipPlane(value);});
+            this.EnableNearClipPlane();
+            toggleClippingComponent.isOn = true;
+
+            Transform teleportGO = this.transform.Find("Poke Interactions Canvas/Teleport Button");
+            Button teleportButtonComponent = teleportGO.GetComponentInChildren<Button>();
+            if (teleportButtonComponent == null)
+                Debug.LogWarning("No teleportButtonComponent found for teleport button in portal UI.");
+            teleportButtonComponent.onClick.AddListener(() =>{
+                void teleport() {
+                    this.EnableNearClipPlane();
+                    Transform avatar = NetworkUser.LocalInstance.transform;
+                    Matrix4x4 relativeOffsetMatrix = this.transform.GetMatrix4x4().inverse * avatar.GetMatrix4x4();
+                    Matrix4x4 absoluteWorldPositon = this.viewTransform.GetMatrix4x4() * relativeOffsetMatrix;
+                    avatar.transform.SetMatrix4x4(absoluteWorldPositon);
+                    this.transform.SetMatrix4x4(this.viewTransform.GetMatrix4x4());
+                    this.viewTransform.Translate(Vector3.forward * 0.01f, Space.Self);
+                }
+
+                if(this.viewTransform.localScale.x == 1.0f) {
+                    teleport();
+                }
+                else {
+                    this.viewTransform.DOScale(1f, 1f).
+                    OnUpdate(() => this.UpdateScaleUI()).
+                    OnComplete(() => teleport());
+                }
+            });
+
+            Transform anchoringGO = this.transform.Find("Poke Interactions Canvas/Anchoring Toggle");
+            Toggle toggleAnchoringComponent = anchoringGO.GetComponentInChildren<Toggle>();
+            if (toggleAnchoringComponent == null)
+                Debug.LogWarning("No toggle component found for anchoring toggle in portal UI.");
+            toggleAnchoringComponent.onValueChanged.AddListener((value) => this.SetRotationLock(value));
+            toggleAnchoringComponent.isOn = false;
+            this.SetRotationLock(false);
+
+            Transform scaleGO = this.transform.Find("Poke Interactions Canvas/Scale Slider");
+            Slider sliderComponent = scaleGO.GetComponentInChildren<Slider>();
+            if (sliderComponent == null)
+                Debug.LogWarning("No slider component found for scale adjustment in portal UI.");
+            sliderComponent?.onValueChanged.AddListener(value => {
+                float targetScale = value switch {
+                    0f => 1f,
+                    1f => 10f,
+                    2f => 50f,
+                    3f => 100f,
+                    4f => 500f,
+                    _ => 1f
+                };
+                this.viewTransform.DOScale(targetScale, 1f);
             });
         }
 
@@ -303,32 +398,6 @@ namespace VRSYS.Photoportals {
             };
             this.sliderElement.SetValueWithoutNotify(mappedScaleValue);
         }
-
-        public void SetScale(float value) {
-            this.SetScale(value, 2f, null, true);
-        }
-
-        public void SetScale(float value, bool uiUpdate = true) {
-            this.SetScale(value, 2f, null, uiUpdate);
-        }
-
-        public void SetScale(float value, float time = 1f, System.Action onComplete = null, bool uiUpdate = true) {
-            this.viewTransform.DOScale(value, time)
-                .OnStart(() => this.UpdateComponentStatus($"Scaling to {value}"))
-                .OnUpdate(() => {
-                    if (uiUpdate) {
-                        this.UpdateScaleUI();
-                    }
-                })
-                .OnComplete(() => {
-                    this.UpdateComponentStatus($"Finished Scaling to {value}");
-                    onComplete?.Invoke();
-                });
-        }
-
-        public float GetScale() {
-            return this.viewTransform.lossyScale.x;
-        }
         #endregion
 
         #region PortalGrab
@@ -384,20 +453,6 @@ namespace VRSYS.Photoportals {
             this.input_initial.position = this.input.position;
             this.input_initial.rotation = this.input.rotation;
             this.inital_display_to_controller_offset = this.display_initial.GetMatrix4x4().inverse * this.input_initial.GetMatrix4x4();
-        }
-
-        //these are being called by the SelectEnter and SelectExit events from the interactables
-        public void InteractionZoneSelectEnter(SelectEnterEventArgs args){
-            this.UpdateComponentStatus("InteractionZoneSelectEnter triggered, switching to bimanual interaction");
-            this.input = args.interactorObject.transform;
-            this.SetupBimanualInteractionHelpers();
-            this.worldGrabIsActive = true;
-        }
-
-        public void InteractionZoneSelectExit(SelectExitEventArgs args) {
-            this.UpdateComponentStatus("InteractionZoneSelectExit triggered, switching to unimanual interaction");
-            this.worldGrabIsActive = false;
-            this.inital_display_to_controller_offset = Matrix4x4.identity;
         }
 
         public void UpdateWorldGrab() {
@@ -494,24 +549,6 @@ namespace VRSYS.Photoportals {
                 this.UpdateComponentStatus("Joystick Released");
                 this.joystickSteeringActive = false;
             });
-        }
-
-        public void InteractionZoneActivate(ActivateEventArgs args) {
-            this.joystickIsSummoned = !this.joystickIsSummoned;
-
-            if(this.joystickIsSummoned == true){
-                this.joystick.transform.DOFollowTransform(args.interactorObject.transform, 0.25f).
-                OnComplete(() => {
-                    this.joystickInteractable.enabled = true;
-                });
-            }
-
-            if(this.joystickIsSummoned == false){
-                this.joystick.transform.DOFollowTransform(this.joystickRoot.transform, 0.25f).
-                OnStart(() => {
-                    this.joystickInteractable.enabled = false;
-                });
-            }
         }
         #endregion
     }

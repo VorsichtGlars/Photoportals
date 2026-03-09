@@ -429,6 +429,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1235096460080394783}
   - component: {fileID: 3611882011624974621}
+  - component: {fileID: 6027220570449595870}
   - component: {fileID: 3538976427525102299}
   m_Layer: 7
   m_Name: Screen Interaction Zone
@@ -473,6 +474,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2085766, y: 0.20929554, z: 0.062348675}
   m_Center: {x: 0.002060108, y: -0.003103435, z: 0.0025465954}
+--- !u!114 &6027220570449595870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3639763621678055863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245c96193dc0cbe49a7529803ee2c0d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  note: 'ExcludedColliders: Free Interaction Zone
+
+
+    OnEnter
+
+    Set PortalControl.collisionAtScreenCenter
+    to true
+
+
+    OnExit
+
+    Set PortalControl.collisionAtScreenCenter to false'
 --- !u!114 &3538976427525102299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,34 +517,10 @@ MonoBehaviour:
   isColliding: 0
   OnEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8126681051436444133}
-        m_TargetAssemblyTypeName: VRSYS.Photoportals.PortalControl, vrsys.photoportals
-        m_MethodName: SetCollisionAtScreenCenter
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Collider Enter
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   OnExit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8126681051436444133}
-        m_TargetAssemblyTypeName: VRSYS.Photoportals.PortalControl, vrsys.photoportals
-        m_MethodName: SetCollisionAtScreenCenter
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Collider Exit
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnStay:
     m_PersistentCalls:
       m_Calls: []
@@ -535,6 +536,7 @@ GameObject:
   - component: {fileID: 5647323919113360792}
   - component: {fileID: 6536869594044831621}
   - component: {fileID: 8560744087212152974}
+  - component: {fileID: 7553682855140875650}
   - component: {fileID: 6143290610123614706}
   - component: {fileID: 5281603013008201876}
   - component: {fileID: 109762706322906212}
@@ -654,6 +656,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &7553682855140875650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3785651222127509849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245c96193dc0cbe49a7529803ee2c0d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  note: 'FirstSelectEnter:
+
+    Retrieve Ownership
+
+    Enable the "Free Interaction
+    Zone" Game Object
+
+
+    Last Select Exit:
+
+    Disable the "Free Interaction
+    Zone" Game Object
+
+    Return Ownership
+
+'
 --- !u!114 &6143290610123614706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,58 +729,10 @@ MonoBehaviour:
       m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8560744087212152974}
-        m_TargetAssemblyTypeName: VRVIS.Networking.OwnershipManager, Assembly-CSharp
-        m_MethodName: RequestOwnershipFromThisClient
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 6768007053433402356}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   m_LastSelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6768007053433402356}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8560744087212152974}
-        m_TargetAssemblyTypeName: VRVIS.Networking.OwnershipManager, Assembly-CSharp
-        m_MethodName: ReturnOwnershipToServer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -911,33 +893,6 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -6412917461327674054, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
-  scaleInput:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Scale Input
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 4ae735eb-cbf2-46bf-b871-aa0de535cd2c
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 5337146877245037457, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
-  scaleResetInput:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Scale Reset Input
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 39709f2f-1ae8-43c2-aabd-577eae419401
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -3347356889902755504, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
-  portalGrabIsActive: 0
-  worldGrabIsActive: 0
-  collisionAtScreenCenter: 0
   speedTransferFunction:
     serializedVersion: 2
     m_Curve:
@@ -1028,6 +983,30 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  scaleInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Scale Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 4ae735eb-cbf2-46bf-b871-aa0de535cd2c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 5337146877245037457, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
+  scaleResetInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Scale Reset Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 39709f2f-1ae8-43c2-aabd-577eae419401
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -3347356889902755504, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
   scaleTransferFunction:
     serializedVersion: 2
     m_Curve:
@@ -1079,7 +1058,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  joystickSteeringActive: 0
 --- !u!114 &5308852153995822969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,6 +1085,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7161682922923369119}
   - component: {fileID: 6164801431216725893}
+  - component: {fileID: 6206989459989611251}
   - component: {fileID: 8345698905313184553}
   - component: {fileID: 8438494408546268265}
   m_Layer: 7
@@ -1149,6 +1128,32 @@ MonoBehaviour:
 
     This interactable determines the switching
     between uni and bimanual interaction'
+--- !u!114 &6206989459989611251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6768007053433402356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245c96193dc0cbe49a7529803ee2c0d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  note: 'OnFirstSelectEntered
+
+    Start Bimanual Interaction
+
+
+    OnLastSelectExited
+
+    End
+    Bimanual Interaction
+
+
+    On Activate
+
+    Toggle the joystick'
 --- !u!114 &8345698905313184553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1191,34 +1196,10 @@ MonoBehaviour:
       m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8126681051436444133}
-        m_TargetAssemblyTypeName: VRSYS.Photoportals.PortalControl, vrsys.photoportals
-        m_MethodName: InteractionZoneSelectEnter
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_LastSelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8126681051436444133}
-        m_TargetAssemblyTypeName: VRSYS.Photoportals.PortalControl, vrsys.photoportals
-        m_MethodName: InteractionZoneSelectExit
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -1239,19 +1220,7 @@ MonoBehaviour:
       m_Calls: []
   m_Activated:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8126681051436444133}
-        m_TargetAssemblyTypeName: VRSYS.Photoportals.PortalControl, vrsys.photoportals
-        m_MethodName: InteractionZoneActivate
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []
@@ -1953,7 +1922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3673707400186278618, guid: a56c982030281f34c8aac44b92d1463a, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3673707400186278618, guid: a56c982030281f34c8aac44b92d1463a, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
