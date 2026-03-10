@@ -26,22 +26,16 @@ namespace VRSYS.Photoportals {
         private XRGrabInteractable grabInteractable;
         private GameObject interaction_root;
         public GameObject interaction_coordinates_prefab;
-
-        [SerializeField]
         private bool isSelected {
             get {
                 return this.grabInteractable.isSelected;
             }
         }
-
-        [SerializeField]
         private bool isSelectedWithLeftHand {
             get {
                 return this.grabInteractable.firstInteractorSelecting?.handedness == InteractorHandedness.Left;
             }
         }
-
-        [SerializeField]
         private bool isSelectedWithRightHand {
             get {
                 return this.grabInteractable.firstInteractorSelecting?.handedness == InteractorHandedness.Right;
