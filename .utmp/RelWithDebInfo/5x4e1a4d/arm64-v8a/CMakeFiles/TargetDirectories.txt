@@ -1,0 +1,5 @@
+D:/Master-Thesis-Development/.utmp/RelWithDebInfo/5x4e1a4d/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/Master-Thesis-Development/.utmp/RelWithDebInfo/5x4e1a4d/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/Master-Thesis-Development/.utmp/RelWithDebInfo/5x4e1a4d/arm64-v8a/GameActivity/CMakeFiles/game.dir
+D:/Master-Thesis-Development/.utmp/RelWithDebInfo/5x4e1a4d/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+D:/Master-Thesis-Development/.utmp/RelWithDebInfo/5x4e1a4d/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
