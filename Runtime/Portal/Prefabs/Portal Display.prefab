@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2247265819
+  GlobalObjectIdHash: 3396257479
   InScenePlacedSourceGlobalObjectIdHash: 4140372752
   DeferredDespawnTick: 0
   Ownership: 1
@@ -878,6 +878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewTransform: {fileID: 0}
+  materialToInstantiate: {fileID: 2100000, guid: 3fb85c0e29a5c83428da9c8e51a95486, type: 2}
   interaction_coordinates_prefab: {fileID: 2711543240970582377, guid: ec2cb20081a296c418f614b184362373, type: 3}
   leftTriggerInput:
     m_UseReference: 1
@@ -1080,10 +1081,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae1a1b60cef29f48b63689bdce45e69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalEntranceHead: {fileID: 0}
-  portalEntranceScreen: {fileID: 6388521857204455601}
-  portalExitScreen: {fileID: 0}
-  portalExitHead: {fileID: 0}
+  portalDisplayHead: {fileID: 0}
+  portalDisplayScreen: {fileID: 0}
+  portalViewScreen: {fileID: 0}
+  portalViewHead: {fileID: 0}
   viewRoot: {fileID: 0}
 --- !u!1 &6768007053433402356
 GameObject:

@@ -130,40 +130,7 @@ namespace VRSYS.Photoportals {
             GameObject view = viewNetworkObject.gameObject;
             PortalControl portalControl = display.GetComponent<PortalControl>();
             portalControl.viewTransform = view.transform;
-
-            //setting up rendering stuff
-            Material material = Material.Instantiate(this.materialToInstantiate);
-            RenderTexture leftRenderTexture = new RenderTexture(1024, 1024, 16, RenderTextureFormat.ARGB32);
-            RenderTexture rightRenderTexture = new RenderTexture(1024, 1024, 16, RenderTextureFormat.ARGB32);
-            leftRenderTexture.Create();
-            rightRenderTexture.Create();
-            var block = new MaterialPropertyBlock();
-            block.SetTexture("_LeftEyeTexture", leftRenderTexture);
-            block.SetTexture("_RightEyeTexture", rightRenderTexture);
-            var quad = display.transform.Find("Stereo Display");
-            var renderer = quad.GetComponent<MeshRenderer>();
-            renderer.SetPropertyBlock(block);
-
-            view.transform.Find("Cameras/LeftCamera").GetComponent<Camera>().targetTexture = leftRenderTexture;
-            view.transform.Find("Cameras/RightCamera").GetComponent<Camera>().targetTexture = rightRenderTexture;
-
-            //setting up head tracking
-            var tracking = display.GetComponent<PortalHeadTracking>();
-            tracking.portalDisplayScreen = quad;
-            tracking.portalViewScreen = view.transform.Find("StereoDisplayProxy");
-            tracking.portalViewHead = view.transform.Find("Cameras");
-            tracking.viewRoot = view.transform;
-            tracking.portalDisplayHead = NetworkUser.LocalInstance.avatarAnatomy.head;
-            
-            //setting up ownership transfer
-            var displayOwnershipManager = display.GetComponent<OwnershipManager>();
-            var viewOwnershipManager = view.GetComponent<OwnershipManager>();
-            var grabInteractable = display.GetComponent<XRGrabInteractable>();
-            grabInteractable.firstSelectEntered.AddListener(displayOwnershipManager.RequestOwnershipFromThisClient);
-            grabInteractable.firstSelectEntered.AddListener(viewOwnershipManager.RequestOwnershipFromThisClient);
-            //maybe this is better as e.g. dotween scaling actions can still run
-            //grabInteractable.lastSelectExited.AddListener(displayOwnershipManager.ReturnOwnershipToServer);
-            //grabInteractable.lastSelectExited.AddListener(viewOwnershipManager.ReturnOwnershipToServer);
+            portalControl.LinkToView();
 
             ExtendedLogger.LogInfo(this.GetType().Name, "CreatePortal Done!", this);
         }

@@ -7,6 +7,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
+using Unity.Netcode;
+using Unity.XR.CoreUtils;
+
 using DG.Tweening;
 using TMPro;
 
@@ -15,14 +18,14 @@ using VRSYS.Core.Avatar;
 using VRSYS.Core.Networking;
 
 using VRSYS.Photoportals.Extensions;
-using Unity.Netcode;
-using Unity.XR.CoreUtils;
-using System.Collections.Generic;
+using VRSYS.Photoportals.Networking;
 
 
 namespace VRSYS.Photoportals {
     public class PortalControl : MonoBehaviour {
         public Transform viewTransform;
+        public Material materialToInstantiate;
+
         private XRGrabInteractable grabInteractable;
         private GameObject interaction_root;
         public GameObject interaction_coordinates_prefab;
@@ -115,6 +118,7 @@ namespace VRSYS.Photoportals {
             this.UpdateScaleUI();
             this.CreateInteractionHelpers();
             this.InitJoystickSteering();
+            this.LinkToView();
 
             ColliderEvents colliderEvents = this.transform.GetComponentInChildren<ColliderEvents>();
             colliderEvents.OnEnter.AddListener(() => this.collisionAtScreenCenter = true);
@@ -230,6 +234,46 @@ namespace VRSYS.Photoportals {
                 };
                 this.viewTransform.DOScale(targetScale, 1f);
             });
+        }
+
+        public void LinkToView()
+        {
+            if(this.viewTransform == null) {
+                ExtendedLogger.LogError(this.GetType().Name, "this.viewTransform transform assigned to portal control.", this);
+                return;
+            }
+            //setting up rendering stuff
+            Material material = Material.Instantiate(this.materialToInstantiate);
+            RenderTexture leftRenderTexture = new RenderTexture(1024, 1024, 16, RenderTextureFormat.ARGB32);
+            RenderTexture rightRenderTexture = new RenderTexture(1024, 1024, 16, RenderTextureFormat.ARGB32);
+            leftRenderTexture.Create();
+            rightRenderTexture.Create();
+            var block = new MaterialPropertyBlock();
+            block.SetTexture("_LeftEyeTexture", leftRenderTexture);
+            block.SetTexture("_RightEyeTexture", rightRenderTexture);
+            var quad = this.transform.Find("Stereo Display");
+            var renderer = quad.GetComponent<MeshRenderer>();
+            renderer.SetPropertyBlock(block);
+
+            this.viewTransform.transform.Find("Cameras/LeftCamera").GetComponent<Camera>().targetTexture = leftRenderTexture;
+            this.viewTransform.transform.Find("Cameras/RightCamera").GetComponent<Camera>().targetTexture = rightRenderTexture;
+
+            //setting up head tracking
+            var tracking = this.GetComponent<PortalHeadTracking>();
+            tracking.portalDisplayScreen = quad;
+            tracking.portalViewScreen = this.viewTransform.transform.Find("StereoDisplayProxy");
+            tracking.portalViewHead = this.viewTransform.transform.Find("Cameras");
+            tracking.viewRoot = this.viewTransform.transform;
+            
+            //setting up ownership transfer
+            var displayOwnershipManager = this.GetComponent<OwnershipManager>();
+            var viewOwnershipManager = this.viewTransform.GetComponent<OwnershipManager>();
+            var grabInteractable = this.GetComponent<XRGrabInteractable>();
+            grabInteractable.firstSelectEntered.AddListener(displayOwnershipManager.RequestOwnershipFromThisClient);
+            grabInteractable.firstSelectEntered.AddListener(viewOwnershipManager.RequestOwnershipFromThisClient);
+            //maybe this is better as e.g. dotween scaling actions can still run
+            //grabInteractable.lastSelectExited.AddListener(displayOwnershipManager.ReturnOwnershipToServer);
+            //grabInteractable.lastSelectExited.AddListener(viewOwnershipManager.ReturnOwnershipToServer);
         }
 
         void Update() {
@@ -383,6 +427,10 @@ namespace VRSYS.Photoportals {
 
         #region Scaling
         private void UpdateScaleUI() {
+            if(this.sliderElement == null) {
+                ExtendedLogger.LogError(this.GetType().Name, "No slider element found in children.", this);
+                return;
+            }
             float mappedScaleValue = this.viewTransform.lossyScale.x switch {
                 >= 500f  => 4f,
                 >= 100f and < 500f => 3f,
@@ -429,6 +477,10 @@ namespace VRSYS.Photoportals {
         #region WorldGrab
 
         private void CreateInteractionHelpers() {
+            if(this.interaction_coordinates_prefab == null) {
+                ExtendedLogger.LogError(this.GetType().Name, "No interaction_coordinates_prefab assigned to portal control.", this);
+                return;
+            }
             this.interaction_root = Instantiate(this.interaction_coordinates_prefab);
             this.interaction_root.name = "interaction_gizmos for " + this.gameObject.name;
             this.interaction_root.transform.SetParent(GameObject.Find("Portal Manager").transform);
