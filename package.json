@@ -13,6 +13,11 @@
             "displayName": "Example Scene",
             "description": "Example for using the Photoportals package.",
             "path": "Samples~/Example Scene"
+        },
+        {
+            "displayName": "Example Scene 2",
+            "description": "Second example for using the Photoportals package with pre-runtime placed portals.",
+            "path": "Samples~/Example Scene 2"
         }
     ],
     "dependencies": {
