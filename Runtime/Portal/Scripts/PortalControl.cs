@@ -111,7 +111,7 @@ namespace VRSYS.Photoportals {
             this.grabInteractable = this.transform.GetComponent<XRGrabInteractable>();
             GameObject viewInteractionZone = this.transform.Find("Free Interaction Zone").gameObject;
 
-            this.sliderElement = this.transform.GetComponentInChildren<Slider>();
+            this.sliderElement = this.transform.GetComponentInChildren<Slider>(includeInactive: true);
             if(this.sliderElement == null) {
                 ExtendedLogger.LogError(this.GetType().Name, "No slider element found in children.", this);
             }
@@ -120,7 +120,7 @@ namespace VRSYS.Photoportals {
             this.InitJoystickSteering();
             this.LinkToView();
 
-            ColliderEvents colliderEvents = this.transform.GetComponentInChildren<ColliderEvents>();
+            ColliderEvents colliderEvents = this.transform.GetComponentInChildren<ColliderEvents>(includeInactive: true);
             colliderEvents.OnEnter.AddListener(() => this.collisionAtScreenCenter = true);
             colliderEvents.OnExit.AddListener(() => this.collisionAtScreenCenter = false);
 
