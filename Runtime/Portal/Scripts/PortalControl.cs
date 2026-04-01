@@ -265,7 +265,9 @@ namespace VRSYS.Photoportals {
 
             //setting up head tracking
             var tracking = this.GetComponent<PortalHeadTracking>();
-            tracking.portalDisplayHead = NetworkUser.LocalInstance.head;
+            if(NetworkUser.LocalInstance != null) {
+                tracking.portalDisplayHead = NetworkUser.LocalInstance.head;
+            }
             tracking.portalDisplayScreen = quad;
             tracking.portalViewScreen = this.viewTransform.transform.Find("StereoDisplayProxy");
             tracking.portalViewHead = this.viewTransform.transform.Find("Cameras");
