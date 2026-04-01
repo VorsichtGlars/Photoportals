@@ -4,7 +4,7 @@ using VRSYS.Core.Networking;
 using VRSYS.Core.Avatar;
 
 namespace VRSYS.Photoportals {
-    public class PortalHeadTracking : MonoBehaviour {
+    public class PortalHeadTracking : MonoBehaviour, INetworkUserCallbacks {
         public Transform portalDisplayHead;
         public Transform portalDisplayScreen;
         public Transform portalViewScreen;
@@ -36,6 +36,28 @@ namespace VRSYS.Photoportals {
             this.portalViewHead.transform.position = portalHeadMat.GetColumn(3);
             this.portalViewHead.transform.rotation = portalHeadMat.rotation;
         }
+        #endregion
+
+        #region Networking
+
+        public void OnLocalNetworkUserSetup() {
+            if (NetworkUser.LocalInstance.avatarAnatomy is AvatarAnatomy) {
+                Debug.LogWarning("AvatarAnatomy determined but viewing setup switch not yet implemented.");
+            }
+            else if (NetworkUser.LocalInstance.avatarAnatomy is AvatarHMDAnatomy) {
+                Debug.LogWarning("AvatarHMDAnatomy determined but viewing setup switch not yet implemented.");
+            }
+            else {
+                Debug.LogError("AvatarAnatomy not found");
+            }
+
+            this.portalDisplayHead = NetworkUser.LocalInstance.head;
+        }
+
+        public void OnRemoteNetworkUserSetup(NetworkUser user) {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
 
         #region Editor
