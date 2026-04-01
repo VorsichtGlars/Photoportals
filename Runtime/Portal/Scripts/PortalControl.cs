@@ -255,11 +255,17 @@ namespace VRSYS.Photoportals {
             var renderer = quad.GetComponent<MeshRenderer>();
             renderer.SetPropertyBlock(block);
 
-            this.viewTransform.transform.Find("Cameras/LeftCamera").GetComponent<Camera>().targetTexture = leftRenderTexture;
-            this.viewTransform.transform.Find("Cameras/RightCamera").GetComponent<Camera>().targetTexture = rightRenderTexture;
+            var leftCamera = this.viewTransform.transform.Find("Cameras/LeftCamera").GetComponent<Camera>();
+            leftCamera.targetTexture = leftRenderTexture;
+            var rightCamera = this.viewTransform.transform.Find("Cameras/RightCamera").GetComponent<Camera>();
+            rightCamera.targetTexture = rightRenderTexture;
+
+            leftCamera.enabled = true;
+            rightCamera.enabled = true;
 
             //setting up head tracking
             var tracking = this.GetComponent<PortalHeadTracking>();
+            tracking.portalDisplayHead = NetworkUser.LocalInstance.head;
             tracking.portalDisplayScreen = quad;
             tracking.portalViewScreen = this.viewTransform.transform.Find("StereoDisplayProxy");
             tracking.portalViewHead = this.viewTransform.transform.Find("Cameras");
