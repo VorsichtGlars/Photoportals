@@ -32,7 +32,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //-----------------------------------------------------------------
-//   Authors:        Sebastian Muehlhaus, Andr� Kunert, Lucky Chandrautama
+//   Authors:        Sebastian Muehlhaus, Andr� Kunert, Lucky Chandrautama, Manuel Hartmann
 //   Date:           2022
 //-----------------------------------------------------------------
 
@@ -58,6 +58,8 @@ namespace VRSYS.Photoportals {
         public bool autoUpdate = false;
         public bool calcNearClipPlane = false;
         private float originalNearClipPlane = 0.01f;
+
+        public bool debugMode = false;
 
         #region States
         private void Awake() {
@@ -106,7 +108,9 @@ namespace VRSYS.Photoportals {
             
             // Validate and clamp near clip plane
             if (near <= 0.01f) {
-                Debug.LogWarning($"Near plane too small: {near}, clamping to 0.01");
+                if (debugMode) {
+                    Debug.LogWarning($"Near plane too small: {near}, clamping to 0.01");
+                }
                 near = 0.01f;
             }
             cam.nearClipPlane = near;
@@ -121,25 +125,35 @@ namespace VRSYS.Photoportals {
 
             // Validate frustum bounds
             if (l >= r) {
-                Debug.LogWarning($"Invalid frustum: left ({l}) >= right ({r}). Early returning.");
+                if (debugMode) {
+                    Debug.LogWarning($"Invalid frustum: left ({l}) >= right ({r}). Early returning.");
+                }
                 return;
             }
             if (b >= t) {
-                Debug.LogWarning($"Invalid frustum: bottom ({b}) >= top ({t}). Early returning.");
+                if (debugMode) {
+                    Debug.LogWarning($"Invalid frustum: bottom ({b}) >= top ({t}). Early returning.");
+                }
                 return;
             }
             if (near <= 0 || far <= near) {
-                Debug.LogWarning($"Invalid clip planes: near={near}, far={far}. Early returning.");
+                if (debugMode) {
+                    Debug.LogWarning($"Invalid clip planes: near={near}, far={far}. Early returning.");
+                }
                 return;
             }
 
             // Validate for NaN or Infinity
             if (float.IsNaN(l) || float.IsNaN(r) || float.IsNaN(b) || float.IsNaN(t)) {
-                Debug.LogWarning($"NaN detected in frustum parameters: l={l}, r={r}, b={b}, t={t}. Early returning.");
+                if (debugMode) {
+                    Debug.LogWarning($"NaN detected in frustum parameters: l={l}, r={r}, b={b}, t={t}. Early returning.");
+                }
                 return;
             }
             if (float.IsInfinity(l) || float.IsInfinity(r) || float.IsInfinity(b) || float.IsInfinity(t)) {
-                Debug.LogWarning($"Infinity detected in frustum parameters: l={l}, r={r}, b={b}, t={t}. Early returning.");
+                if (debugMode) {
+                    Debug.LogWarning($"Infinity detected in frustum parameters: l={l}, r={r}, b={b}, t={t}. Early returning.");
+                }
                 return;
             }
 
