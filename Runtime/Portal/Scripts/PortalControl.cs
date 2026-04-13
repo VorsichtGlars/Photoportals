@@ -47,6 +47,20 @@ namespace VRSYS.Photoportals {
 
         public InputActionProperty leftTriggerInput;
         public InputActionProperty rightTriggerInput;
+
+        #region Functionality Configuration
+        //TODO AllowClutching/AllowPortalGrab?
+        [SerializeField] private bool allowUnimanualSteering = true;
+        [SerializeField] private bool allowBimanualControllerBasedSteering = true;
+        [SerializeField] private bool allowJoystickBasedSteering = true;
+        [SerializeField] private bool allowWorldGrab = true;
+
+        private bool AllowUnimanualSteering { get => this.allowUnimanualSteering; set => this.allowUnimanualSteering = value; }
+        private bool AllowBimanualControllerBasedSteering { get => this.allowBimanualControllerBasedSteering; set => this.allowBimanualControllerBasedSteering = value; }
+        private bool AllowJoystickBasedSteering { get => this.allowJoystickBasedSteering; set => this.allowJoystickBasedSteering = value; }
+        private bool AllowWorldGrab { get => this.allowWorldGrab; set => this.allowWorldGrab = value; }
+        #endregion
+
         #region grabbing members
 
         private bool portalGrabIsActive = false;
@@ -68,7 +82,6 @@ namespace VRSYS.Photoportals {
         [Tooltip("Specify the mapping of trigger input to steering speed in meters per second.")]
         private AnimationCurve speedTransferFunction = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 
-        [SerializeField]
         [Tooltip("Specify the mapping of trigger input to steering speed in meters per second. Used for bimanual steering and joystick steering.")]
         private AnimationCurve bimanualSpeedTransferFunction = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 
@@ -147,6 +160,11 @@ namespace VRSYS.Photoportals {
 
             var simpleInteractable = this.GetComponentInChildren<XRSimpleInteractable>(includeInactive: true);
             simpleInteractable.firstSelectEntered.AddListener((args) => {
+                if(this.AllowWorldGrab == false) {
+                    Debug.LogWarning("World grab is not allowed. Early returning.");
+                    return;
+                }
+
                 this.UpdateComponentStatus("InteractionZoneSelectEnter triggered, switching to bimanual interaction");
                 this.input = args.interactorObject.transform;
                 this.SetupBimanualInteractionHelpers();
@@ -154,12 +172,20 @@ namespace VRSYS.Photoportals {
             });
 
             simpleInteractable.lastSelectExited.AddListener((args) => {
+                if(this.AllowWorldGrab == false) {
+                    Debug.LogWarning("World grab is not allowed. Early returning.");
+                    return;
+                }
                 this.UpdateComponentStatus("InteractionZoneSelectExit triggered, switching to unimanual interaction");
                 this.worldGrabIsActive = false;
                 this.inital_display_to_controller_offset = Matrix4x4.identity;
             });
 
             simpleInteractable.activated.AddListener((args) => {
+                if(this.AllowJoystickBasedSteering == false) {
+                    Debug.LogWarning("Bimanual joystick steering is not allowed. Early returning.");
+                    return;
+                }
                 this.joystickIsSummoned = !this.joystickIsSummoned;
 
                 if(this.joystickIsSummoned == true){
@@ -298,6 +324,7 @@ namespace VRSYS.Photoportals {
             leftTriggerValue = (float)Math.Round(leftTriggerValue, 2);
             rightTriggerValue = (float)Math.Round(rightTriggerValue, 2);
 
+            //TODO check wether clutching/portal grab is allowed/disallowed
             if (this.worldGrabIsActive == false && this.portalGrabIsActive == false && leftTriggerValue > 0.1f && this.isSelectedWithLeftHand) {
                 this.UpdateComponentStatus("Starting portal grab with left hand");
                 this.portalGrabIsActive = true;
@@ -324,57 +351,62 @@ namespace VRSYS.Photoportals {
 
             //unimanual action
             //one handed view steering
-            if (this.portalGrabIsActive == true && leftTriggerValue > 0.1f && this.isSelectedWithLeftHand) {
-                this.UpdateComponentStatus("Performing unimanual left handed controller based steering");
-                var oneHandedSteeringValue = this.speedTransferFunction.Evaluate(leftTriggerValue);
-                oneHandedSteeringValue *= Time.deltaTime;
-                this.clutchingOriginView = Matrix4x4.Translate(this.viewTransform.forward * oneHandedSteeringValue) * this.clutchingOriginView;
-            }
-            
-            if (this.portalGrabIsActive == true && rightTriggerValue > 0.1f && this.isSelectedWithRightHand) {
-                this.UpdateComponentStatus("Performing unimanual right handed controller based steering");
-                var oneHandedSteeringValue = this.speedTransferFunction.Evaluate(rightTriggerValue);
-                oneHandedSteeringValue *= Time.deltaTime;
-                this.clutchingOriginView = Matrix4x4.Translate(this.viewTransform.forward * oneHandedSteeringValue) * this.clutchingOriginView;
+            if(this.AllowUnimanualSteering == true) {
+                if (this.portalGrabIsActive == true && leftTriggerValue > 0.1f && this.isSelectedWithLeftHand) {
+                    this.UpdateComponentStatus("Performing unimanual left handed controller based steering");
+                    var oneHandedSteeringValue = this.speedTransferFunction.Evaluate(leftTriggerValue);
+                    oneHandedSteeringValue *= Time.deltaTime;
+                    this.clutchingOriginView = Matrix4x4.Translate(this.viewTransform.forward * oneHandedSteeringValue) * this.clutchingOriginView;
+                }
+                
+                if (this.portalGrabIsActive == true && rightTriggerValue > 0.1f && this.isSelectedWithRightHand) {
+                    this.UpdateComponentStatus("Performing unimanual right handed controller based steering");
+                    var oneHandedSteeringValue = this.speedTransferFunction.Evaluate(rightTriggerValue);
+                    oneHandedSteeringValue *= Time.deltaTime;
+                    this.clutchingOriginView = Matrix4x4.Translate(this.viewTransform.forward * oneHandedSteeringValue) * this.clutchingOriginView;
+                }
             }
 
             //bimanual action
             //TODO encapsulate logic and then call for left and right hand
+            if(this.AllowBimanualControllerBasedSteering == true){
+                if (this.isSelectedWithLeftHand == true && rightTriggerValue > 0.1f){
+                    this.UpdateComponentStatus("Performing bimanual controller based steering with right hand");
+                    //var avatar = NetworkUser.LocalInstance.avatarAnatomy as Photoportals.Avatar.AvatarHMDAnatomy;
+                    var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
+                    var localRepr = this.transform.GetMatrix4x4().inverse * avatar.rightHand.transform.forward;
+                    var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
+                    var rightSteeringValue = (float)this.rightTriggerInput.action?.ReadValue<float>();
+                    rightSteeringValue = this.bimanualSpeedTransferFunction.Evaluate(rightSteeringValue);
+                    rightSteeringValue *= Time.deltaTime;
+                    this.ApplySteeringVector(viewRepr * rightSteeringValue, Space.Self);
+                }
 
-            if (this.isSelectedWithLeftHand == true && rightTriggerValue > 0.1f){
-                this.UpdateComponentStatus("Performing bimanual controller based steering with right hand");
-                //var avatar = NetworkUser.LocalInstance.avatarAnatomy as Photoportals.Avatar.AvatarHMDAnatomy;
-                var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
-                var localRepr = this.transform.GetMatrix4x4().inverse * avatar.rightHand.transform.forward;
-                var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
-                var rightSteeringValue = (float)this.rightTriggerInput.action?.ReadValue<float>();
-                rightSteeringValue = this.bimanualSpeedTransferFunction.Evaluate(rightSteeringValue);
-                rightSteeringValue *= Time.deltaTime;
-                this.ApplySteeringVector(viewRepr * rightSteeringValue, Space.Self);
+                if ( this.isSelectedWithRightHand == true && leftTriggerValue > 0.1f){
+                    this.UpdateComponentStatus("Performing bimanual controller based steering with left hand");
+                    //var avatar = NetworkUser.LocalInstance.avatarAnatomy as Photoportals.Avatar.AvatarHMDAnatomy;
+                    var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
+
+                    var localRepr = this.transform.GetMatrix4x4().inverse * avatar.leftHand.transform.forward;
+                    var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
+                    var leftSteeringValue = (float)this.leftTriggerInput.action?.ReadValue<float>();
+                    leftSteeringValue = this.bimanualSpeedTransferFunction.Evaluate(leftSteeringValue);
+                    leftSteeringValue *= Time.deltaTime;
+                    this.ApplySteeringVector(viewRepr * leftSteeringValue, Space.Self);
+                }
             }
 
-            if ( this.isSelectedWithRightHand == true && leftTriggerValue > 0.1f){
-                this.UpdateComponentStatus("Performing bimanual controller based steering with left hand");
-                //var avatar = NetworkUser.LocalInstance.avatarAnatomy as Photoportals.Avatar.AvatarHMDAnatomy;
-                var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
+            if(this.AllowJoystickBasedSteering == true){
+                if (this.isSelected && this.joystickSteeringActive == true) {
+                    this.UpdateComponentStatus("Performing joystick based steering");
+                    var joystickDirection = this.joystickValues.Direction();
 
-                var localRepr = this.transform.GetMatrix4x4().inverse * avatar.leftHand.transform.forward;
-                var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
-                var leftSteeringValue = (float)this.leftTriggerInput.action?.ReadValue<float>();
-                leftSteeringValue = this.bimanualSpeedTransferFunction.Evaluate(leftSteeringValue);
-                leftSteeringValue *= Time.deltaTime;
-                this.ApplySteeringVector(viewRepr * leftSteeringValue, Space.Self);
-            }
-
-            if (this.isSelected && this.joystickSteeringActive == true) {
-                this.UpdateComponentStatus("Performing joystick based steering");
-                var joystickDirection = this.joystickValues.Direction();
-
-                var localRepr = this.transform.GetMatrix4x4().inverse * joystickDirection;
-                var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
-                var steeringValue = this.joystickSpeedTransferFunction.Evaluate(this.joystickValues.Magnitude());
-                steeringValue *= Time.deltaTime;
-                this.ApplySteeringVector(viewRepr * steeringValue, Space.Self);
+                    var localRepr = this.transform.GetMatrix4x4().inverse * joystickDirection;
+                    var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
+                    var steeringValue = this.joystickSpeedTransferFunction.Evaluate(this.joystickValues.Magnitude());
+                    steeringValue *= Time.deltaTime;
+                    this.ApplySteeringVector(viewRepr * steeringValue, Space.Self);
+                }
             }
 
             //debug log
@@ -388,10 +420,12 @@ namespace VRSYS.Photoportals {
                 this.UpdatePortalGrab();
             }
 
-            //two handed controller/hand world grab (triggered by two selections one on portal display, one on portal view)
-            if (this.worldGrabIsActive == true) {
-                this.UpdateComponentStatus("Updating world grab");
-                this.UpdateWorldGrab();
+            if(this.AllowWorldGrab == true){
+                //two handed controller/hand world grab (triggered by two selections one on portal display, one on portal view)
+                if (this.worldGrabIsActive == true) {
+                    this.UpdateComponentStatus("Updating world grab");
+                    this.UpdateWorldGrab();
+                }
             }
 
             //scaling options via controller (both inputs are allowed simultaneously)
@@ -604,10 +638,18 @@ namespace VRSYS.Photoportals {
             this.joystickInteractable.enabled = this.joystickIsSummoned;
             this.joystickValues = this.joystick.GetComponent<JoystickValues>();
             this.joystickValues.OnJoystickGrabbed.AddListener(()=>{
+                if(this.AllowJoystickBasedSteering == false) {
+                    Debug.LogWarning("Bimanual joystick steering is not allowed. Early returning.");
+                    return;
+                }
                 this.UpdateComponentStatus("Joystick Grabbed");
                 this.joystickSteeringActive = true;
             });
             this.joystickValues.OnJoystickReleased.AddListener(()=>{
+                if(this.AllowJoystickBasedSteering == false) {
+                    Debug.LogWarning("Bimanual joystick steering is not allowed. Early returning.");
+                    return;
+                }
                 this.UpdateComponentStatus("Joystick Released");
                 this.joystickSteeringActive = false;
             });
