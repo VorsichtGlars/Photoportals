@@ -456,6 +456,11 @@ namespace VRSYS.Photoportals {
                 Vector3 constrainedRotation = new Vector3(0f, currentRotation.y, 0f);
                 this.viewTransform.rotation = Quaternion.Euler(constrainedRotation);
             }
+
+            //sometimes this is redundant
+            //but it ensures that the scale ui is always up to date
+            //as it is always reading from the views transform
+            this.UpdateScaleUI(); 
         }
         #endregion
 
@@ -478,11 +483,12 @@ namespace VRSYS.Photoportals {
             }
 
             float mappedScaleValue = this.viewTransform.lossyScale.x switch {
-                >= 500f  => 4f,
-                >= 100f and < 500f => 3f,
-                >= 50f and < 100f => 2f,
-                >= 10f and < 50f => 1f,
-                _ => 0f
+                >= 250f             => 4f,  //500
+                >= 75f and < 250f   => 3f,  //100
+                >= 25f and < 75f    => 2f,  //50
+                >= 5f and < 25f     => 1f,  //10
+                < 5f                => 0f,  //1
+                _                   => 0f   //shouldn't happen
             };
 
             if(this.sliderElement.value == mappedScaleValue)
