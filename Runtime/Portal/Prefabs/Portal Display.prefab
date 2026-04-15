@@ -904,6 +904,10 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -6412917461327674054, guid: d3e1bec5d05940341bbe734115e1a9e6, type: 3}
+  allowUnimanualSteering: 1
+  allowBimanualControllerBasedSteering: 1
+  allowJoystickBasedSteering: 1
+  allowWorldGrab: 1
   speedTransferFunction:
     serializedVersion: 2
     m_Curve:
