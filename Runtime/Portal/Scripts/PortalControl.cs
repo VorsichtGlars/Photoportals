@@ -81,7 +81,7 @@ namespace VRSYS.Photoportals {
         [SerializeField]
         [Tooltip("Specify the mapping of trigger input to steering speed in meters per second.")]
         private AnimationCurve speedTransferFunction = AnimationCurve.Linear(0f, 0f, 1f, 1f);
-
+        [SerializeField]
         [Tooltip("Specify the mapping of trigger input to steering speed in meters per second. Used for bimanual steering and joystick steering.")]
         private AnimationCurve bimanualSpeedTransferFunction = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 
