@@ -375,7 +375,7 @@ namespace VRSYS.Photoportals {
                     //var avatar = NetworkUser.LocalInstance.avatarAnatomy as Photoportals.Avatar.AvatarHMDAnatomy;
                     var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
                     var localRepr = this.transform.GetMatrix4x4().inverse * avatar.rightHand.transform.forward;
-                    var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
+                    var viewRepr = (this.viewTransform.GetMatrix4x4() * localRepr).normalized;
                     var rightSteeringValue = (float)this.rightTriggerInput.action?.ReadValue<float>();
                     rightSteeringValue = this.bimanualSpeedTransferFunction.Evaluate(rightSteeringValue);
                     rightSteeringValue *= Time.deltaTime;
@@ -388,7 +388,7 @@ namespace VRSYS.Photoportals {
                     var avatar = NetworkUser.LocalInstance.avatarAnatomy as VRSYS.Core.Avatar.AvatarHMDAnatomy;
 
                     var localRepr = this.transform.GetMatrix4x4().inverse * avatar.leftHand.transform.forward;
-                    var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
+                    var viewRepr = (this.viewTransform.GetMatrix4x4() * localRepr).normalized;
                     var leftSteeringValue = (float)this.leftTriggerInput.action?.ReadValue<float>();
                     leftSteeringValue = this.bimanualSpeedTransferFunction.Evaluate(leftSteeringValue);
                     leftSteeringValue *= Time.deltaTime;
@@ -402,7 +402,7 @@ namespace VRSYS.Photoportals {
                     var joystickDirection = this.joystickValues.Direction();
 
                     var localRepr = this.transform.GetMatrix4x4().inverse * joystickDirection;
-                    var viewRepr = this.viewTransform.GetMatrix4x4() * localRepr;
+                    var viewRepr = (this.viewTransform.GetMatrix4x4() * localRepr).normalized;
                     var steeringValue = this.joystickSpeedTransferFunction.Evaluate(this.joystickValues.Magnitude());
                     steeringValue *= Time.deltaTime;
                     this.ApplySteeringVector(viewRepr * steeringValue, Space.Self);
