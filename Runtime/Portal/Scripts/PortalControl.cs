@@ -580,11 +580,17 @@ namespace VRSYS.Photoportals {
 
         #region Steering
         public void ApplySteeringVector(Vector3 vector, Space space) {
-            if(space == Space.World)
-                this.viewTransform.position += this.viewTransform.TransformVector(vector);
+            Vector3 worldVector = (space == Space.World)
+                ? this.viewTransform.TransformVector(vector)
+                : vector;
 
-            if(space == Space.Self)
-                this.viewTransform.position += vector;
+            if (this.portalGrabIsActive) {
+                // Portal grab overwrites viewTransform each frame from clutchingOriginView,
+                // so accumulate the steering offset there instead of on viewTransform directly.
+                this.clutchingOriginView = Matrix4x4.Translate(worldVector) * this.clutchingOriginView;
+            } else {
+                this.viewTransform.position += worldVector;
+            }
         }
 
         #endregion
