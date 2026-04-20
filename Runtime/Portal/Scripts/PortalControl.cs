@@ -56,11 +56,16 @@ namespace VRSYS.Photoportals {
         [SerializeField] private bool allowWorldGrab = true;
         [SerializeField] private bool allowControllerJoystickScaling = true;
         [SerializeField] private bool allowUnimanualLinkingOverFrameGrabbing = true;
+        [SerializeField] private bool joystickAsChild = true;
+
 
         public bool AllowUnimanualSteering { get => this.allowUnimanualSteering; set => this.allowUnimanualSteering = value; }
         public bool AllowBimanualControllerBasedSteering { get => this.allowBimanualControllerBasedSteering; set => this.allowBimanualControllerBasedSteering = value; }
         public bool AllowJoystickBasedSteering { get => this.allowJoystickBasedSteering; set => this.allowJoystickBasedSteering = value; }
         public bool AllowWorldGrab { get => this.allowWorldGrab; set => this.allowWorldGrab = value; }
+        public bool AllowControllerJoystickScaling { get => this.allowControllerJoystickScaling; set => this.allowControllerJoystickScaling = value; }
+        public bool AllowUnimanualLinkingOverFrameGrabbing { get => this.allowUnimanualLinkingOverFrameGrabbing; set => this.allowUnimanualLinkingOverFrameGrabbing = value; }
+        public bool JoystickAsChild { get => this.joystickAsChild; set => this.joystickAsChild = value; }
         #endregion
 
         #region grabbing members
@@ -145,9 +150,7 @@ namespace VRSYS.Photoportals {
                     this.portalGrabIsActive = true;
                     this.StartPortalGrab();
                 }
-                else{
-                    viewInteractionZone.SetActive(true);
-                }
+                viewInteractionZone.SetActive(true);
             });
 
             this.grabInteractable.lastSelectExited.AddListener(() => {
@@ -166,7 +169,10 @@ namespace VRSYS.Photoportals {
                     Debug.LogWarning("World grab is not allowed. Early returning.");
                     return;
                 }
-
+                if(this.portalGrabIsActive == true) {
+                    //Portal grab is active. Both working at the same time is not yet implemented.
+                    return;
+                }
                 this.UpdateComponentStatus("InteractionZoneSelectEnter triggered, switching to bimanual interaction");
                 this.input = args.interactorObject.transform;
                 this.SetupBimanualInteractionHelpers();
@@ -176,6 +182,10 @@ namespace VRSYS.Photoportals {
             simpleInteractable.lastSelectExited.AddListener((args) => {
                 if(this.AllowWorldGrab == false) {
                     Debug.LogWarning("World grab is not allowed. Early returning.");
+                    return;
+                }
+                if(this.portalGrabIsActive == true) {
+                    //Portal grab is active. Both working at the same time is not yet implemented.
                     return;
                 }
                 this.UpdateComponentStatus("InteractionZoneSelectExit triggered, switching to unimanual interaction");
@@ -191,17 +201,11 @@ namespace VRSYS.Photoportals {
                 this.joystickIsSummoned = !this.joystickIsSummoned;
 
                 if(this.joystickIsSummoned == true){
-                    this.joystick.transform.DOFollowTransform(args.interactorObject.transform, 0.25f).
-                    OnComplete(() => {
-                        this.joystickInteractable.enabled = true;
-                    });
+                    this.SummonJoystick(args.interactorObject.transform);
                 }
 
                 if(this.joystickIsSummoned == false){
-                    this.joystick.transform.DOFollowTransform(this.joystickRoot.transform, 0.25f).
-                    OnStart(() => {
-                        this.joystickInteractable.enabled = false;
-                    });
+                    this.DismissJoystick();
                 }
             });
 
@@ -669,6 +673,25 @@ namespace VRSYS.Photoportals {
                 }
                 this.UpdateComponentStatus("Joystick Released");
                 this.joystickSteeringActive = false;
+            });
+        }
+
+        public void SummonJoystick(Transform target) {
+            this.joystickIsSummoned = true;
+            this.joystick.transform.parent = this.joystickAsChild ? this.transform : null;
+            this.joystick.transform.DOFollowTransform(target, 0.25f)
+            .OnComplete(() => {
+                this.joystickInteractable.enabled = true;
+            });
+        }
+
+        public void DismissJoystick() {
+            this.joystickIsSummoned = false;
+            this.joystick.transform.parent = this.transform;
+            
+            this.joystick.transform.DOFollowTransform(this.joystickRoot.transform, 0.25f)
+            .OnStart(() => {
+                this.joystickInteractable.enabled = false;
             });
         }
         #endregion
