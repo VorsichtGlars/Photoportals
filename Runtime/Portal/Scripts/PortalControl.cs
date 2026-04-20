@@ -133,7 +133,7 @@ namespace VRSYS.Photoportals {
             this.InitJoystickSteering();
             this.LinkToView();
 
-            ColliderEvents colliderEvents = this.transform.GetComponentInChildren<ColliderEvents>(includeInactive: true);
+            ColliderEvents colliderEvents = this.transform.Find("Screen Interaction Zone").GetComponent<ColliderEvents>();
             colliderEvents.OnEnter.AddListener(() => this.collisionAtScreenCenter = true);
             colliderEvents.OnExit.AddListener(() => this.collisionAtScreenCenter = false);
 

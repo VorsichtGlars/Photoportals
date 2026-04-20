@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 7078237608252736770}
   - component: {fileID: 6991258377099711000}
   - component: {fileID: 7584799989820792664}
+  - component: {fileID: 3880668712906091349}
   m_Layer: 7
   m_Name: Frame Interaction Zone
   m_TagString: Untagged
@@ -187,6 +188,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2247104, y: 0.07272238, z: 0.019631386}
   m_Center: {x: 0.0026847273, y: -0.15476035, z: 0.003513813}
+--- !u!114 &3880668712906091349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292753481320039184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dee5520c34313f4f846beb2e1fff707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: vrsys.photoportals::VRSYS.Photoportals.Extensions.ColliderEvents
+  collider: {fileID: 0}
+  excludedColliders:
+  - {fileID: 8438494408546268265}
+  other: {fileID: 0}
+  isColliding: 0
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1803344475487678023
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +577,7 @@ GameObject:
   - component: {fileID: 109762706322906212}
   - component: {fileID: 8126681051436444133}
   - component: {fileID: 5308852153995822969}
+  - component: {fileID: 3055969074275109001}
   m_Layer: 7
   m_Name: Portal Display
   m_TagString: Untagged
@@ -592,7 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3396257479
+  GlobalObjectIdHash: 2247265819
   InScenePlacedSourceGlobalObjectIdHash: 4140372752
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1090,6 +1118,23 @@ MonoBehaviour:
   portalViewScreen: {fileID: 0}
   portalViewHead: {fileID: 0}
   viewRoot: {fileID: 0}
+--- !u!114 &3055969074275109001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3785651222127509849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74624d1d4e237e14784be8b034593169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: vrsys.photoportals::VRSYS.Photoportals.PortalFrameHoverFeedback
+  frameRenderer: {fileID: 201353831994567706}
+  frameInteractionZone: {fileID: 3880668712906091349}
+  grabInteractable: {fileID: 6143290610123614706}
+  pulseColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  pulseDuration: 1
 --- !u!1 &6768007053433402356
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,7 +2597,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 931816916640208042, guid: 4dfa8db059c86a34d81a4c1e6185d5c0, type: 3}
       propertyPath: m_Value
-      value: 4
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 931816916640208042, guid: 4dfa8db059c86a34d81a4c1e6185d5c0, type: 3}
+      propertyPath: m_Colors.m_ColorMultiplier
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 931816916640208043, guid: 4dfa8db059c86a34d81a4c1e6185d5c0, type: 3}
       propertyPath: m_Pivot.x
