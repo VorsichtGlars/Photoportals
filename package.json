@@ -1,6 +1,6 @@
 {
     "name": "com.vrsys.photoportals",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "displayName": "VRSYS Photoportals",
     "description": "Implementation of Photoportals for the Virtual Reality and Visualization Systems Group at BUW",
     "unity": "6000.0",
