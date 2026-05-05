@@ -70,6 +70,13 @@ namespace VRSYS.Photoportals {
                 }
             }
 
+            var cameras = NetworkUser.LocalInstance.avatarAnatomy.gameObject.GetComponentsInChildren<Camera>();
+            foreach(var camera in cameras)
+            {
+                camera.cullingMask |= LayerMask.GetMask("PokeUI");
+                camera.cullingMask |= LayerMask.GetMask("DirectUI");
+            }
+
             /**
             // set each camera to render everything, then exclude CameraIgnore
             // this can conflict with other culling mask configurations

@@ -289,8 +289,10 @@ namespace VRSYS.Photoportals {
 
             var leftCamera = this.viewTransform.transform.Find("Cameras/LeftCamera").GetComponent<Camera>();
             leftCamera.targetTexture = leftRenderTexture;
+            leftCamera.cullingMask |= LayerMask.GetMask("CameraIgnore");
             var rightCamera = this.viewTransform.transform.Find("Cameras/RightCamera").GetComponent<Camera>();
             rightCamera.targetTexture = rightRenderTexture;
+            rightCamera.cullingMask |= LayerMask.GetMask("CameraIgnore");
 
             leftCamera.enabled = true;
             rightCamera.enabled = true;
@@ -314,6 +316,8 @@ namespace VRSYS.Photoportals {
             //maybe this is better as e.g. dotween scaling actions can still run
             //grabInteractable.lastSelectExited.AddListener(displayOwnershipManager.ReturnOwnershipToServer);
             //grabInteractable.lastSelectExited.AddListener(viewOwnershipManager.ReturnOwnershipToServer);
+
+
         }
 
         void Update() {
