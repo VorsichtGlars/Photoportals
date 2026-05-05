@@ -68,9 +68,9 @@ namespace VRSYS.Photoportals {
                         this.CreatePortalServerRpc(spawnMatrix.GetPosition(), spawnMatrix.rotation);
                     };    
                 }
-                
             }
 
+            /**
             // set each camera to render everything, then exclude CameraIgnore
             // this can conflict with other culling mask configurations
             int cameraIgnoreLayer = LayerMask.NameToLayer("CameraIgnore");
@@ -83,6 +83,7 @@ namespace VRSYS.Photoportals {
                     camera.cullingMask &= ~(1 << cameraIgnoreLayer);
                 }
             }
+            **/
         }
 
         public void OnRemoteNetworkUserSetup(NetworkUser user) {
